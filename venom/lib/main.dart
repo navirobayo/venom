@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screen01/home.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:venom/screen01/welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +14,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        textTheme:
+            GoogleFonts.chakraPetchTextTheme(Theme.of(context).textTheme),
+        brightness: Brightness.dark,
       ),
-      home: const Home(title: 'Venom App Ver.1.0'),
+      darkTheme: ThemeData(
+        textTheme: GoogleFonts.chakraPetchTextTheme(Theme.of(context).textTheme)
+            .apply(bodyColor: Colors.white),
+        brightness: Brightness.dark,
+      ),
+      themeMode: ThemeMode.dark,
+      home: WelcomeScreen(),
     );
   }
 }

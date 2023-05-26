@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:venom/screen02/bikedata.dart';
+import 'package:venom/screen02/user_intro.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key, required this.title});
+class WelcomeScreen extends StatelessWidget {
+  WelcomeScreen({super.key});
+  final TextEditingController _nameController = TextEditingController();
 
-  final String title;
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("Venom Ver. 1.0"),
       ),
       body: Center(
         child: Column(
@@ -24,15 +18,18 @@ class _HomeState extends State<Home> {
             const SizedBox(
               height: 150,
             ),
-            const Text("Ingresa el nombre de la motocicleta"),
+            const Text("Venom Ver 1.0", style: TextStyle(fontSize: 45)),
             const SizedBox(
               height: 50,
             ),
-            // ignore: sized_box_for_whitespace
             Container(
               width: 300,
-              child: const TextField(
-                decoration: InputDecoration(border: OutlineInputBorder()),
+              child: TextField(
+                controller: _nameController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Enter your username"),
               ),
             ),
             const SizedBox(
@@ -46,12 +43,13 @@ class _HomeState extends State<Home> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BikeData(
-                title: widget.title,
+              builder: (context) => UserIntro(
+                userName: _nameController.text,
               ),
             ),
           );
         },
+        backgroundColor: Colors.grey,
       ),
     );
   }
