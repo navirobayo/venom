@@ -50,7 +50,7 @@ class _ToolKitState extends State<ToolKit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Working title2"),
+        title: const Text("{ }"),
       ),
       body: Center(
         child: ListView(
