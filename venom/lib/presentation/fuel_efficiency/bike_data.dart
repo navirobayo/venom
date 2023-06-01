@@ -22,8 +22,8 @@ class _BikeDataState extends State<BikeData> {
             const SizedBox(
               height: 50,
             ),
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Text("Here goes some text"),
                 Text("Here goes a second widget or something else")
               ],
