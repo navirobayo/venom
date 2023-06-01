@@ -34,11 +34,11 @@ class _BikeDataState extends State<BikeData> {
               decoration: const InputDecoration(
                 labelText: 'Enter the value',
               ),
-              onChanged: handleValueChange,
+              onChanged: // handleValueChange,
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: handleConvert,
+              onPressed: // handleConvert,
               child: const Text('Convert'),
             ),
             const SizedBox(height: 16),

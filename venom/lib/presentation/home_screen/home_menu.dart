@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:venom/screen03/tool_kit.dart';
+import 'package:venom/presentation/tool_kit/tool_kit.dart';
 
-class UserIntro extends StatelessWidget {
-  const UserIntro({Key? key, required this.userName}) : super(key: key);
+class HomeMenu extends StatelessWidget {
+  const HomeMenu({Key? key, required this.userName}) : super(key: key);
   final String userName;
 
   @override
@@ -60,21 +60,22 @@ class UserIntro extends StatelessWidget {
         ]),
       ),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            print("test");
-          },
-          label: const Text("New Ride"),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15.0)),
-          ),
-          icon: const Icon(Icons.add)),
+        label: const Text("New Ride"),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        ),
+        icon: const Icon(Icons.add),
+        onPressed: () {
+          print("test");
+        },
+      ),
       bottomNavigationBar: BottomAppBar(
         child: Row(children: <Widget>[
           IconButton(
+            icon: const Icon(Icons.more_vert),
             onPressed: () {
               print("test");
             },
-            icon: const Icon(Icons.more_vert),
           )
         ]),
       ),
