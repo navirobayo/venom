@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:venom/presentation/fuel_efficiency/bike_data.dart';
+import 'package:venom/presentation/main_menu/main_menu.dart';
 
-class RideAnalyzer extends StatelessWidget {
-  const RideAnalyzer({super.key});
+class WelcomeScreen extends StatelessWidget {
+  WelcomeScreen({super.key});
   final TextEditingController _nameController = TextEditingController();
 
   @override
@@ -18,7 +18,7 @@ class RideAnalyzer extends StatelessWidget {
             const SizedBox(
               height: 150,
             ),
-            const Text("Venom Ver 1.0", style: TextStyle(fontSize: 25)),
+            const Text("Venom Ver 1.0", style: TextStyle(fontSize: 45)),
             const SizedBox(
               height: 50,
             ),
@@ -29,7 +29,7 @@ class RideAnalyzer extends StatelessWidget {
                 obscureText: true,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: "Enter a name for your bike"),
+                    labelText: "Enter your username"),
               ),
             ),
             const SizedBox(
@@ -43,8 +43,8 @@ class RideAnalyzer extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BikeData(
-                bikeName: _nameController.text,
+              builder: (context) => MainMenu(
+                userName: _nameController.text,
               ),
             ),
           );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:venom/presentation/splash_screen/welcome_screen.dart';
+import 'package:venom/presentation/welcome_screen/welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());
