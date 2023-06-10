@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 class NewRide extends StatefulWidget {
   const NewRide({super.key});
@@ -12,17 +13,50 @@ class _NewRideState extends State<NewRide> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Fuel Efficiency"),
+        title: const Text("Ride Analyzer"),
       ),
       body: Center(
         child: ListView(children: [
-          const Card(
-            child: SizedBox(
-              width: 150,
-              height: 150,
-              child: Center(
-                  child: Text("Here goes the animation with the result")),
-            ),
+          const SizedBox(
+            height: 25,
+          ),
+          CircularCountDownTimer(
+            duration: 10,
+            initialDuration: 0,
+            controller: CountDownController(),
+            width: MediaQuery.of(context).size.width / 3,
+            height: MediaQuery.of(context).size.height / 3,
+            ringColor: Theme.of(context).focusColor,
+            ringGradient: null,
+            fillColor: Colors.purpleAccent[100]!,
+            fillGradient: null,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            backgroundGradient: null,
+            strokeWidth: 20.0,
+            strokeCap: StrokeCap.round,
+            textStyle:
+                const TextStyle(fontSize: 33.0, fontWeight: FontWeight.bold),
+            textFormat: CountdownTextFormat.S,
+            isReverse: false,
+            isReverseAnimation: false,
+            isTimerTextShown: true,
+            autoStart: false,
+            onStart: () {
+              debugPrint('Countdown Started');
+            },
+            onComplete: () {
+              debugPrint('Countdown Ended');
+            },
+            onChange: (String timeStamp) {
+              debugPrint('Countdown Changed $timeStamp');
+            },
+            timeFormatterFunction: (defaultFormatterFunction, duration) {
+              if (duration.inSeconds == 0) {
+                return "Start";
+              } else {
+                return Function.apply(defaultFormatterFunction, [duration]);
+              }
+            },
           ),
           const SizedBox(
             height: 50,
@@ -56,10 +90,11 @@ class _NewRideState extends State<NewRide> {
               ),
               textAlign: TextAlign.center,
               textAlignVertical: TextAlignVertical.center,
+              keyboardType: TextInputType.number,
             ),
           ),
           const SizedBox(
-            height: 25,
+            height: 50,
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -70,32 +105,8 @@ class _NewRideState extends State<NewRide> {
               ),
               textAlign: TextAlign.center,
               textAlignVertical: TextAlignVertical.center,
+              keyboardType: TextInputType.number,
             ),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Fuel price',
-              ),
-              textAlign: TextAlign.center,
-              textAlignVertical: TextAlignVertical.center,
-            ),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                print("test");
-              },
-              child: const Text("Start the ride")),
-          const SizedBox(
-            height: 50,
           ),
           const SizedBox(
             height: 50,

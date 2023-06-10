@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:venom/presentation/gas_history/gas_history.dart';
 import 'package:venom/presentation/settings_screen/settings_screen.dart';
 import 'package:venom/presentation/tool_kit/tool_kit.dart';
-import '../new_ride/ride_analyzer.dart';
+import '../new_ride/new_ride.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key, required this.userName}) : super(key: key);
