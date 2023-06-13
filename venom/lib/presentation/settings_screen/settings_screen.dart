@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:venom/presentation/settings_screen/gas_capacity.dart';
 import 'package:venom/presentation/settings_screen/gas_price.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -13,14 +14,27 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         children: [
           ListTile(
-            leading: Icon(Icons.monetization_on_outlined),
-            title: Text("Current Gas price"),
-            trailing: Icon(Icons.arrow_forward_ios),
+            leading: const Icon(Icons.monetization_on_outlined),
+            title: const Text("Current Gas price"),
+            trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const GasPrice(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.gas_meter_outlined),
+            title: const Text("Current Gas capacity"),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const GasCapacity(),
                 ),
               );
             },

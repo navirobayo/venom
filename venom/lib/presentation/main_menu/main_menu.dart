@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:venom/presentation/gas_history/gas_history.dart';
+import 'package:venom/presentation/new_ride/before_ride.dart';
 import 'package:venom/presentation/settings_screen/settings_screen.dart';
 import 'package:venom/presentation/tool_kit/tool_kit.dart';
 import '../new_ride/new_ride.dart';
@@ -94,7 +95,7 @@ class MainMenu extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const GasHistory(),
+                        builder: (context) => const BeforeRide(),
                       ),
                     );
                   },
