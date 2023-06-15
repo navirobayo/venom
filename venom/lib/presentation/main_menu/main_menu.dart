@@ -8,6 +8,8 @@ import '../new_ride/new_ride.dart';
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key, required this.userName}) : super(key: key);
   final String userName;
+  final Duration _duration =
+      const Duration(minutes: 30); // Define a default value for _duration
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +122,7 @@ class MainMenu extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const NewRide(),
+              builder: (context) => const BeforeRide(),
             ),
           );
         },

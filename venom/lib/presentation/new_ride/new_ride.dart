@@ -3,15 +3,16 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:venom/components/timer_widget.dart';
 
 class NewRide extends StatefulWidget {
-  const NewRide({super.key});
+  final int duration;
+  const NewRide({Key? key, required this.duration}) : super(key: key);
 
   @override
   State<NewRide> createState() => _NewRideState();
 }
 
 class _NewRideState extends State<NewRide> {
-  final int _duration = 10;
-  final CountDownController _controller = CountDownController();
+  late final CountDownController _controller = CountDownController();
+  late int _duration = widget.duration;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class _NewRideState extends State<NewRide> {
           const SizedBox(
             height: 25,
           ),
-          TimerWidget(duration: _duration, controller: _controller),
+          TimerWidget(duration: widget.duration, controller: _controller),
           const SizedBox(
             height: 50,
           ),
