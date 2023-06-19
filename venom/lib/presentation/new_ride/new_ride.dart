@@ -12,59 +12,40 @@ class NewRide extends StatefulWidget {
 
 class _NewRideState extends State<NewRide> {
   late final CountDownController _controller = CountDownController();
-  late int _duration = widget.duration;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         title: const Text("Ride Analyzer"),
       ),
       body: Center(
         child: ListView(children: [
           const SizedBox(
-            height: 25,
+            height: 50,
           ),
-          TimerWidget(duration: widget.duration, controller: _controller),
+          GestureDetector(
+              child: TimerWidget(
+                  duration: widget.duration, controller: _controller),
+              onTap: () => _controller.start()),
           const SizedBox(
             height: 50,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Radio(
-                value: 0,
-                groupValue: 0,
-                onChanged: (value) {},
-              ),
-              const Text("Half tank"),
-              Radio(
-                value: 1,
-                groupValue: 0,
-                onChanged: (value) {},
-              ),
-              const Text("Full tank"),
-            ],
-          ),
           const SizedBox(
-            height: 25,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Current KM in odometer',
-              ),
-              textAlign: TextAlign.center,
-              textAlignVertical: TextAlignVertical.center,
-              keyboardType: TextInputType.number,
+            width: 300,
+            height: 100,
+            child: Column(
+              children: [
+                Text("Press Go and enjoy the ride,"),
+                Text("Venom will notify when the ride is done"),
+              ],
             ),
           ),
-          const SizedBox(
-            height: 50,
-          ),
-          Row(
+          _button(
+              title: "Stop now and Analyze",
+              onPressed: () => _controller.pause())
+          /* Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
@@ -96,9 +77,13 @@ class _NewRideState extends State<NewRide> {
                 onPressed: () => _controller.restart(duration: _duration),
               ),
             ],
-          ),
+          ), */
         ]),
       ),
+      /* floatingActionButton: FloatingActionButton(
+        onPressed: () => _controller.start(),
+        child: const Icon(Icons.pause),
+      ), */
     );
   }
 

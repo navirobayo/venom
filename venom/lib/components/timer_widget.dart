@@ -29,7 +29,7 @@ class TimerWidget extends StatelessWidget {
       strokeWidth: 20.0,
       strokeCap: StrokeCap.round,
       textStyle: const TextStyle(fontSize: 33.0, fontWeight: FontWeight.bold),
-      textFormat: CountdownTextFormat.S,
+      textFormat: CountdownTextFormat.HH_MM_SS,
       isReverse: false,
       isReverseAnimation: false,
       isTimerTextShown: true,

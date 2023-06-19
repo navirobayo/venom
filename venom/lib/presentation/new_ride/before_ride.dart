@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
-import 'package:venom/presentation/new_ride/new_ride.dart';
+import 'package:venom/presentation/new_ride/before_ride_2.dart';
 
 class BeforeRide extends StatefulWidget {
-  const BeforeRide({Key? key}) : super(key: key);
+  const BeforeRide({Key? key, required this.userName}) : super(key: key);
+  final String userName;
 
   @override
   State<BeforeRide> createState() => _BeforeRideState();
@@ -32,8 +33,9 @@ class _BeforeRideState extends State<BeforeRide> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            NewRide(duration: _getDuration(selectedTime)),
+                        builder: (context) => KmInBike(
+                            duration: _getDuration(selectedTime),
+                            userName: widget.userName),
                       ),
                     );
                   },

@@ -3,13 +3,10 @@ import 'package:venom/presentation/gas_history/gas_history.dart';
 import 'package:venom/presentation/new_ride/before_ride.dart';
 import 'package:venom/presentation/settings_screen/settings_screen.dart';
 import 'package:venom/presentation/tool_kit/tool_kit.dart';
-import '../new_ride/new_ride.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key, required this.userName}) : super(key: key);
   final String userName;
-  final Duration _duration =
-      const Duration(minutes: 30); // Define a default value for _duration
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +94,9 @@ class MainMenu extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const BeforeRide(),
+                        builder: (context) => BeforeRide(
+                          userName: userName,
+                        ),
                       ),
                     );
                   },
@@ -122,7 +121,9 @@ class MainMenu extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const BeforeRide(),
+              builder: (context) => BeforeRide(
+                userName: userName,
+              ),
             ),
           );
         },
