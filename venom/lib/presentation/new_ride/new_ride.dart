@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:venom/components/timer_widget.dart';
+import 'package:venom/presentation/results_screen/results_screen.dart';
+import 'dart:async';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class NewRide extends StatefulWidget {
   final int duration;
@@ -42,10 +46,34 @@ class _NewRideState extends State<NewRide> {
               ],
             ),
           ),
-          _button(
-              title: "Stop now and Analyze",
-              onPressed: () => _controller.pause())
-          /* Row(
+          Expanded(
+            child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(Theme.of(context).focusColor),
+              ),
+              onPressed: () {
+                _controller.pause();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultsScreen(
+                      timeTraveled: (_controller.getTime()).toString(),
+                    ),
+                  ),
+                );
+              },
+              child: const Text("Press now and Analyze"),
+            ),
+          ),
+        ]),
+      ),
+    );
+  }
+}
+
+
+/* Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
@@ -78,16 +106,8 @@ class _NewRideState extends State<NewRide> {
               ),
             ],
           ), */
-        ]),
-      ),
-      /* floatingActionButton: FloatingActionButton(
-        onPressed: () => _controller.start(),
-        child: const Icon(Icons.pause),
-      ), */
-    );
-  }
 
-  Widget _button({required String title, VoidCallback? onPressed}) {
+          /* Widget _button({required String title, VoidCallback? onPressed}) {
     return Expanded(
       child: ElevatedButton(
         style: ButtonStyle(
@@ -101,5 +121,9 @@ class _NewRideState extends State<NewRide> {
         ),
       ),
     );
-  }
-}
+  } */
+
+  /* floatingActionButton: FloatingActionButton(
+        onPressed: () => _controller.start(),
+        child: const Icon(Icons.pause),
+      ), */

@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:venom/components/database_helper.dart';
 
-class GasPrice extends StatelessWidget {
+class GasPrice extends StatefulWidget {
   const GasPrice({Key? key}) : super(key: key);
-  final String currentGasPrice = "xxxx";
+
+  @override
+  State<GasPrice> createState() => _GasPriceState();
+}
+
+class _GasPriceState extends State<GasPrice> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +24,11 @@ class GasPrice extends StatelessWidget {
         title: const Text("Gas Price"),
       ),
       body: ListView(
-        children: const [
-          SizedBox(
+        children: [
+          const SizedBox(
             height: 25,
           ),
-          Row(
+          const Row(
             children: [
               Spacer(),
               Text("\$", style: TextStyle(fontSize: 48.0)),
@@ -28,11 +41,12 @@ class GasPrice extends StatelessWidget {
               Spacer(),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           TextField(
-            decoration: InputDecoration(
+            controller: _controller,
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Enter the current gas price',
             ),
@@ -40,12 +54,15 @@ class GasPrice extends StatelessWidget {
             textAlignVertical: TextAlignVertical.center,
             keyboardType: TextInputType.number,
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           ElevatedButton(
-            onPressed: null,
-            child: Text("Update"),
+            onPressed: () async {
+              final enteredPrice = double.tryParse(_controller.text) ?? 0.0;
+              await DatabaseHelper.instance.insertFuelPrice(enteredPrice);
+            },
+            child: const Text("Save"),
           ),
         ],
       ),
