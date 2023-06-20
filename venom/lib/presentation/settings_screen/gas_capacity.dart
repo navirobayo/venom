@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:venom/components/database_helper.dart';
 
-class GasCapacity extends StatelessWidget {
+class GasCapacity extends StatefulWidget {
   const GasCapacity({Key? key}) : super(key: key);
-  final String currentGasPrice = "xxxx";
+
+  @override
+  State<GasCapacity> createState() => _GasCapacityState();
+}
+
+class _GasCapacityState extends State<GasCapacity> {
+  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +18,11 @@ class GasCapacity extends StatelessWidget {
         title: const Text("Gas Capacity"),
       ),
       body: ListView(
-        children: const [
-          SizedBox(
+        children: [
+          const SizedBox(
             height: 25,
           ),
-          Row(
+          const Row(
             children: [
               Spacer(),
               Text(
@@ -28,11 +35,12 @@ class GasCapacity extends StatelessWidget {
               Spacer(),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           TextField(
-            decoration: InputDecoration(
+            controller: _controller,
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Enter the gas capacity of your bike',
             ),
@@ -40,12 +48,15 @@ class GasCapacity extends StatelessWidget {
             textAlignVertical: TextAlignVertical.center,
             keyboardType: TextInputType.number,
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           ElevatedButton(
-            onPressed: null,
-            child: Text("Update"),
+            onPressed: () async {
+              final enteredCapacity = double.tryParse(_controller.text) ?? 0.0;
+              await DatabaseHelper.instance.insertFuelCapacity(enteredCapacity);
+            },
+            child: const Text("Update"),
           ),
         ],
       ),

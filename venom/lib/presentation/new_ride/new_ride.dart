@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:venom/components/timer_widget.dart';
 import 'package:venom/presentation/results_screen/results_screen.dart';
-import 'dart:async';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 
 class NewRide extends StatefulWidget {
   final int duration;
-  const NewRide({Key? key, required this.duration}) : super(key: key);
+  final double gasLevel;
+  final double odometer1;
+  const NewRide(
+      {Key? key,
+      required this.duration,
+      required this.gasLevel,
+      required this.odometer1})
+      : super(key: key);
 
   @override
   State<NewRide> createState() => _NewRideState();
@@ -16,6 +20,15 @@ class NewRide extends StatefulWidget {
 
 class _NewRideState extends State<NewRide> {
   late final CountDownController _controller = CountDownController();
+  double _gasLevel1 = 0.5;
+  double _odometer1 = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _odometer1 = widget.odometer1;
+    _gasLevel1 = widget.gasLevel;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +49,15 @@ class _NewRideState extends State<NewRide> {
           const SizedBox(
             height: 50,
           ),
-          const SizedBox(
+          SizedBox(
             width: 300,
             height: 100,
             child: Column(
               children: [
-                Text("Press Go and enjoy the ride,"),
-                Text("Venom will notify when the ride is done"),
+                const Text("Press Go and enjoy the ride,"),
+                const Text("Venom will notify when the ride is done"),
+                Text("Gas level: ${(_gasLevel1 * 100).round()}%"),
+                Text('Odometer before ride: $_odometer1'),
               ],
             ),
           ),
@@ -58,6 +73,8 @@ class _NewRideState extends State<NewRide> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResultsScreen(
+                      gasLevel1: _gasLevel1,
+                      odometer1: widget.odometer1,
                       timeTraveled: (_controller.getTime()).toString(),
                     ),
                   ),
