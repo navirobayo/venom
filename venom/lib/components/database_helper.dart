@@ -63,28 +63,22 @@ class DatabaseHelper {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
-
-  Future<double?> getFuelCapacity() async {
-    final db = await instance.database;
-
-    final result = await db.query('bike_info');
-
-    if (result.isEmpty) return null;
-
-    return result.first['fuel_capacity'] as double;
-  }
 }
 
-Future<double> getTankSizeFromDatabase() async {
-  final Database db = await openDatabase('my_database.db');
-  final List<Map<String, dynamic>> result =
-      await db.query('vehicle_info', limit: 1);
-  return result[0]['tank_size'];
+Future<double?> getFuelPriceFromDatabase() async {
+  final db = await DatabaseHelper.instance.database;
+  final result = await db.query('bike_info');
+
+  if (result.isEmpty) return null;
+
+  return result.first['fuel_price'] as double?;
 }
 
-Future<double> getFuelPriceFromDatabase() async {
-  final Database db = await openDatabase('my_database.db');
-  final List<Map<String, dynamic>> result =
-      await db.query('fuel_prices', limit: 1, orderBy: 'date DESC');
-  return result[0]['price'];
+Future<double?> getFuelCapacityFromDatabase() async {
+  final db = await DatabaseHelper.instance.database;
+  final result = await db.query('bike_info');
+
+  if (result.isEmpty) return null;
+
+  return result.first['fuel_capacity'] as double?;
 }

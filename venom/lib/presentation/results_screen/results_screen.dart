@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:venom/components/database_helper.dart';
 
 class ResultsScreen extends StatefulWidget {
   final String timeTraveled;
@@ -18,6 +19,29 @@ class ResultsScreen extends StatefulWidget {
 
 class _ResultsScreenState extends State<ResultsScreen> {
   double _gasLevel2 = 0.5;
+  final _odometer2Controller = TextEditingController();
+  double _distanceTravelled = 0.0;
+  double gasUsed = 0.0;
+  double gasPrice = 0.0;
+
+  void calculateDistanceTravelled() {
+    final double odometer2 = double.parse(_odometer2Controller.text);
+    _distanceTravelled = odometer2 - widget.odometer1;
+  }
+
+  Future<void> calculateGasUsed() async {
+    final fuelCapacity = await getFuelCapacityFromDatabase();
+    setState(() {
+      gasUsed = (_gasLevel2 - widget.gasLevel1) * fuelCapacity!;
+    });
+  }
+
+  Future<void> calculateGasPrice() async {
+    final fuelPrice = await getFuelPriceFromDatabase() ?? 0;
+    setState(() {
+      gasPrice = gasUsed! * fuelPrice;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +54,11 @@ class _ResultsScreenState extends State<ResultsScreen> {
           const SizedBox(
             height: 25,
           ),
-          const Padding(
-            padding: EdgeInsets.all(50.0),
+          Padding(
+            padding: const EdgeInsets.all(50.0),
             child: TextField(
-              decoration: InputDecoration(
+              controller: _odometer2Controller,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'KM that you see in the odometer',
               ),
@@ -66,32 +91,29 @@ class _ResultsScreenState extends State<ResultsScreen> {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                // Function that adds the KM in odometer from the TextInput
+                calculateDistanceTravelled();
+                calculateGasUsed();
+                calculateGasPrice();
                 setState(() {});
               },
               child: const Text("Results"),
             ),
           ),
           Card(
-              child: SizedBox(
-            width: 150,
-            height: 300,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Gas level: ${(_gasLevel2 * 100).round()}%"),
-                Text('Odometer before ride: ${widget.odometer1}'),
-                Text("Time traveled: ${widget.timeTraveled}"),
-                Text('Money spent: xxxx'),
-                Text('Price per liter: xxxx '),
-                Text('Price per km: xxxx'),
-                Text('Liters consumed: xxxx'),
-                Text('Gallons consumed: xxxx'),
-                Text('Distance traveled: xxxx'),
-                Text('Average speed: xxxx'),
-              ],
+            child: SizedBox(
+              width: 150,
+              height: 300,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Gas used: $gasUsed Gallons"),
+                  Text("Time traveled: ${widget.timeTraveled}"),
+                  Text('Distance traveled: $_distanceTravelled km'),
+                  Text('Money spent: $gasPrice'),
+                ],
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
