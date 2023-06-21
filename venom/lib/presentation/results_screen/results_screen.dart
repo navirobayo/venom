@@ -25,21 +25,21 @@ class _ResultsScreenState extends State<ResultsScreen> {
   double gasPrice = 0.0;
 
   void calculateDistanceTravelled() {
-    final double odometer2 = double.parse(_odometer2Controller.text);
+    final double odometer2 = double.tryParse(_odometer2Controller.text) ?? 0.0;
     _distanceTravelled = odometer2 - widget.odometer1;
   }
 
   Future<void> calculateGasUsed() async {
     final fuelCapacity = await getFuelCapacityFromDatabase();
     setState(() {
-      gasUsed = (_gasLevel2 - widget.gasLevel1) * fuelCapacity!;
+      gasUsed = (_gasLevel2 - widget.gasLevel1) * (fuelCapacity ?? 0.0);
     });
   }
 
   Future<void> calculateGasPrice() async {
-    final fuelPrice = await getFuelPriceFromDatabase() ?? 0;
+    final fuelPrice = await getFuelPriceFromDatabase() ?? 0.0;
     setState(() {
-      gasPrice = gasUsed! * fuelPrice;
+      gasPrice = gasUsed * fuelPrice;
     });
   }
 

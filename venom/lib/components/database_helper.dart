@@ -25,11 +25,18 @@ class DatabaseHelper {
 
   Future<void> _createDB(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE fuel_prices (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        price REAL NOT NULL
-      )
-    ''');
+    CREATE TABLE fuel_prices (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      price REAL NOT NULL
+    )
+  ''');
+
+    await db.execute('''
+    CREATE TABLE bike_info (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      fuel_capacity REAL NOT NULL
+    )
+  ''');
   }
 
   Future<int> insertFuelPrice(double price) async {
@@ -67,11 +74,11 @@ class DatabaseHelper {
 
 Future<double?> getFuelPriceFromDatabase() async {
   final db = await DatabaseHelper.instance.database;
-  final result = await db.query('bike_info');
+  final result = await db.query('fuel_prices');
 
   if (result.isEmpty) return null;
 
-  return result.first['fuel_price'] as double?;
+  return result.first['price'] as double?;
 }
 
 Future<double?> getFuelCapacityFromDatabase() async {
