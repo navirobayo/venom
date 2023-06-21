@@ -71,21 +71,3 @@ class DatabaseHelper {
     );
   }
 }
-
-Future<double?> getFuelPriceFromDatabase() async {
-  final db = await DatabaseHelper.instance.database;
-  final result = await db.query('fuel_prices');
-
-  if (result.isEmpty) return null;
-
-  return result.first['price'] as double?;
-}
-
-Future<double?> getFuelCapacityFromDatabase() async {
-  final db = await DatabaseHelper.instance.database;
-  final result = await db.query('bike_info');
-
-  if (result.isEmpty) return null;
-
-  return result.first['fuel_capacity'] as double?;
-}

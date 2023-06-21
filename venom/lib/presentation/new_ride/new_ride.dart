@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:venom/components/timer_widget.dart';
-import 'package:venom/presentation/results_screen/results_screen.dart';
+import 'package:venom/presentation/final_data/final_data_screen.dart';
 
 class NewRide extends StatefulWidget {
   final int duration;
@@ -72,7 +72,7 @@ class _NewRideState extends State<NewRide> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ResultsScreen(
+                    builder: (context) => FinalData(
                       gasLevel1: _gasLevel1,
                       odometer1: widget.odometer1,
                       timeTraveled: (_controller.getTime()).toString(),

@@ -5,12 +5,14 @@ class ResultsScreen extends StatefulWidget {
   final String timeTraveled;
   final double gasLevel1;
   final double odometer1;
+  final double odometer2;
 
   const ResultsScreen(
       {Key? key,
       required this.timeTraveled,
       required this.gasLevel1,
-      required this.odometer1})
+      required this.odometer1,
+      required this.odometer2})
       : super(key: key);
 
   @override
@@ -19,10 +21,27 @@ class ResultsScreen extends StatefulWidget {
 
 class _ResultsScreenState extends State<ResultsScreen> {
   double _gasLevel2 = 0.5;
-  final _odometer2Controller = TextEditingController();
   double _distanceTravelled = 0.0;
   double gasUsed = 0.0;
   double gasPrice = 0.0;
+
+  Future<double?> getFuelPriceFromDatabase() async {
+    final db = await DatabaseHelper.instance.database;
+    final result = await db.query('fuel_prices');
+
+    if (result.isEmpty) return null;
+
+    return result.first['price'] as double?;
+  }
+
+  Future<double?> getFuelCapacityFromDatabase() async {
+    final db = await DatabaseHelper.instance.database;
+    final result = await db.query('bike_info');
+
+    if (result.isEmpty) return null;
+
+    return result.first['fuel_capacity'] as double?;
+  }
 
   void calculateDistanceTravelled() {
     final double odometer2 = double.tryParse(_odometer2Controller.text) ?? 0.0;
@@ -47,57 +66,12 @@ class _ResultsScreenState extends State<ResultsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Ride Results"),
+        title: const Text("Results"),
       ),
       body: ListView(
         children: [
           const SizedBox(
             height: 25,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(50.0),
-            child: TextField(
-              controller: _odometer2Controller,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'KM that you see in the odometer',
-              ),
-              textAlign: TextAlign.center,
-              textAlignVertical: TextAlignVertical.center,
-              keyboardType: TextInputType.number,
-            ),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          //Slicer to choose the gas level
-          const Text("Gas level:"),
-          Slider(
-            value: _gasLevel2,
-            onChanged: (value) {
-              setState(() {
-                _gasLevel2 = value;
-              });
-            },
-            min: 0,
-            max: 1,
-            divisions: 10,
-            label: _gasLevel2 == 0
-                ? "Empty tank"
-                : _gasLevel2 == 1
-                    ? "Full tank"
-                    : "",
-          ),
-          Expanded(
-            child: ElevatedButton(
-              onPressed: () {
-                calculateDistanceTravelled();
-                calculateGasUsed();
-                calculateGasPrice();
-                setState(() {});
-              },
-              child: const Text("Results"),
-            ),
           ),
           Card(
             child: SizedBox(

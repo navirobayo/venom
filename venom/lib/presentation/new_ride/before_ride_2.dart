@@ -16,7 +16,7 @@ class KmInBike extends StatefulWidget {
 
 class _KmInBikeState extends State<KmInBike> {
   double _gasLevel = 0.5;
-  final _odometer1Controller = TextEditingController();
+  final odometer1 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +31,7 @@ class _KmInBikeState extends State<KmInBike> {
               Padding(
                 padding: const EdgeInsets.all(50.0),
                 child: TextField(
-                  controller: _odometer1Controller,
+                  controller: odometer1,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'KM that you see in the odometer',
@@ -68,7 +68,7 @@ class _KmInBikeState extends State<KmInBike> {
                 child: ElevatedButton(
                   onPressed: () {
                     final enteredOdometer1 =
-                        double.tryParse(_odometer1Controller.text) ?? 0.0;
+                        double.tryParse(odometer1.text) ?? 0.0;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
