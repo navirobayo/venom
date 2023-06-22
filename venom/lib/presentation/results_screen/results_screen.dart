@@ -4,6 +4,7 @@ import 'package:venom/components/database_helper.dart';
 class ResultsScreen extends StatefulWidget {
   final String timeTraveled;
   final double gasLevel1;
+  final double gasLevel2;
   final double odometer1;
   final double odometer2;
 
@@ -11,6 +12,7 @@ class ResultsScreen extends StatefulWidget {
       {Key? key,
       required this.timeTraveled,
       required this.gasLevel1,
+      required this.gasLevel2,
       required this.odometer1,
       required this.odometer2})
       : super(key: key);
@@ -20,7 +22,6 @@ class ResultsScreen extends StatefulWidget {
 }
 
 class _ResultsScreenState extends State<ResultsScreen> {
-  double _gasLevel2 = 0.5;
   double _distanceTravelled = 0.0;
   double gasUsed = 0.0;
   double gasPrice = 0.0;
@@ -44,14 +45,13 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   void calculateDistanceTravelled() {
-    final double odometer2 = double.tryParse(_odometer2Controller.text) ?? 0.0;
-    _distanceTravelled = odometer2 - widget.odometer1;
+    _distanceTravelled = widget.odometer2 - widget.odometer1;
   }
 
   Future<void> calculateGasUsed() async {
     final fuelCapacity = await getFuelCapacityFromDatabase();
     setState(() {
-      gasUsed = (_gasLevel2 - widget.gasLevel1) * (fuelCapacity ?? 0.0);
+      gasUsed = (widget.gasLevel2 - widget.gasLevel1) * (fuelCapacity ?? 0.0);
     });
   }
 
@@ -80,14 +80,28 @@ class _ResultsScreenState extends State<ResultsScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Gas used: $gasUsed Gallons"),
                   Text("Time traveled: ${widget.timeTraveled}"),
                   Text('Distance traveled: $_distanceTravelled km'),
+                  Text("Gas used: $gasUsed Gallons"),
                   Text('Money spent: $gasPrice'),
+                  Text("Debug: ${widget.gasLevel1}"),
+                  Text("Debug: ${widget.gasLevel2}"),
+                  Text("Debug: ${widget.odometer1}"),
+                  Text("Debug: ${widget.odometer2}"),
                 ],
               ),
             ),
           ),
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () {
+                calculateDistanceTravelled();
+                calculateGasUsed();
+                calculateGasPrice();
+              },
+              child: const Text("Analyze ride"),
+            ),
+          )
         ],
       ),
     );

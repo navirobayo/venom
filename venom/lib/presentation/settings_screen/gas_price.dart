@@ -9,6 +9,7 @@ class GasPrice extends StatefulWidget {
 }
 
 class _GasPriceState extends State<GasPrice> {
+  String fuelPrice = "0.0";
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -28,17 +29,17 @@ class _GasPriceState extends State<GasPrice> {
           const SizedBox(
             height: 25,
           ),
-          const Row(
+          Row(
             children: [
-              Spacer(),
-              Text("\$", style: TextStyle(fontSize: 48.0)),
+              const Spacer(),
+              const Text("\$", style: TextStyle(fontSize: 48.0)),
               Text(
-                "12367",
-                style: TextStyle(fontSize: 48.0),
+                fuelPrice,
+                style: const TextStyle(fontSize: 48.0),
               ),
-              Spacer(),
-              Text("Brio, Tunja"),
-              Spacer(),
+              const Spacer(),
+              const Text("Brio, Tunja"),
+              const Spacer(),
             ],
           ),
           const SizedBox(

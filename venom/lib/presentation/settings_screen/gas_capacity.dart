@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:venom/components/database_helper.dart';
 
 class GasCapacity extends StatefulWidget {
   const GasCapacity({Key? key}) : super(key: key);
@@ -52,10 +51,7 @@ class _GasCapacityState extends State<GasCapacity> {
             height: 25,
           ),
           ElevatedButton(
-            onPressed: () async {
-              final enteredCapacity = double.tryParse(_controller.text) ?? 0.0;
-              await DatabaseHelper.instance.insertFuelCapacity(enteredCapacity);
-            },
+            onPressed: () {},
             child: const Text("Update"),
           ),
         ],

@@ -75,15 +75,16 @@ class _FinalDataState extends State<FinalData> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResultsScreen(
-                      timeTraveled: widget.duration,
-                      gasLevel1: _gasLevel,
+                      timeTraveled: widget.timeTraveled,
+                      gasLevel1: widget.gasLevel1,
+                      gasLevel2: _gasLevel2,
                       odometer1: widget.odometer1,
                       odometer2: enteredOdometer2,
                     ),
                   ),
                 );
               },
-              child: const Text("Results"),
+              child: const Text("Analyze ride"),
             ),
           ),
         ],

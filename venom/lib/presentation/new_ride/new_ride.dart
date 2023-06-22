@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:venom/components/timer_widget.dart';
-import 'package:venom/presentation/final_data/final_data_screen.dart';
+import 'package:venom/presentation/new_ride/final_data_screen.dart';
 
 class NewRide extends StatefulWidget {
   final int duration;

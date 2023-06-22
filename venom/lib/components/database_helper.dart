@@ -60,14 +60,4 @@ class DatabaseHelper {
 
     await db.delete('fuel_prices');
   }
-
-  Future<int> insertFuelCapacity(double capacity) async {
-    final db = await instance.database;
-
-    return await db.insert(
-      'bike_info',
-      {'fuel_capacity': capacity},
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
 }
