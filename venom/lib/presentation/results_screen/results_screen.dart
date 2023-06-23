@@ -25,40 +25,39 @@ class _ResultsScreenState extends State<ResultsScreen> {
   double _distanceTravelled = 0.0;
   double gasUsed = 0.0;
   double gasPrice = 0.0;
-
-  Future<double?> getFuelPriceFromDatabase() async {
-    final db = await DatabaseHelper.instance.database;
-    final result = await db.query('fuel_prices');
-
-    if (result.isEmpty) return null;
-
-    return result.first['price'] as double?;
-  }
-
-  Future<double?> getFuelCapacityFromDatabase() async {
-    final db = await DatabaseHelper.instance.database;
-    final result = await db.query('bike_info');
-
-    if (result.isEmpty) return null;
-
-    return result.first['fuel_capacity'] as double?;
-  }
+  double gasPercentage = 0.0;
 
   void calculateDistanceTravelled() {
-    _distanceTravelled = widget.odometer2 - widget.odometer1;
+    setState(() {
+      _distanceTravelled = widget.odometer2 - widget.odometer1;
+    });
   }
 
-  Future<void> calculateGasUsed() async {
-    final fuelCapacity = await getFuelCapacityFromDatabase();
+  void calculateGasUsed() {
+    const fuelCapacity = 10.0; // Replace with actual fuel capacity
     setState(() {
-      gasUsed = (widget.gasLevel2 - widget.gasLevel1) * (fuelCapacity ?? 0.0);
+      gasUsed = (widget.gasLevel1 - widget.gasLevel2) * fuelCapacity;
     });
   }
 
   Future<void> calculateGasPrice() async {
-    final fuelPrice = await getFuelPriceFromDatabase() ?? 0.0;
+    final db = await DatabaseHelper.instance.database;
+    final fuelPrices = await db.query(
+      'fuel_prices',
+      orderBy: 'id DESC',
+      limit: 1,
+    );
+    final fuelPrice = fuelPrices[0]['price'] as double;
     setState(() {
       gasPrice = gasUsed * fuelPrice;
+    });
+  }
+
+  void calculateGasPercentage() {
+    const fuelCapacity = 10.0; // Replace with actual fuel capacity
+    setState(() {
+      gasUsed = (widget.gasLevel1 - widget.gasLevel2) * fuelCapacity;
+      gasPercentage = (gasUsed / fuelCapacity) * 100.0;
     });
   }
 
@@ -83,21 +82,23 @@ class _ResultsScreenState extends State<ResultsScreen> {
                   Text("Time traveled: ${widget.timeTraveled}"),
                   Text('Distance traveled: $_distanceTravelled km'),
                   Text("Gas used: $gasUsed Gallons"),
+                  Text("Gas percentage: $gasPercentage%"),
                   Text('Money spent: $gasPrice'),
-                  Text("Debug: ${widget.gasLevel1}"),
-                  Text("Debug: ${widget.gasLevel2}"),
-                  Text("Debug: ${widget.odometer1}"),
-                  Text("Debug: ${widget.odometer2}"),
+                  Text("Debug Gas Level 1: ${widget.gasLevel1}"),
+                  Text("Debug Gas Level 2: ${widget.gasLevel2}"),
+                  Text("Debug Odometer 1: ${widget.odometer1}"),
+                  Text("Debug Odometer 2: ${widget.odometer2}"),
                 ],
               ),
             ),
           ),
           Expanded(
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 calculateDistanceTravelled();
                 calculateGasUsed();
-                calculateGasPrice();
+                await calculateGasPrice();
+                calculateGasPercentage();
               },
               child: const Text("Analyze ride"),
             ),
