@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:venom/components/vehicles_database.dart';
+import 'package:venom/components/vehicle_class.dart';
 
 class MyVehicles extends StatefulWidget {
   const MyVehicles({Key? key}) : super(key: key);
@@ -8,53 +10,171 @@ class MyVehicles extends StatefulWidget {
 }
 
 class _MyVehiclesState extends State<MyVehicles> {
-  final _controller = TextEditingController();
+  late Future<List<Vehicle>> _vehiclesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _vehiclesFuture = _getVehicles();
+  }
+
+  Future<List<Vehicle>> _getVehicles() async {
+    final database = VehicleDatabase();
+    return database.vehicles();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Gas Capacity"),
+        title: const Text("My Vehicles"),
       ),
-      body: ListView(
-        children: [
-          const SizedBox(
-            height: 25,
-          ),
-          const Row(
-            children: [
-              Spacer(),
-              Text(
-                "8.5",
-                style: TextStyle(fontSize: 48.0),
-              ),
-              Text("-GAL", style: TextStyle(fontSize: 48.0)),
-              Spacer(),
-              Text("Ninja, 650"),
-              Spacer(),
-            ],
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          TextField(
-            controller: _controller,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Enter the gas capacity of your bike',
-            ),
-            textAlign: TextAlign.center,
-            textAlignVertical: TextAlignVertical.center,
-            keyboardType: TextInputType.number,
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text("Update"),
-          ),
-        ],
+      body: FutureBuilder<List<Vehicle>>(
+        future: _vehiclesFuture,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final vehicles = snapshot.data!;
+            return ListView.builder(
+              itemCount: vehicles.length,
+              itemBuilder: (BuildContext context, int index) {
+                final vehicle = vehicles[index];
+                return Dismissible(
+                  key: Key(vehicle.id.toString()),
+                  onDismissed: (direction) async {
+                    final database = VehicleDatabase();
+                    await database.deleteVehicle(vehicle.id!);
+                    final vehicles = await database.vehicles();
+                    setState(() {
+                      _vehiclesFuture = Future.value(vehicles);
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("${vehicle.name} deleted"),
+                        action: SnackBarAction(
+                          label: "Undo",
+                          onPressed: () async {
+                            await database.insertVehicle(vehicle);
+                            final vehicles = await database.vehicles();
+                            setState(() {
+                              _vehiclesFuture = Future.value(vehicles);
+                            });
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                  background: Container(
+                    color: Colors.red,
+                    child: const ListTile(
+                      leading: Icon(Icons.delete, color: Colors.white),
+                    ),
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.motorcycle, size: 40),
+                    title: Text(vehicle.name),
+                    subtitle: Text(vehicle.tankCapacity),
+                    trailing: Switch(value: false, onChanged: (value) {}),
+                    onLongPress: () async {
+                      final result = await showMenu(
+                        context: context,
+                        position: const RelativeRect.fromLTRB(2, 0, 0, 0),
+                        items: [
+                          const PopupMenuItem(
+                            value: "delete",
+                            child: Row(
+                              children: [
+                                Icon(Icons.delete),
+                                SizedBox(width: 8),
+                                Text("Delete")
+                              ],
+                            ),
+                          )
+                        ],
+                      );
+                      if (result == "delete") {
+                        final database = VehicleDatabase();
+                        await database.deleteVehicle(vehicle.id!);
+                        final vehicles = await database.vehicles();
+                        setState(() {
+                          _vehiclesFuture = Future.value(vehicles);
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("${vehicle.name} deleted"),
+                            action: SnackBarAction(
+                              label: "Undo",
+                              onPressed: () async {
+                                await database.insertVehicle(vehicle);
+                                final vehicles = await database.vehicles();
+                                setState(() {
+                                  _vehiclesFuture = Future.value(vehicles);
+                                });
+                              },
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Error: ${snapshot.error}"));
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await showDialog<Vehicle>(
+            context: context,
+            builder: (BuildContext context) {
+              String name = "";
+              String tankCapacity = "";
+              return AlertDialog(
+                title: const Text("Add Vehicle"),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      decoration: const InputDecoration(labelText: "Name"),
+                      onChanged: (value) => name = value,
+                    ),
+                    TextField(
+                      decoration:
+                          const InputDecoration(labelText: "Tank Capacity"),
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) => tankCapacity = value,
+                    ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("Cancel"),
+                  ),
+                  TextButton(
+                    onPressed: () async {
+                      final vehicle =
+                          Vehicle(name: name, tankCapacity: tankCapacity);
+                      final database = VehicleDatabase();
+                      await database.insertVehicle(vehicle);
+                      final vehicles = await database.vehicles();
+                      setState(() {
+                        _vehiclesFuture = Future.value(vehicles);
+                      });
+                      Navigator.pop(context, vehicle);
+                    },
+                    child: const Text("Add"),
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

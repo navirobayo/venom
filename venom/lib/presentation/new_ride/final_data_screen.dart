@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:venom/presentation/results_screen/results_screen.dart';
+import 'package:venom/presentation/new_ride/results_screen.dart';
 
 class FinalData extends StatefulWidget {
   final String timeTraveled;
