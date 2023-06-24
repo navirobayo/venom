@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:venom/components/database_helper.dart';
+import 'package:venom/components/fuel_prices_database.dart';
 
 class ResultsScreen extends StatefulWidget {
   final String timeTraveled;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:venom/components/vehicles_database.dart';
-import 'package:venom/components/vehicle_class.dart';
+import 'package:venom/components/vehicle_object.dart';
 
 class MyVehicles extends StatefulWidget {
   const MyVehicles({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:venom/components/vehicle_class.dart';
+import 'package:venom/components/vehicle_object.dart';
 
 class VehicleDatabase {
   static const _databaseName = 'vehicles.db';
