@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:venom/components/tank_size_database.dart';
 import 'package:venom/components/vehicles_database.dart';
 import 'package:venom/components/vehicle_object.dart';
 
@@ -21,6 +22,23 @@ class _MyVehiclesState extends State<MyVehicles> {
   Future<List<Vehicle>> _getVehicles() async {
     final database = VehicleDatabase();
     return database.vehicles();
+  }
+
+  Future<void> _addVehicle(String name, String tankCapacity) async {
+    final vehicle = Vehicle(name: name, tankCapacity: tankCapacity);
+    final database = VehicleDatabase();
+    await database.insertVehicle(vehicle);
+    final vehicles = await database.vehicles();
+    setState(() {
+      _vehiclesFuture = Future.value(vehicles);
+    });
+
+    final defaultVehicle = DefaultVehicleObject(
+      vehicleName: vehicle.name,
+      vehicleTankSize: vehicle.tankCapacity,
+    );
+    final defaultVehicleDatabase = DefaultVehicleDatabase();
+    await defaultVehicleDatabase.insertDefaultVehicle(defaultVehicle);
   }
 
   @override
@@ -157,15 +175,8 @@ class _MyVehiclesState extends State<MyVehicles> {
                   ),
                   TextButton(
                     onPressed: () async {
-                      final vehicle =
-                          Vehicle(name: name, tankCapacity: tankCapacity);
-                      final database = VehicleDatabase();
-                      await database.insertVehicle(vehicle);
-                      final vehicles = await database.vehicles();
-                      setState(() {
-                        _vehiclesFuture = Future.value(vehicles);
-                      });
-                      Navigator.pop(context, vehicle);
+                      await _addVehicle(name, tankCapacity);
+                      Navigator.pop(context);
                     },
                     child: const Text("Add"),
                   ),

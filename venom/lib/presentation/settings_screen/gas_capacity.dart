@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:venom/components/tank_size_database.dart';
 import 'package:venom/components/vehicle_object.dart';
 import 'package:venom/components/vehicles_database.dart';
 
@@ -19,16 +20,14 @@ class _GasCapacityState extends State<GasCapacity> {
   }
 
   Future<void> _getDefaultVehicle() async {
-    final database = VehicleDatabase();
-    final vehicles = await database.vehicles();
-    final defaultVehicle = vehicles.isNotEmpty
-        ? vehicles.first
+    final defaultVehicleDatabase = DefaultVehicleDatabase();
+    final defaultVehicle = await defaultVehicleDatabase.defaultVehicle();
+    final gasVehicle = defaultVehicle != null
+        ? Vehicle(
+            name: defaultVehicle.vehicleName,
+            tankCapacity: defaultVehicle.vehicleTankSize,
+          )
         : Vehicle(name: '---', tankCapacity: '---');
-    final gasVehicle = Vehicle(
-      id: defaultVehicle.id,
-      name: defaultVehicle.name,
-      tankCapacity: defaultVehicle.tankCapacity,
-    );
     setState(() {
       _gasVehicle = gasVehicle;
     });
@@ -112,6 +111,15 @@ class _GasCapacityState extends State<GasCapacity> {
                   },
                 );
                 if (selectedVehicle != null) {
+                  // Insert the selected vehicle as the new default vehicle
+                  final defaultVehicle = DefaultVehicleObject(
+                    vehicleName: selectedVehicle.name,
+                    vehicleTankSize: selectedVehicle.tankCapacity,
+                  );
+                  final defaultVehicleDatabase = DefaultVehicleDatabase();
+                  await defaultVehicleDatabase
+                      .insertDefaultVehicle(defaultVehicle);
+
                   setState(() {
                     _gasVehicle = selectedVehicle;
                   });
