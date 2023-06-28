@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:venom/presentation/gas_history/gas_history.dart';
+import 'package:venom/presentation/my_rides/my_rides.dart';
 import 'package:venom/presentation/my_vehicles/my_vehicles.dart';
 import 'package:venom/presentation/new_ride/before_ride.dart';
 import 'package:venom/presentation/settings_screen/settings_screen.dart';
@@ -28,11 +29,22 @@ class MainMenu extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Card(
-                child: SizedBox(
-                  width: 150,
-                  height: 150,
-                  child: Center(child: Text("Rides")),
+              Card(
+                clipBehavior: Clip.hardEdge,
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyRides(),
+                        ));
+                  },
+                  child: const SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Center(child: Text("Rides")),
+                  ),
                 ),
               ),
               const SizedBox(

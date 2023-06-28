@@ -102,6 +102,15 @@ class _ResultsScreenState extends State<ResultsScreen> {
               },
               child: const Text("Analyze ride"),
             ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () async {},
+              child: const Text("Save and close"),
+            ),
           )
         ],
       ),
