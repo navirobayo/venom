@@ -37,7 +37,7 @@ class _MyVehiclesState extends State<MyVehicles> {
       vehicleName: vehicle.name,
       vehicleTankSize: vehicle.tankCapacity,
     );
-    final defaultVehicleDatabase = DefaultVehicleDatabase();
+    final defaultVehicleDatabase = DefaultVehicleDatabase.instance;
     await defaultVehicleDatabase.insertDefaultVehicle(defaultVehicle);
   }
 

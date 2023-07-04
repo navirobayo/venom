@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:venom/components/default_price_database.dart';
 import 'package:venom/components/price_object.dart';
 
 class PricesDatabase {
@@ -63,12 +64,63 @@ class PricesDatabase {
     });
   }
 
+  Future<FuelPrice> getFuelPrice(int id) async {
+    final db = await database;
+    final maps = await db.query(
+      table,
+      where: '$columnId = ?',
+      whereArgs: [id],
+    );
+    if (maps.isNotEmpty) {
+      return FuelPrice(
+        id: maps[0][columnId] as int?,
+        price: maps[0][columnPrice] as double,
+        placeOfPurchase: maps[0][columnPlaceOfPurchase] as String,
+      );
+    } else {
+      throw Exception('Fuel price not found');
+    }
+  }
+
   Future<void> deleteFuelPrice(int id) async {
     final db = await database;
+    final fuelPrice = await getFuelPrice(id);
     await db.delete(
       table,
       where: '$columnId = ?',
       whereArgs: [id],
     );
+    final defaultPriceDatabase = DefaultPriceDatabase.instance;
+    final defaultPrice = await defaultPriceDatabase.defaultPrice();
+    if (fuelPrice.price == double.parse(defaultPrice.fuelPrice)) {
+      final fuelPrices = await fuelPricesList();
+      if (fuelPrices.isNotEmpty) {
+        final nextFuelPrice = fuelPrices.first;
+        await defaultPriceDatabase.insertDefaultPrice(DefaultPriceObject(
+          fuelPrice: nextFuelPrice.price.toString(),
+          placeOfPurchase: nextFuelPrice.placeOfPurchase,
+        ));
+      } else {
+        await defaultPriceDatabase.insertDefaultPrice(DefaultPriceObject(
+          fuelPrice: '0',
+          placeOfPurchase: 'No data',
+        ));
+      }
+    }
+  }
+
+  Future<List<FuelPrice>> fuelPricesList() async {
+    final db = await database;
+    final maps = await db.query(
+      table,
+      orderBy: '$columnId DESC',
+    );
+    return List.generate(maps.length, (i) {
+      return FuelPrice(
+        id: maps[i][columnId] as int?,
+        price: maps[i][columnPrice] as double,
+        placeOfPurchase: maps[i][columnPlaceOfPurchase] as String,
+      );
+    });
   }
 }

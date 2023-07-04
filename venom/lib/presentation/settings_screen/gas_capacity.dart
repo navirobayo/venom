@@ -20,7 +20,7 @@ class _GasCapacityState extends State<GasCapacity> {
   }
 
   Future<void> _getDefaultVehicle() async {
-    final defaultVehicleDatabase = DefaultVehicleDatabase();
+    final defaultVehicleDatabase = DefaultVehicleDatabase.instance;
     final defaultVehicle = await defaultVehicleDatabase.defaultVehicle();
     final gasVehicle = defaultVehicle != null
         ? Vehicle(
@@ -116,7 +116,8 @@ class _GasCapacityState extends State<GasCapacity> {
                     vehicleName: selectedVehicle.name,
                     vehicleTankSize: selectedVehicle.tankCapacity,
                   );
-                  final defaultVehicleDatabase = DefaultVehicleDatabase();
+                  final defaultVehicleDatabase =
+                      DefaultVehicleDatabase.instance;
                   await defaultVehicleDatabase
                       .insertDefaultVehicle(defaultVehicle);
 

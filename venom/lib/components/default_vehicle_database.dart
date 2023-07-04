@@ -28,12 +28,14 @@ class DefaultVehicleDatabase {
 
   static Database? _database;
 
-  Future<Database> get database async {
-    if (_database != null) {
-      return _database!;
-    }
+  DefaultVehicleDatabase._();
 
-    _database = await _initDatabase();
+  static final DefaultVehicleDatabase instance = DefaultVehicleDatabase._();
+
+  Future<Database> get database async {
+    if (_database == null) {
+      _database = await _initDatabase();
+    }
     return _database!;
   }
 
@@ -54,6 +56,14 @@ class DefaultVehicleDatabase {
         $columnVehicleTankSize TEXT NOT NULL
       )
     ''');
+    await db.insert(
+      table,
+      DefaultVehicleObject(
+        vehicleName: 'No Vehicle',
+        vehicleTankSize: '0',
+      ).toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   Future<void> insertDefaultVehicle(DefaultVehicleObject defaultVehicle) async {
@@ -68,11 +78,12 @@ class DefaultVehicleDatabase {
 
   Future<DefaultVehicleObject> defaultVehicle() async {
     final db = await database;
-    final maps = await db.query(table);
-    if (maps.isEmpty) {
-      return DefaultVehicleObject(
-          vehicleName: 'No Vehicle', vehicleTankSize: '0');
+    final tables =
+        await db.query('sqlite_master', where: 'name = ?', whereArgs: [table]);
+    if (tables.isEmpty) {
+      await _onCreate(db, _databaseVersion);
     }
+    final maps = await db.query(table);
     return DefaultVehicleObject(
       vehicleName: maps[0][columnVehicleName] as String,
       vehicleTankSize: maps[0][columnVehicleTankSize] as String,
