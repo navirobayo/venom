@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:venom/components/default_price_database.dart';
-import 'package:venom/components/fuel_prices_database.dart';
+import 'package:venom/components/default_vehicle_database.dart';
 
 class ResultsScreen extends StatefulWidget {
   final String timeTraveled;
@@ -34,8 +34,10 @@ class _ResultsScreenState extends State<ResultsScreen> {
     });
   }
 
-  void calculateGasUsed() {
-    const fuelCapacity = 10.0; // Replace with actual fuel capacity
+  void calculateGasUsed() async {
+    final defaultVehicleDatabase = DefaultVehicleDatabase.instance;
+    final defaultVehicle = await defaultVehicleDatabase.defaultVehicle();
+    final fuelCapacity = double.parse(defaultVehicle.vehicleTankSize);
     setState(() {
       gasUsed = (widget.gasLevel1 - widget.gasLevel2) * fuelCapacity;
     });
@@ -55,8 +57,10 @@ class _ResultsScreenState extends State<ResultsScreen> {
     });
   }
 
-  void calculateGasPercentage() {
-    const fuelCapacity = 10.0; // Replace with actual fuel capacity
+  void calculateGasPercentage() async {
+    final defaultVehicleDatabase = DefaultVehicleDatabase.instance;
+    final defaultVehicle = await defaultVehicleDatabase.defaultVehicle();
+    final fuelCapacity = double.parse(defaultVehicle.vehicleTankSize);
     setState(() {
       gasUsed = (widget.gasLevel1 - widget.gasLevel2) * fuelCapacity;
       gasPercentage = (gasUsed / fuelCapacity) * 100.0;
