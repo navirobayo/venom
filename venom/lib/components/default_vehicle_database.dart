@@ -59,7 +59,7 @@ class DefaultVehicleDatabase {
     await db.insert(
       table,
       DefaultVehicleObject(
-        vehicleName: 'No Vehicle',
+        vehicleName: 'No Data',
         vehicleTankSize: '0',
       ).toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,

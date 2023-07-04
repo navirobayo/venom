@@ -103,7 +103,7 @@ class VehicleDatabase {
         ));
       } else {
         await defaultVehicleDatabase.insertDefaultVehicle(DefaultVehicleObject(
-          vehicleName: 'No Vehicle',
+          vehicleName: 'No Data',
           vehicleTankSize: '0',
         ));
       }

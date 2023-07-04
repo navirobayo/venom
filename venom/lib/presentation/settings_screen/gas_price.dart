@@ -48,11 +48,11 @@ class _DefaultPriceSelectorState extends State<DefaultPriceSelector> {
                 Row(
                   children: [
                     const Spacer(),
+                    const Text("\$", style: TextStyle(fontSize: 48.0)),
                     Text(
                       defaultPrice.price.toString(),
                       style: const TextStyle(fontSize: 48.0),
                     ),
-                    const Text("-USD", style: TextStyle(fontSize: 48.0)),
                     const Spacer(),
                     Text(
                       defaultPrice.placeOfPurchase,
