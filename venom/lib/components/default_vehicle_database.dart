@@ -66,11 +66,12 @@ class DefaultVehicleDatabase {
     );
   }
 
-  Future<DefaultVehicleObject?> defaultVehicle() async {
+  Future<DefaultVehicleObject> defaultVehicle() async {
     final db = await database;
     final maps = await db.query(table);
     if (maps.isEmpty) {
-      return null;
+      return DefaultVehicleObject(
+          vehicleName: 'No Vehicle', vehicleTankSize: '0');
     }
     return DefaultVehicleObject(
       vehicleName: maps[0][columnVehicleName] as String,

@@ -1,44 +1,129 @@
 import 'package:flutter/material.dart';
-import 'package:venom/components/ride_object.dart';
 import 'package:venom/components/rides_database.dart';
+import 'package:venom/components/ride_object.dart';
 
-class MyRides extends StatefulWidget {
+class RidesHistorical extends StatefulWidget {
+  const RidesHistorical({Key? key}) : super(key: key);
+
   @override
-  _MyRidesState createState() => _MyRidesState();
+  State<RidesHistorical> createState() => _RidesHistoricalState();
 }
 
-class _MyRidesState extends State<MyRides> {
-  late RideDatabase _rideDatabase;
-  late List<RideObject> _rides;
+class _RidesHistoricalState extends State<RidesHistorical> {
+  late Future<List<Ride>> _ridesFuture;
 
   @override
   void initState() {
     super.initState();
-    _rideDatabase = RideDatabase();
-    _loadRides();
+    _ridesFuture = _getRides();
   }
 
-  Future<void> _loadRides() async {
-    final rides = await _rideDatabase.rides();
-    setState(() {
-      _rides = rides;
-    });
+  Future<List<Ride>> _getRides() async {
+    final database = RidesDatabase();
+    return database.rides();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My rides historical tracker"),
+        title: const Text("Rides Historical Tracker"),
       ),
-      body: ListView.builder(
-        itemCount: _rides.length,
-        itemBuilder: (context, index) {
-          final ride = _rides[index];
-          return ListTile(
-            title: Text('Time traveled: ${ride.timeTraveled}'),
-            subtitle: Text('Date: ${ride.date}'),
-          );
+      body: FutureBuilder<List<Ride>>(
+        future: _ridesFuture,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final rides = snapshot.data!;
+            return ListView.builder(
+              itemCount: rides.length,
+              itemBuilder: (BuildContext context, int index) {
+                final ride = rides[index];
+                return Dismissible(
+                  key: Key(ride.id.toString()),
+                  onDismissed: (direction) async {
+                    final database = RidesDatabase();
+                    await database.deleteRide(ride.id!);
+                    final rides = await database.rides();
+                    setState(() {
+                      _ridesFuture = Future.value(rides);
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("$ride deleted"),
+                        action: SnackBarAction(
+                          label: "Undo",
+                          onPressed: () async {
+                            await database.insertRide(ride);
+                            final rides = await database.rides();
+                            setState(() {
+                              _ridesFuture = Future.value(rides);
+                            });
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                  background: Container(
+                    color: Colors.red,
+                    child: const ListTile(
+                      leading: Icon(Icons.delete, color: Colors.white),
+                    ),
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.motorcycle, size: 40),
+                    title: Text("Here should be the distance travelled"),
+                    subtitle: Text("Here should be the gas used"),
+                    trailing: Switch(value: false, onChanged: (value) {}),
+                    onLongPress: () async {
+                      final result = await showMenu(
+                        context: context,
+                        position: const RelativeRect.fromLTRB(2, 0, 0, 0),
+                        items: [
+                          const PopupMenuItem(
+                            value: "delete",
+                            child: Row(
+                              children: [
+                                Icon(Icons.delete),
+                                SizedBox(width: 8),
+                                Text("Delete")
+                              ],
+                            ),
+                          )
+                        ],
+                      );
+                      if (result == "delete") {
+                        final database = RidesDatabase();
+                        await database.deleteRide(ride.id!);
+                        final rides = await database.rides();
+                        setState(() {
+                          _ridesFuture = Future.value(rides);
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("$ride deleted"),
+                            action: SnackBarAction(
+                              label: "Undo",
+                              onPressed: () async {
+                                await database.insertRide(ride);
+                                final rides = await database.rides();
+                                setState(() {
+                                  _ridesFuture = Future.value(rides);
+                                });
+                              },
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Error: ${snapshot.error}"));
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
         },
       ),
     );

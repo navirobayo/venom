@@ -21,7 +21,7 @@ class SettingsScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const GasPrice(),
+                  builder: (context) => const DefaultPriceSelector(),
                 ),
               );
             },

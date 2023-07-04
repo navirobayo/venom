@@ -37,7 +37,7 @@ class MainMenu extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyRides(),
+                          builder: (context) => RidesHistorical(),
                         ));
                   },
                   child: const SizedBox(

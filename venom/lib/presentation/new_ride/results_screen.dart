@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:venom/components/default_price_database.dart';
 import 'package:venom/components/fuel_prices_database.dart';
 
 class ResultsScreen extends StatefulWidget {
@@ -41,15 +42,16 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   Future<void> calculateGasPrice() async {
-    final db = await DatabaseHelper.instance.database;
-    final fuelPrices = await db.query(
-      'fuel_prices',
+    final db = await DefaultPriceDatabase.instance.database;
+    final defaultPrice = await db.query(
+      'default_price',
       orderBy: 'id DESC',
       limit: 1,
     );
-    final fuelPrice = fuelPrices[0]['price'] as double;
+    final fuelPrice = defaultPrice[0]['price'] as double;
+    final gasPrice = gasUsed * fuelPrice;
     setState(() {
-      gasPrice = gasUsed * fuelPrice;
+      this.gasPrice = gasPrice;
     });
   }
 
@@ -84,10 +86,6 @@ class _ResultsScreenState extends State<ResultsScreen> {
                   Text("Gas used: $gasUsed Gallons"),
                   Text("Gas percentage: $gasPercentage%"),
                   Text('Money spent: $gasPrice'),
-                  Text("Debug Gas Level 1: ${widget.gasLevel1}"),
-                  Text("Debug Gas Level 2: ${widget.gasLevel2}"),
-                  Text("Debug Odometer 1: ${widget.odometer1}"),
-                  Text("Debug Odometer 2: ${widget.odometer2}"),
                 ],
               ),
             ),

@@ -1,63 +1,74 @@
-import 'dart:async';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'package:venom/components/price_object.dart';
 
-class DatabaseHelper {
-  static final DatabaseHelper instance = DatabaseHelper._init();
+class PricesDatabase {
+  static const _databaseName = 'prices.db';
+  static const _databaseVersion = 1;
+
+  static const table = 'fuel_prices';
+  static const columnId = 'id';
+  static const columnPrice = 'price';
+  static const columnPlaceOfPurchase = 'place_of_purchase';
 
   static Database? _database;
 
-  DatabaseHelper._init();
-
   Future<Database> get database async {
-    if (_database != null) return _database!;
+    if (_database != null) {
+      return _database!;
+    }
 
-    _database = await _initDB('fuel_prices.db');
+    _database = await _initDatabase();
     return _database!;
   }
 
-  Future<Database> _initDB(String filePath) async {
-    final dbPath = await getDatabasesPath();
-    final path = join(dbPath, filePath);
-
-    return await openDatabase(path, version: 1, onCreate: _createDB);
+  Future<Database> _initDatabase() async {
+    final path = await getDatabasesPath();
+    final databasePath = join(path, _databaseName);
+    return await openDatabase(
+      databasePath,
+      version: _databaseVersion,
+      onCreate: _onCreate,
+    );
   }
 
-  Future<void> _createDB(Database db, int version) async {
+  Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
-    CREATE TABLE fuel_prices (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      price REAL NOT NULL
-    )
-  ''');
-
-    await db.execute('''
-    CREATE TABLE bike_info (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      fuel_capacity REAL NOT NULL
-    )
-  ''');
+      CREATE TABLE $table (
+        $columnId INTEGER PRIMARY KEY,
+        $columnPrice REAL NOT NULL,
+        $columnPlaceOfPurchase TEXT NOT NULL
+      )
+    ''');
   }
 
-  Future<int> insertFuelPrice(double price) async {
-    final db = await instance.database;
-
+  Future<int> insertFuelPrice(FuelPrice fuelPrice) async {
+    final db = await database;
     return await db.insert(
-      'fuel_prices',
-      {'price': price},
+      table,
+      fuelPrice.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  Future<List<Map<String, dynamic>>> getFuelPrices() async {
-    final db = await instance.database;
-
-    return await db.query('fuel_prices');
+  Future<List<FuelPrice>> fuelPrices() async {
+    final db = await database;
+    final maps = await db.query(table);
+    return List.generate(maps.length, (i) {
+      return FuelPrice(
+        id: maps[i][columnId] as int?,
+        price: maps[i][columnPrice] as double,
+        placeOfPurchase: maps[i][columnPlaceOfPurchase] as String,
+      );
+    });
   }
 
-  Future<void> deleteAllFuelPrices() async {
-    final db = await instance.database;
-
-    await db.delete('fuel_prices');
+  Future<void> deleteFuelPrice(int id) async {
+    final db = await database;
+    await db.delete(
+      table,
+      where: '$columnId = ?',
+      whereArgs: [id],
+    );
   }
 }
