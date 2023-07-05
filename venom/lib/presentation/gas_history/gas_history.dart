@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:venom/components/default_price_database.dart';
 import 'package:venom/components/fuel_prices_database.dart';
 import 'package:venom/components/price_object.dart';
-import 'package:venom/components/ride_object.dart';
 
 class GasHistory extends StatefulWidget {
   const GasHistory({Key? key}) : super(key: key);
@@ -144,7 +143,7 @@ class _GasHistoryState extends State<GasHistory> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await showDialog<Ride>(
+          await showDialog<FuelPrice>(
             context: context,
             builder: (BuildContext context) {
               String fuelPrice = "";

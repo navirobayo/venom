@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:venom/components/rides_database.dart';
-import 'package:venom/components/ride_object.dart';
 
 class RidesHistorical extends StatefulWidget {
   const RidesHistorical({Key? key}) : super(key: key);
@@ -19,8 +18,8 @@ class _RidesHistoricalState extends State<RidesHistorical> {
   }
 
   Future<List<Ride>> _getRides() async {
-    final database = RidesDatabase();
-    return database.rides();
+    final database = RidesDatabase.instance;
+    return database.getAllRides();
   }
 
   @override
@@ -41,9 +40,9 @@ class _RidesHistoricalState extends State<RidesHistorical> {
                 return Dismissible(
                   key: Key(ride.id.toString()),
                   onDismissed: (direction) async {
-                    final database = RidesDatabase();
+                    final database = RidesDatabase.instance;
                     await database.deleteRide(ride.id!);
-                    final rides = await database.rides();
+                    final rides = await database.getAllRides();
                     setState(() {
                       _ridesFuture = Future.value(rides);
                     });
@@ -54,7 +53,7 @@ class _RidesHistoricalState extends State<RidesHistorical> {
                           label: "Undo",
                           onPressed: () async {
                             await database.insertRide(ride);
-                            final rides = await database.rides();
+                            final rides = await database.getAllRides();
                             setState(() {
                               _ridesFuture = Future.value(rides);
                             });
@@ -71,8 +70,9 @@ class _RidesHistoricalState extends State<RidesHistorical> {
                   ),
                   child: ListTile(
                     leading: const Icon(Icons.motorcycle, size: 40),
-                    title: Text("Here should be the distance travelled"),
-                    subtitle: Text("Here should be the gas used"),
+                    title: Text(
+                        "Distance travelled: ${ride.distanceTravelled} km"),
+                    subtitle: Text("Gas used: ${ride.gasUsed} gallons"),
                     trailing: Switch(value: false, onChanged: (value) {}),
                     onLongPress: () async {
                       final result = await showMenu(
@@ -92,9 +92,9 @@ class _RidesHistoricalState extends State<RidesHistorical> {
                         ],
                       );
                       if (result == "delete") {
-                        final database = RidesDatabase();
+                        final database = RidesDatabase.instance;
                         await database.deleteRide(ride.id!);
-                        final rides = await database.rides();
+                        final rides = await database.getAllRides();
                         setState(() {
                           _ridesFuture = Future.value(rides);
                         });
@@ -105,7 +105,7 @@ class _RidesHistoricalState extends State<RidesHistorical> {
                               label: "Undo",
                               onPressed: () async {
                                 await database.insertRide(ride);
-                                final rides = await database.rides();
+                                final rides = await database.getAllRides();
                                 setState(() {
                                   _ridesFuture = Future.value(rides);
                                 });
