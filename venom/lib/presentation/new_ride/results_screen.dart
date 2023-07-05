@@ -28,8 +28,8 @@ class _ResultsScreenState extends State<ResultsScreen> {
   double _distanceTravelled = 0.0;
   double gasUsed = 0.0;
   double gasAvailable = 0.0;
-  double nextDistance = 0.0;
   double gasPrice = 0.0;
+  double averageSpeed = 0.0;
 
   void calculateDistanceTravelled() {
     setState(() {
@@ -48,10 +48,24 @@ class _ResultsScreenState extends State<ResultsScreen> {
     return gasPrice;
   }
 
-  double calculateGasAvailable() {
+  double calculateNextDistance() {
     final fuelCapacity = widget.defaultTankSize;
-    final gasAvailable = (widget.gasLevel2 * fuelCapacity) / fuelCapacity;
-    return gasAvailable;
+    final fuelAvailable = widget.gasLevel2 * fuelCapacity;
+    final fuelUsed = gasUsed / fuelCapacity;
+    final fuelRemaining = fuelAvailable - fuelUsed;
+    final nextDistance = fuelRemaining * (_distanceTravelled / fuelUsed);
+    return nextDistance;
+  }
+
+  double calculateAverageSpeed() {
+    final timeTraveled = widget.timeTraveled;
+    final distanceTravelled = _distanceTravelled;
+    final hours = int.parse(timeTraveled.split(":")[0]);
+    final minutes = int.parse(timeTraveled.split(":")[1]);
+    final seconds = int.parse(timeTraveled.split(":")[2]);
+    final totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+    final averageSpeed = (distanceTravelled / totalSeconds) * 3600;
+    return averageSpeed;
   }
 
   @override
@@ -75,9 +89,8 @@ class _ResultsScreenState extends State<ResultsScreen> {
                   Text("Time traveled: ${widget.timeTraveled}"),
                   Text('Distance traveled: $_distanceTravelled km'),
                   Text("Fuel used in this ride: $gasUsed Gallons"),
-                  Text(
-                      "Fuel available: $gasAvailable% You can ride $nextDistance km more (aprox.)"),
                   Text('Money spent in this ride: \$$gasPrice'),
+                  Text("Average speed: $averageSpeed km/h"),
                 ],
               ),
             ),
@@ -88,11 +101,11 @@ class _ResultsScreenState extends State<ResultsScreen> {
                 calculateDistanceTravelled();
                 final gasUsed = calculateGasUsed();
                 final gasPrice = calculateGasPrice(gasUsed);
-                final gasAvailable = calculateGasAvailable();
+                final averageSpeed = calculateAverageSpeed();
                 setState(() {
                   this.gasUsed = gasUsed;
                   this.gasPrice = gasPrice;
-                  this.gasAvailable = gasAvailable;
+                  this.averageSpeed = averageSpeed;
                 });
               },
               child: const Text("Analyze ride"),
