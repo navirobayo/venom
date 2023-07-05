@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:venom/components/default_price_database.dart';
-import 'package:venom/components/default_vehicle_database.dart';
 
 class ResultsScreen extends StatefulWidget {
   final String timeTraveled;
@@ -8,6 +6,8 @@ class ResultsScreen extends StatefulWidget {
   final double gasLevel2;
   final double odometer1;
   final double odometer2;
+  final double defaultPrice;
+  final double defaultTankSize;
 
   const ResultsScreen(
       {Key? key,
@@ -15,7 +15,9 @@ class ResultsScreen extends StatefulWidget {
       required this.gasLevel1,
       required this.gasLevel2,
       required this.odometer1,
-      required this.odometer2})
+      required this.odometer2,
+      required this.defaultPrice,
+      required this.defaultTankSize})
       : super(key: key);
 
   @override
@@ -25,8 +27,9 @@ class ResultsScreen extends StatefulWidget {
 class _ResultsScreenState extends State<ResultsScreen> {
   double _distanceTravelled = 0.0;
   double gasUsed = 0.0;
+  double gasAvailable = 0.0;
+  double nextDistance = 0.0;
   double gasPrice = 0.0;
-  double gasPercentage = 0.0;
 
   void calculateDistanceTravelled() {
     setState(() {
@@ -34,37 +37,21 @@ class _ResultsScreenState extends State<ResultsScreen> {
     });
   }
 
-  void calculateGasUsed() async {
-    final defaultVehicleDatabase = DefaultVehicleDatabase.instance;
-    final defaultVehicle = await defaultVehicleDatabase.defaultVehicle();
-    final fuelCapacity = double.parse(defaultVehicle.vehicleTankSize);
-    setState(() {
-      gasUsed = (widget.gasLevel1 - widget.gasLevel2) * fuelCapacity;
-    });
+  double calculateGasUsed() {
+    final fuelCapacity = widget.defaultTankSize;
+    final gasUsed = (widget.gasLevel1 - widget.gasLevel2) * fuelCapacity;
+    return gasUsed;
   }
 
-  Future<void> calculateGasPrice() async {
-    final db = await DefaultPriceDatabase.instance.database;
-    final defaultPrice = await db.query(
-      'default_price',
-      orderBy: 'id DESC',
-      limit: 1,
-    );
-    final fuelPrice = defaultPrice[0]['price'] as double;
-    final gasPrice = gasUsed * fuelPrice;
-    setState(() {
-      this.gasPrice = gasPrice;
-    });
+  double calculateGasPrice(double gasUsed) {
+    final gasPrice = gasUsed * widget.defaultPrice;
+    return gasPrice;
   }
 
-  void calculateGasPercentage() async {
-    final defaultVehicleDatabase = DefaultVehicleDatabase.instance;
-    final defaultVehicle = await defaultVehicleDatabase.defaultVehicle();
-    final fuelCapacity = double.parse(defaultVehicle.vehicleTankSize);
-    setState(() {
-      gasUsed = (widget.gasLevel1 - widget.gasLevel2) * fuelCapacity;
-      gasPercentage = (gasUsed / fuelCapacity) * 100.0;
-    });
+  double calculateGasAvailable() {
+    final fuelCapacity = widget.defaultTankSize;
+    final gasAvailable = (widget.gasLevel2 * fuelCapacity) / fuelCapacity;
+    return gasAvailable;
   }
 
   @override
@@ -87,20 +74,26 @@ class _ResultsScreenState extends State<ResultsScreen> {
                 children: [
                   Text("Time traveled: ${widget.timeTraveled}"),
                   Text('Distance traveled: $_distanceTravelled km'),
-                  Text("Gas used: $gasUsed Gallons"),
-                  Text("Gas percentage: $gasPercentage%"),
-                  Text('Money spent: $gasPrice'),
+                  Text("Fuel used in this ride: $gasUsed Gallons"),
+                  Text(
+                      "Fuel available: $gasAvailable% You can ride $nextDistance km more (aprox.)"),
+                  Text('Money spent in this ride: \$$gasPrice'),
                 ],
               ),
             ),
           ),
           Expanded(
             child: ElevatedButton(
-              onPressed: () async {
+              onPressed: () {
                 calculateDistanceTravelled();
-                calculateGasUsed();
-                await calculateGasPrice();
-                calculateGasPercentage();
+                final gasUsed = calculateGasUsed();
+                final gasPrice = calculateGasPrice(gasUsed);
+                final gasAvailable = calculateGasAvailable();
+                setState(() {
+                  this.gasUsed = gasUsed;
+                  this.gasPrice = gasPrice;
+                  this.gasAvailable = gasAvailable;
+                });
               },
               child: const Text("Analyze ride"),
             ),

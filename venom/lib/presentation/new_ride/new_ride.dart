@@ -82,11 +82,12 @@ class _NewRideState extends State<NewRide> {
                 children: [
                   const Text("Press Go and enjoy the ride,"),
                   const Text("Venom will notify when the ride is done"),
-                  Text(
-                    "Gas level: ${(_gasLevel1 * 100).round()}%",
+                  const SizedBox(
+                    height: 10,
                   ),
-                  Text('Vehicle: ${_defaultVehicle.vehicleName}'),
-                  Text('Gas Price: ${_defaultPrice.fuelPrice}'),
+                  Text('Current Vehicle: ${_defaultVehicle.vehicleName}'),
+                  Text(
+                      'Current Price per Gallon: \$${_defaultPrice.fuelPrice}'),
                 ],
               ),
             ),
@@ -108,6 +109,9 @@ class _NewRideState extends State<NewRide> {
                           gasLevel1: _gasLevel1,
                           odometer1: widget.odometer1,
                           timeTraveled: (_controller.getTime()).toString(),
+                          defaultPrice: double.parse(_defaultPrice.fuelPrice),
+                          defaultTankSize:
+                              double.parse(_defaultVehicle.vehicleTankSize),
                         ),
                       ),
                     );

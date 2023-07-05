@@ -5,12 +5,16 @@ class FinalData extends StatefulWidget {
   final String timeTraveled;
   final double gasLevel1;
   final double odometer1;
+  final double defaultPrice;
+  final double defaultTankSize;
 
   const FinalData(
       {Key? key,
       required this.timeTraveled,
       required this.gasLevel1,
-      required this.odometer1})
+      required this.odometer1,
+      required this.defaultPrice,
+      required this.defaultTankSize})
       : super(key: key);
 
   @override
@@ -80,11 +84,13 @@ class _FinalDataState extends State<FinalData> {
                       gasLevel2: _gasLevel2,
                       odometer1: widget.odometer1,
                       odometer2: enteredOdometer2,
+                      defaultPrice: widget.defaultPrice,
+                      defaultTankSize: widget.defaultTankSize,
                     ),
                   ),
                 );
               },
-              child: const Text("Analyze ride"),
+              child: const Icon(Icons.arrow_forward_ios_rounded),
             ),
           ),
         ],
