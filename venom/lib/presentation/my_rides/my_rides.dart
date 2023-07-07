@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:venom/components/rides_database.dart';
+import 'package:venom/components/ride_object.dart';
+import 'package:venom/components/rides_database_final.dart';
 
-class RidesHistorical extends StatefulWidget {
-  const RidesHistorical({Key? key}) : super(key: key);
+class MyRides extends StatefulWidget {
+  const MyRides({Key? key}) : super(key: key);
 
   @override
-  State<RidesHistorical> createState() => _RidesHistoricalState();
+  State<MyRides> createState() => _MyRidesState();
 }
 
-class _RidesHistoricalState extends State<RidesHistorical> {
+class _MyRidesState extends State<MyRides> {
   late Future<List<Ride>> _ridesFuture;
 
   @override
@@ -18,15 +19,36 @@ class _RidesHistoricalState extends State<RidesHistorical> {
   }
 
   Future<List<Ride>> _getRides() async {
-    final database = RidesDatabase.instance;
-    return database.getAllRides();
+    final database = RidesDatabaseFinal();
+    return database.rides();
   }
+
+  /* Future<void> _addRide(
+    String timeTraveled,
+    double distanceTravelled,
+    double gasUsed,
+    double gasPrice,
+    double averageSpeed,
+  ) async {
+    final ride = Ride(
+        timeTraveled: timeTraveled,
+        distanceTravelled: distanceTravelled,
+        gasUsed: gasUsed,
+        gasPrice: gasPrice,
+        averageSpeed: averageSpeed);
+    final database = RidesDatabaseFinal();
+    await database.insertRide(ride);
+    final rides = await database.rides();
+    setState(() {
+      _ridesFuture = Future.value(rides);
+    });
+  } */
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Rides Historical Tracker"),
+        title: const Text("My Rides"),
       ),
       body: FutureBuilder<List<Ride>>(
         future: _ridesFuture,
@@ -40,20 +62,20 @@ class _RidesHistoricalState extends State<RidesHistorical> {
                 return Dismissible(
                   key: Key(ride.id.toString()),
                   onDismissed: (direction) async {
-                    final database = RidesDatabase.instance;
+                    final database = RidesDatabaseFinal();
                     await database.deleteRide(ride.id!);
-                    final rides = await database.getAllRides();
+                    final rides = await database.rides();
                     setState(() {
                       _ridesFuture = Future.value(rides);
                     });
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text("$ride deleted"),
+                        content: Text(ride.averageSpeed),
                         action: SnackBarAction(
                           label: "Undo",
                           onPressed: () async {
                             await database.insertRide(ride);
-                            final rides = await database.getAllRides();
+                            final rides = await database.rides();
                             setState(() {
                               _ridesFuture = Future.value(rides);
                             });
@@ -70,9 +92,8 @@ class _RidesHistoricalState extends State<RidesHistorical> {
                   ),
                   child: ListTile(
                     leading: const Icon(Icons.motorcycle, size: 40),
-                    title: Text(
-                        "Distance travelled: ${ride.distanceTravelled} km"),
-                    subtitle: Text("Gas used: ${ride.gasUsed} gallons"),
+                    title: Text(ride.averageSpeed),
+                    subtitle: Text(ride.averageSpeed),
                     trailing: Switch(value: false, onChanged: (value) {}),
                     onLongPress: () async {
                       final result = await showMenu(
@@ -92,20 +113,20 @@ class _RidesHistoricalState extends State<RidesHistorical> {
                         ],
                       );
                       if (result == "delete") {
-                        final database = RidesDatabase.instance;
+                        final database = RidesDatabaseFinal();
                         await database.deleteRide(ride.id!);
-                        final rides = await database.getAllRides();
+                        final rides = await database.rides();
                         setState(() {
                           _ridesFuture = Future.value(rides);
                         });
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text("$ride deleted"),
+                            content: Text(ride.averageSpeed.toString()),
                             action: SnackBarAction(
                               label: "Undo",
                               onPressed: () async {
                                 await database.insertRide(ride);
-                                final rides = await database.getAllRides();
+                                final rides = await database.rides();
                                 setState(() {
                                   _ridesFuture = Future.value(rides);
                                 });

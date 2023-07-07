@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:venom/components/rides_database.dart';
+import 'package:venom/components/ride_object.dart';
+import 'package:venom/components/rides_database_final.dart';
 
 class ResultsScreen extends StatefulWidget {
   final String timeTraveled;
@@ -10,16 +11,16 @@ class ResultsScreen extends StatefulWidget {
   final double defaultPrice;
   final double defaultTankSize;
 
-  const ResultsScreen(
-      {Key? key,
-      required this.timeTraveled,
-      required this.gasLevel1,
-      required this.gasLevel2,
-      required this.odometer1,
-      required this.odometer2,
-      required this.defaultPrice,
-      required this.defaultTankSize})
-      : super(key: key);
+  const ResultsScreen({
+    Key? key,
+    required this.timeTraveled,
+    required this.gasLevel1,
+    required this.gasLevel2,
+    required this.odometer1,
+    required this.odometer2,
+    required this.defaultPrice,
+    required this.defaultTankSize,
+  }) : super(key: key);
 
   @override
   State<ResultsScreen> createState() => _ResultsScreenState();
@@ -47,15 +48,6 @@ class _ResultsScreenState extends State<ResultsScreen> {
   double calculateGasPrice(double gasUsed) {
     final gasPrice = gasUsed * widget.defaultPrice;
     return gasPrice;
-  }
-
-  double calculateNextDistance() {
-    final fuelCapacity = widget.defaultTankSize;
-    final fuelAvailable = widget.gasLevel2 * fuelCapacity;
-    final fuelUsed = gasUsed / fuelCapacity;
-    final fuelRemaining = fuelAvailable - fuelUsed;
-    final nextDistance = fuelRemaining * (_distanceTravelled / fuelUsed);
-    return nextDistance;
   }
 
   double calculateAverageSpeed() {
@@ -117,7 +109,18 @@ class _ResultsScreenState extends State<ResultsScreen> {
           ),
           Expanded(
             child: ElevatedButton(
-              onPressed: () async {},
+              onPressed: () async {
+                final ride = Ride(
+                  timeTraveled: widget.timeTraveled,
+                  distanceTravelled: _distanceTravelled.toStringAsFixed(2),
+                  gasUsed: gasUsed.toStringAsFixed(2),
+                  gasPrice: gasPrice.toStringAsFixed(2),
+                  averageSpeed: averageSpeed.toStringAsFixed(2),
+                );
+                final ridesDatabase = RidesDatabaseFinal();
+                await ridesDatabase.insertRide(ride);
+                Navigator.pop(context);
+              },
               child: const Text("Save and close"),
             ),
           )

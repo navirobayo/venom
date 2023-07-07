@@ -23,6 +23,7 @@ class NewRide extends StatefulWidget {
 class _NewRideState extends State<NewRide> {
   late final CountDownController _controller = CountDownController();
   double _gasLevel1 = 0.5;
+  // ignore: unused_field
   double _odometer1 = 0.0;
   bool _isStarted = false;
   late DefaultVehicleObject _defaultVehicle;
@@ -125,59 +126,3 @@ class _NewRideState extends State<NewRide> {
     );
   }
 }
-
-
-/* Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                width: 30,
-              ),
-              _button(
-                title: "Start",
-                onPressed: () => _controller.start(),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              _button(
-                title: "Pause",
-                onPressed: () => _controller.pause(),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              _button(
-                title: "Resume",
-                onPressed: () => _controller.resume(),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              _button(
-                title: "Restart",
-                onPressed: () => _controller.restart(duration: _duration),
-              ),
-            ],
-          ), */
-
-          /* Widget _button({required String title, VoidCallback? onPressed}) {
-    return Expanded(
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.all(Theme.of(context).focusColor),
-        ),
-        onPressed: onPressed,
-        child: Text(
-          title,
-          style: const TextStyle(color: Colors.white),
-        ),
-      ),
-    );
-  } */
-
-  /* floatingActionButton: FloatingActionButton(
-        onPressed: () => _controller.start(),
-        child: const Icon(Icons.pause),
-      ), */
