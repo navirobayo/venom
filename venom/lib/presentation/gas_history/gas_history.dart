@@ -87,7 +87,8 @@ class _GasHistoryState extends State<GasHistory> {
                     ),
                   ),
                   child: ListTile(
-                    title: Text(price.price.toString()),
+                    leading: const Icon(Icons.gas_meter_outlined, size: 40),
+                    title: Text("${price.price.toString()} \$"),
                     subtitle: Text(price.placeOfPurchase),
                     onLongPress: () async {
                       final result = await showMenu(
@@ -149,18 +150,18 @@ class _GasHistoryState extends State<GasHistory> {
               String fuelPrice = "";
               String placeOfPurchase = "";
               return AlertDialog(
-                title: const Text("Add Vehicle"),
+                title: const Text("Add Price"),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
                       decoration: const InputDecoration(labelText: "Price"),
+                      keyboardType: TextInputType.number,
                       onChanged: (value) => fuelPrice = value,
                     ),
                     TextField(
                       decoration:
                           const InputDecoration(labelText: "Place of purchase"),
-                      keyboardType: TextInputType.number,
                       onChanged: (value) => placeOfPurchase = value,
                     ),
                   ],

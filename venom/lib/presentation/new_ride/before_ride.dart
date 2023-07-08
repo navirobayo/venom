@@ -17,7 +17,7 @@ class _BeforeRideState extends State<BeforeRide> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Time Picker Spinner"),
+          title: const Text("Ride time"),
         ),
         body: Container(
           padding: const EdgeInsets.only(top: 100),
@@ -27,6 +27,10 @@ class _BeforeRideState extends State<BeforeRide> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 50),
                 child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Theme.of(context).focusColor),
+                  ),
                   onPressed: () {
                     final selectedTime =
                         '${_dateTime.hour.toString().padLeft(2, '0')}:${_dateTime.minute.toString().padLeft(2, '0')}:${_dateTime.second.toString().padLeft(2, '0')}';

@@ -44,10 +44,11 @@ class _KmInBikeState extends State<KmInBike> {
               const SizedBox(
                 height: 25,
               ),
-              //Slicer to choose the gas level
               const Text("Gas level:"),
               Slider(
                 value: _gasLevel,
+                activeColor: Theme.of(context).primaryColor,
+                inactiveColor: Theme.of(context).focusColor,
                 onChanged: (value) {
                   setState(() {
                     _gasLevel = value;
@@ -62,10 +63,13 @@ class _KmInBikeState extends State<KmInBike> {
                         ? "Full tank"
                         : "",
               ),
-
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 35),
                 child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Theme.of(context).focusColor),
+                  ),
                   onPressed: () {
                     final enteredOdometer1 =
                         double.tryParse(odometer1.text) ?? 0.0;
@@ -73,6 +77,7 @@ class _KmInBikeState extends State<KmInBike> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => NewRide(
+                          userName: widget.userName,
                           duration: widget.duration,
                           gasLevel: _gasLevel,
                           odometer1: enteredOdometer1,
@@ -80,7 +85,9 @@ class _KmInBikeState extends State<KmInBike> {
                       ),
                     );
                   },
-                  child: const Icon(Icons.arrow_forward_ios_rounded),
+                  child: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                  ),
                 ),
               ),
             ],
@@ -88,26 +95,3 @@ class _KmInBikeState extends State<KmInBike> {
         ));
   }
 }
-
-//Good looking Radio buttons
-
-/* Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Gas level:"),
-                  Radio(
-                    value: 0,
-                    groupValue: 0,
-                    onChanged: (value) {},
-                  ),
-                  const Text("Half tank"),
-                  Radio(
-                    value: 1,
-                    groupValue: 0,
-                    onChanged: (value) {},
-                  ),
-                  const Text("Full tank"),
-                ],
-              ),
-
-              */ 

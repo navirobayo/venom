@@ -6,11 +6,13 @@ import 'package:venom/components/timer_widget.dart';
 import 'package:venom/presentation/new_ride/final_data_screen.dart';
 
 class NewRide extends StatefulWidget {
+  final String userName;
   final int duration;
   final double gasLevel;
   final double odometer1;
   const NewRide({
     Key? key,
+    required this.userName,
     required this.duration,
     required this.gasLevel,
     required this.odometer1,
@@ -107,6 +109,7 @@ class _NewRideState extends State<NewRide> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => FinalData(
+                          userName: widget.userName,
                           gasLevel1: _gasLevel1,
                           odometer1: widget.odometer1,
                           timeTraveled: (_controller.getTime()).toString(),

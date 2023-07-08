@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme:
             GoogleFonts.chakraPetchTextTheme(Theme.of(context).textTheme),
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
       ),
       darkTheme: ThemeData(
         textTheme: GoogleFonts.chakraPetchTextTheme(Theme.of(context).textTheme)

@@ -33,7 +33,7 @@ class _GasCapacityState extends State<GasCapacity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Default Vehicle Selector"),
+        title: const Text("Default Vehicle"),
       ),
       body: FutureBuilder<Vehicle>(
         future: _defaultVehicleFuture,
@@ -64,6 +64,10 @@ class _GasCapacityState extends State<GasCapacity> {
                   height: 25,
                 ),
                 ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Theme.of(context).focusColor),
+                  ),
                   onPressed: () async {
                     final database = VehicleDatabase();
                     final vehicles = await database.vehicles();

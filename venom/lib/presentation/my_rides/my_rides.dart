@@ -23,27 +23,6 @@ class _MyRidesState extends State<MyRides> {
     return database.rides();
   }
 
-  /* Future<void> _addRide(
-    String timeTraveled,
-    double distanceTravelled,
-    double gasUsed,
-    double gasPrice,
-    double averageSpeed,
-  ) async {
-    final ride = Ride(
-        timeTraveled: timeTraveled,
-        distanceTravelled: distanceTravelled,
-        gasUsed: gasUsed,
-        gasPrice: gasPrice,
-        averageSpeed: averageSpeed);
-    final database = RidesDatabaseFinal();
-    await database.insertRide(ride);
-    final rides = await database.rides();
-    setState(() {
-      _ridesFuture = Future.value(rides);
-    });
-  } */
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,10 +70,9 @@ class _MyRidesState extends State<MyRides> {
                     ),
                   ),
                   child: ListTile(
-                    leading: const Icon(Icons.motorcycle, size: 40),
-                    title: Text(ride.averageSpeed),
-                    subtitle: Text(ride.averageSpeed),
-                    trailing: Switch(value: false, onChanged: (value) {}),
+                    leading: const Icon(Icons.add_road_rounded, size: 40),
+                    title: Text("${ride.gasPrice} \$"),
+                    subtitle: Text("${ride.distanceTravelled} km"),
                     onLongPress: () async {
                       final result = await showMenu(
                         context: context,
@@ -121,7 +99,7 @@ class _MyRidesState extends State<MyRides> {
                         });
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(ride.averageSpeed.toString()),
+                            content: Text("${ride.gasPrice} deleted"),
                             action: SnackBarAction(
                               label: "Undo",
                               onPressed: () async {

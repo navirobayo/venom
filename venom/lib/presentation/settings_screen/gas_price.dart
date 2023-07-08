@@ -33,7 +33,7 @@ class _DefaultPriceSelectorState extends State<DefaultPriceSelector> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Default Price Selector"),
+        title: const Text("Default Price"),
       ),
       body: FutureBuilder<FuelPrice>(
         future: _defaultPriceFuture,
@@ -64,6 +64,10 @@ class _DefaultPriceSelectorState extends State<DefaultPriceSelector> {
                   height: 25,
                 ),
                 ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Theme.of(context).focusColor),
+                  ),
                   onPressed: () async {
                     final database = PricesDatabase();
                     final prices = await database.fuelPrices();

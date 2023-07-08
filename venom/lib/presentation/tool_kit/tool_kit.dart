@@ -77,6 +77,10 @@ class _ToolKitState extends State<ToolKit> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(Theme.of(context).focusColor),
+              ),
               onPressed: handleConvert,
               child: const Text('Convert'),
             ),
@@ -85,12 +89,6 @@ class _ToolKitState extends State<ToolKit> {
             const SizedBox(
               height: 16,
             ),
-            const Text("Gas prices"),
-            const SizedBox(height: 16),
-            const Text(
-              'COP/Liter: x x x  - COP/Gal: x x x',
-            ),
-            const SizedBox(height: 16),
           ],
         ),
       ),

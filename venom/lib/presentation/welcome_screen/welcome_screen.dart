@@ -49,7 +49,8 @@ class WelcomeScreen extends StatelessWidget {
             ),
           );
         },
-        backgroundColor: Colors.grey,
+        backgroundColor: Theme.of(context).primaryColor,
+        child: const Icon(Icons.code),
       ),
     );
   }

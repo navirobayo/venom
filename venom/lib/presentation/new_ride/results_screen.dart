@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:venom/components/ride_object.dart';
 import 'package:venom/components/rides_database_final.dart';
+import 'package:venom/presentation/main_menu/main_menu.dart';
 
 class ResultsScreen extends StatefulWidget {
+  final String userName;
   final String timeTraveled;
   final double gasLevel1;
   final double gasLevel2;
@@ -13,6 +15,7 @@ class ResultsScreen extends StatefulWidget {
 
   const ResultsScreen({
     Key? key,
+    required this.userName,
     required this.timeTraveled,
     required this.gasLevel1,
     required this.gasLevel2,
@@ -90,6 +93,10 @@ class _ResultsScreenState extends State<ResultsScreen> {
           ),
           Expanded(
             child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(Theme.of(context).focusColor),
+              ),
               onPressed: () {
                 calculateDistanceTravelled();
                 final gasUsed = calculateGasUsed();
@@ -109,6 +116,10 @@ class _ResultsScreenState extends State<ResultsScreen> {
           ),
           Expanded(
             child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(Theme.of(context).focusColor),
+              ),
               onPressed: () async {
                 final ride = Ride(
                   timeTraveled: widget.timeTraveled,
@@ -119,7 +130,14 @@ class _ResultsScreenState extends State<ResultsScreen> {
                 );
                 final ridesDatabase = RidesDatabaseFinal();
                 await ridesDatabase.insertRide(ride);
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MainMenu(
+                      userName: widget.userName,
+                    ),
+                  ),
+                );
               },
               child: const Text("Save and close"),
             ),

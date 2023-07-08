@@ -91,7 +91,6 @@ class _MyVehiclesState extends State<MyVehicles> {
                     leading: const Icon(Icons.motorcycle, size: 40),
                     title: Text(vehicle.name),
                     subtitle: Text(vehicle.tankCapacity),
-                    trailing: Switch(value: false, onChanged: (value) {}),
                     onLongPress: () async {
                       final result = await showMenu(
                         context: context,
@@ -161,8 +160,8 @@ class _MyVehiclesState extends State<MyVehicles> {
                       onChanged: (value) => name = value,
                     ),
                     TextField(
-                      decoration:
-                          const InputDecoration(labelText: "Tank Capacity"),
+                      decoration: const InputDecoration(
+                          labelText: "Tank Capacity in GAL"),
                       keyboardType: TextInputType.number,
                       onChanged: (value) => tankCapacity = value,
                     ),

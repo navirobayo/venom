@@ -19,7 +19,7 @@ class _ConverterSwitchState extends State<ConverterSwitch> {
   Widget build(BuildContext context) {
     return Switch(
       value: light,
-      activeColor: Colors.black,
+      activeColor: Theme.of(context).primaryColor,
       onChanged: (bool value) {
         setState(() {
           light = value;
