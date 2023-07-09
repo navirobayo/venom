@@ -10,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
-        title: const Text("Venom Beta 0.1.0"),
+        title: const Text("Venom Beta 1.0"),
       ),
       body: Center(
         child: Column(
@@ -18,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
             const SizedBox(
               height: 150,
             ),
-            const Text("Venom Beta 0.1.0", style: TextStyle(fontSize: 45)),
+            const Text("Venom Beta 1.0", style: TextStyle(fontSize: 45)),
             const SizedBox(
               height: 50,
             ),

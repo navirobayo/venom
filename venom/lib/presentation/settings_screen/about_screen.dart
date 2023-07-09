@@ -16,7 +16,7 @@ class AboutScreen extends StatelessWidget {
                 height: 50,
               ),
               Text(
-                "Venom Beta 0.1.0",
+                "Venom Beta 1.0",
                 style: TextStyle(fontSize: 38.0),
               ),
               SizedBox(
