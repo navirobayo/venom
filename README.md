@@ -11,7 +11,7 @@ Key Features:
 - Rides tracker.
 - Liters to gallons converter.
 
-Download the app and start tracking the fuel consumption of your vehicles. Available now on the Google Play Store
+Download the app and start tracking the fuel consumption of your vehicles. Available now on the [Google Play Store](https://play.google.com/store/apps/details?id=com.host2077.venom)
 
 Thank you for being part of the Venom community
 
