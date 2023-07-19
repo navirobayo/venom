@@ -30,7 +30,14 @@ class AboutScreen extends StatelessWidget {
                 height: 25,
               ),
               Text(
-                "github.com/host-2077",
+                "github.com/navirobayo",
+                style: TextStyle(fontSize: 18.0),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Text(
+                "Collaborators:",
                 style: TextStyle(fontSize: 18.0),
               ),
             ],
