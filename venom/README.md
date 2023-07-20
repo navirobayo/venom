@@ -1,16 +1,19 @@
-# venom
+# Release Notes - Venom Beta 1.0.1
+Thrilled to announce the release of the first stable prototype of the Venom App!
 
-A new Flutter project.
+This is an Android application that helps you keeping track of the fuel expenses of your vehicles and to understand them better
 
-## Getting Started
+Key Features:
 
-This project is a starting point for a Flutter application.
+- Multiple vehicle support.
+- Multiple fuel prices tracker.
+- Ride analyzer.
+- Rides tracker.
+- Liters to gallons converter.
 
-A few resources to get you started if this is your first Flutter project:
+Download the app and start tracking the fuel consumption of your vehicles. Available on the [Google Play Store](https://play.google.com/store/apps/details?id=com.host2077.venom)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Thank you for being part of the Venom community
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Best regards,
+Ivan
