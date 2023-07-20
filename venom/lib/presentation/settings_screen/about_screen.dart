@@ -16,7 +16,7 @@ class AboutScreen extends StatelessWidget {
                 height: 50,
               ),
               Text(
-                "Venom Beta 1.0",
+                "Venom Beta 1.1",
                 style: TextStyle(fontSize: 38.0),
               ),
               SizedBox(
@@ -33,13 +33,13 @@ class AboutScreen extends StatelessWidget {
                 "github.com/navirobayo",
                 style: TextStyle(fontSize: 18.0),
               ),
-              SizedBox(
+              /* SizedBox(
                 height: 25,
               ),
               Text(
                 "Collaborators:",
                 style: TextStyle(fontSize: 18.0),
-              ),
+              ), */
             ],
           ),
         ));
