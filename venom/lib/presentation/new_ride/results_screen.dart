@@ -91,7 +91,8 @@ class _ResultsScreenState extends State<ResultsScreen> {
               ),
             ),
           ),
-          Expanded(
+          SizedBox(
+            height: 50,
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor:
@@ -114,7 +115,8 @@ class _ResultsScreenState extends State<ResultsScreen> {
           const SizedBox(
             height: 25,
           ),
-          Expanded(
+          SizedBox(
+            height: 50,
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor:
