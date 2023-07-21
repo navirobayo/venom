@@ -8,7 +8,7 @@ part of 'ride_model.dart';
 
 class RideAdapter extends TypeAdapter<Ride> {
   @override
-  final int typeId = 5;
+  final int typeId = 6;
 
   @override
   Ride read(BinaryReader reader) {
