@@ -22,7 +22,7 @@ If you would like to collaborate in the project feel free to fork the repo and w
 - Push code only to the **dev** branch. 
 
 - Comment your commit with the description of the change.
-- Ex: _Style update for Analyze_Ride buttons_ or _Code refactoring for the Vehicles_Screen_ Keep them simple, yet accurate. 
+- Ex: _Style update for Analyze_Ride buttons_ or _Code refactoring for the Vehicles_Screen_ [ Keep it simple, yet accurate. ]
 
 - Enjoy the process, it's all about having fun.
 
