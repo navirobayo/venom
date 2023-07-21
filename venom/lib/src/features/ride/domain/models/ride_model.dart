@@ -13,7 +13,7 @@ part 'ride_model.g.dart';
 )
 
 /// asd
-@HiveType(typeId: 5)
+@HiveType(typeId: 6)
 class Ride with _$Ride {
   ///adsasd
   factory Ride({

@@ -13,7 +13,7 @@ part 'vehicle_model.g.dart';
 )
 
 /// asd
-@HiveType(typeId: 5)
+@HiveType(typeId: 7)
 class Vehicle with _$Vehicle {
   ///adsasd
   factory Vehicle({

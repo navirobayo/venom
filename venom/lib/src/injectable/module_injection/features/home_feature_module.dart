@@ -16,5 +16,5 @@ abstract class HomeFeatureModule {
         getIt.get<DatabaseService>(),
       );
 
-  HomeRepository get repo => HomeRepositoryImpl(remoteDS, localDS);
+  HomeRepository get repo => HomeRepositoryImpl();
 }

@@ -8,7 +8,7 @@ part of 'vehicle_model.dart';
 
 class VehicleAdapter extends TypeAdapter<Vehicle> {
   @override
-  final int typeId = 5;
+  final int typeId = 7;
 
   @override
   Vehicle read(BinaryReader reader) {

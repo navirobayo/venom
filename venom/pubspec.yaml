@@ -13,6 +13,7 @@ dependencies:
       url: https://github.com/hamidjalili59/api_service.git
       ref: main
   auto_route: ^7.7.0
+  circular_countdown_timer: ^0.2.3
   cupertino_icons: ^1.0.5
   dartz: ^0.10.1
   database_service:
@@ -26,6 +27,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.1
   flutter_screenutil: ^5.9.0-beta
+  flutter_spinner_picker: ^0.0.7
   get_it: ^7.6.0
   google_fonts: ^5.1.0
   hive: ^2.2.3

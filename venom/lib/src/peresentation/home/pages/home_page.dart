@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/ride/pages/bloc/rides/rides_bloc.dart';
+import 'package:venom/src/peresentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
+import 'package:venom/src/peresentation/ride/bloc/before_ride/before_ride_bloc.dart';
+import 'package:venom/src/peresentation/ride/bloc/final_data/final_data_bloc.dart';
+import 'package:venom/src/peresentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart';
+import 'package:venom/src/peresentation/ride/bloc/new_ride/new_ride_bloc.dart';
+import 'package:venom/src/peresentation/ride/bloc/ride_result/ride_result_bloc.dart';
+import 'package:venom/src/peresentation/ride/bloc/rides/rides_bloc.dart';
+import 'package:venom/src/peresentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
 
 @RoutePage(name: 'home')
 class HomePage extends StatelessWidget {
@@ -13,8 +20,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt.get<RidesBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt.get<RidesBloc>()),
+        BlocProvider(create: (_) => getIt.get<BeforeRideBloc>()),
+        BlocProvider(create: (_) => getIt.get<NewRideBloc>()),
+        BlocProvider(create: (_) => getIt.get<FinalDataBloc>()),
+        BlocProvider(create: (_) => getIt.get<RideResultBloc>()),
+        BlocProvider(create: (_) => getIt.get<KmInBikeBloc>()),
+        BlocProvider(create: (_) => getIt.get<MyVehicleBloc>()),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Ver. 1.0"),
@@ -54,12 +69,7 @@ class HomePage extends StatelessWidget {
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const ToolKit(),
-                      //   ),
-                      // );
+                      getIt.get<AppRouter>().pushNamed('/toolkit');
                     },
                     child: const SizedBox(
                       width: 150,
@@ -81,12 +91,7 @@ class HomePage extends StatelessWidget {
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const GasHistory(),
-                      //   ),
-                      // );
+                      getIt.get<AppRouter>().pushNamed('/gas_history');
                     },
                     child: const SizedBox(
                       width: 150,
@@ -103,12 +108,7 @@ class HomePage extends StatelessWidget {
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const MyVehicles(),
-                      //   ),
-                      // );
+                      getIt.get<AppRouter>().pushNamed('/my_vehicle');
                     },
                     child: const SizedBox(
                       width: 150,
@@ -128,14 +128,23 @@ class HomePage extends StatelessWidget {
           ),
           icon: const Icon(Icons.add),
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => BeforeRide(
-            //       userName: userName,
-            //     ),
-            //   ),
-            // );
+            getIt.get<MyVehicleBloc>().state.maybeWhen(
+              orElse: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Please add a vehicle')));
+              },
+              idle: (vehicles) {
+                getIt.get<GasPriceBloc>().state.maybeWhen(
+                  orElse: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Please add a gas price')));
+                  },
+                  idle: (prices) {
+                    getIt.get<AppRouter>().pushNamed('/before_ride');
+                  },
+                );
+              },
+            );
           },
         ),
         bottomNavigationBar: BottomAppBar(

@@ -1,13 +1,13 @@
-import 'package:venom/src/features/home/data/data_sources/local/home_local_data_source.dart';
-import 'package:venom/src/features/home/data/data_sources/remote/home_remote_data_source.dart';
 import 'package:venom/src/features/home/domain/repositories/home_repository.dart';
 
 class HomeRepositoryImpl extends HomeRepository {
-  final HomeRemoteDataSource _remoteDS;
-  final HomeLocalDataSource _localDS;
+  // final HomeRemoteDataSource _remoteDS;
+  // final HomeLocalDataSource _localDS;
   final String tokenFieldKey = 'token';
 
-  HomeRepositoryImpl(this._remoteDS, this._localDS);
+  HomeRepositoryImpl(
+      // this._remoteDS, this._localDS
+      );
 
   // @override
   // Future<Either<HomeFailure, void>> cacheHomeData(

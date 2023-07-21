@@ -32,6 +32,25 @@ class IntroPage extends StatelessWidget {
               child: TextField(
                 controller: _nameController,
                 obscureText: true,
+                onSubmitted: (value) async {
+                  if (value.isEmpty) {
+                    await NDialog(
+                      content: SizedBox(
+                        width: 0.5.sw,
+                        height: 80.h,
+                        child: Center(child: Text('Username is required')),
+                      ),
+                    ).show(context);
+                    return;
+                  }
+                  if (getIt.isRegistered<String>()) {
+                    getIt.unregister<String>();
+                    getIt.registerSingleton<String>(value);
+                  } else {
+                    getIt.registerSingleton<String>(value);
+                  }
+                  getIt.get<AppRouter>().pushNamed('/home');
+                },
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Enter your username"),
