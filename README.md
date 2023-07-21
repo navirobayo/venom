@@ -31,4 +31,4 @@ Thank you for being part of the Venom community
 
 Best regards,
 
-The Venom developer team.
+The Venom developer team
