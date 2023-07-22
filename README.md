@@ -23,11 +23,9 @@ If you would like to collaborate in the project feel free to fork the repo and w
 
 - Comment your commit with the description of the change. Keep it simple, yet accurate.
 
-- Ex: _Style update for Analyze_Ride buttons_ or _Code refactoring for the Vehicles_Screen_ 
-
 - Enjoy the process, it's all about having fun.
 
-Thank you for being part of the Venom community
+Thank you for being part of the Venom community. You can talk with us directly here: [+](https://discord.com/invite/M4wTh36A3N)
 
 Best regards,
 
