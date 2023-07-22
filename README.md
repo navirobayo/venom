@@ -15,7 +15,9 @@ Download the app and start tracking the fuel consumption of your vehicles. Avail
 
 # Contributions: 
 
-If you would like to collaborate in the project feel free to fork the repo and work on it. You can talk with us directly here: [+](https://discord.com/invite/M4wTh36A3N)
+If you would like to collaborate in the project feel free to fork the repo and work on it. 
+
+Chat with us via [discord](https://discord.com/invite/M4wTh36A3N)
 
 ## Quick guidelines:
 
