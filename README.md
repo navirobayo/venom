@@ -15,7 +15,7 @@ Download the app and start tracking the fuel consumption of your vehicles. Avail
 
 # Contributions: 
 
-If you would like to collaborate in the project feel free to fork the repo and work on it.
+If you would like to collaborate in the project feel free to fork the repo and work on it. You can talk with us directly here: [+](https://discord.com/invite/M4wTh36A3N)
 
 ## Quick guidelines:
 
@@ -25,7 +25,7 @@ If you would like to collaborate in the project feel free to fork the repo and w
 
 - Enjoy the process, it's all about having fun.
 
-Thank you for being part of the Venom community. You can talk with us directly here: [+](https://discord.com/invite/M4wTh36A3N)
+Thank you for being part of the Venom community. 
 
 Best regards,
 
