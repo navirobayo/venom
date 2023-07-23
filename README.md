@@ -21,7 +21,7 @@ If you would like to collaborate in the project feel free to fork the repo and w
 
 - Push your code to the _dev_ branch
   
-- You chat with us via [discord](https://discord.com/invite/M4wTh36A3N)
+- You can chat with us via [discord](https://discord.com/invite/M4wTh36A3N)
 
 - Enjoy the process, it's all about having fun.
 
