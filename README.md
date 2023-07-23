@@ -23,7 +23,7 @@ If you would like to collaborate in the project feel free to fork the repo and w
   
 - You chat with us via [discord](https://discord.com/invite/M4wTh36A3N)
 
-- Enjoy the process, it's all about having fun
+- Enjoy the process, it's all about having fun.
 
 Thank you for being part of the Venom community. 
 
