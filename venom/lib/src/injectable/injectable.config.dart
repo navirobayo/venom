@@ -50,22 +50,21 @@ import 'package:venom/src/injectable/module_injection/features/ride_feature_modu
     as _i29;
 import 'package:venom/src/injectable/module_injection/features/vehicle_feature_module.dart'
     as _i30;
-import 'package:venom/src/peresentation/gas_price/bloc/gas_price/gas_price_bloc.dart'
+import 'package:venom/src/presentation/gas_price/bloc/gas_price/gas_price_bloc.dart'
     as _i27;
-import 'package:venom/src/peresentation/home/bloc/home_bloc.dart' as _i11;
-import 'package:venom/src/peresentation/ride/bloc/before_ride/before_ride_bloc.dart'
+import 'package:venom/src/presentation/home/bloc/home_bloc.dart' as _i11;
+import 'package:venom/src/presentation/ride/bloc/before_ride/before_ride_bloc.dart'
     as _i3;
-import 'package:venom/src/peresentation/ride/bloc/final_data/final_data_bloc.dart'
+import 'package:venom/src/presentation/ride/bloc/final_data/final_data_bloc.dart'
     as _i7;
-import 'package:venom/src/peresentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart'
+import 'package:venom/src/presentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart'
     as _i15;
-import 'package:venom/src/peresentation/ride/bloc/new_ride/new_ride_bloc.dart'
+import 'package:venom/src/presentation/ride/bloc/new_ride/new_ride_bloc.dart'
     as _i17;
-import 'package:venom/src/peresentation/ride/bloc/ride_result/ride_result_bloc.dart'
+import 'package:venom/src/presentation/ride/bloc/ride_result/ride_result_bloc.dart'
     as _i23;
-import 'package:venom/src/peresentation/ride/bloc/rides/rides_bloc.dart'
-    as _i24;
-import 'package:venom/src/peresentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart'
+import 'package:venom/src/presentation/ride/bloc/rides/rides_bloc.dart' as _i24;
+import 'package:venom/src/presentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart'
     as _i16;
 
 extension GetItInjectableX on _i1.GetIt {

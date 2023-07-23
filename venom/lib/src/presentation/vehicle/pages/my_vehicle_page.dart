@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/features/vehicle/domain/models/vehicle_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
+import 'package:venom/src/presentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
 
 @RoutePage(name: 'my_vehicle')
 class MyVehiclePage extends StatelessWidget {

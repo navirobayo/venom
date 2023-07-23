@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/features/price/domain/models/price_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
+import 'package:venom/src/presentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
 
 @RoutePage(name: 'gas_history')
 class GasHistory extends StatelessWidget {

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/ride/bloc/new_ride/new_ride_bloc.dart';
-import 'package:venom/src/peresentation/ride/widgets/timer_widget.dart';
+import 'package:venom/src/presentation/ride/bloc/new_ride/new_ride_bloc.dart';
+import 'package:venom/src/presentation/ride/widgets/timer_widget.dart';
 
 @RoutePage(name: 'new_ride')
 class NewRidePage extends StatelessWidget {

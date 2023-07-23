@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
-import 'package:venom/src/peresentation/ride/bloc/before_ride/before_ride_bloc.dart';
-import 'package:venom/src/peresentation/ride/bloc/final_data/final_data_bloc.dart';
-import 'package:venom/src/peresentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart';
-import 'package:venom/src/peresentation/ride/bloc/new_ride/new_ride_bloc.dart';
-import 'package:venom/src/peresentation/ride/bloc/ride_result/ride_result_bloc.dart';
-import 'package:venom/src/peresentation/ride/bloc/rides/rides_bloc.dart';
-import 'package:venom/src/peresentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
+import 'package:venom/src/presentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/before_ride/before_ride_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/final_data/final_data_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/new_ride/new_ride_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/ride_result/ride_result_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/rides/rides_bloc.dart';
+import 'package:venom/src/presentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
 
 @RoutePage(name: 'home')
 class HomePage extends StatelessWidget {

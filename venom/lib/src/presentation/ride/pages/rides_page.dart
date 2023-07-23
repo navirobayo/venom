@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/ride/bloc/rides/rides_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/rides/rides_bloc.dart';
 
 @RoutePage(name: 'rides')
 class MyRides extends StatelessWidget {

@@ -1,18 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:venom/src/peresentation/auth/pages/user_auth_page.dart';
-import 'package:venom/src/peresentation/gas_price/pages/gas_history_page.dart';
-import 'package:venom/src/peresentation/home/pages/home_page.dart';
-import 'package:venom/src/peresentation/intro/page/intro_page.dart';
-import 'package:venom/src/peresentation/ride/pages/before_ride_page.dart';
-import 'package:venom/src/peresentation/ride/pages/final_data_page.dart';
-import 'package:venom/src/peresentation/ride/pages/km_in_bike_page.dart';
-import 'package:venom/src/peresentation/ride/pages/rides_page.dart';
-import 'package:venom/src/peresentation/ride/pages/new_ride_page.dart';
-import 'package:venom/src/peresentation/ride/pages/ride_results_page.dart';
-import 'package:venom/src/peresentation/splash/pages/splash_page.dart';
-import 'package:venom/src/peresentation/tool_kit/pages/toolkit_page.dart';
-import 'package:venom/src/peresentation/vehicle/pages/my_vehicle_page.dart';
+import 'package:venom/src/presentation/auth/pages/user_auth_page.dart';
+import 'package:venom/src/presentation/gas_price/pages/gas_history_page.dart';
+import 'package:venom/src/presentation/home/pages/home_page.dart';
+import 'package:venom/src/presentation/intro/page/intro_page.dart';
+import 'package:venom/src/presentation/ride/pages/before_ride_page.dart';
+import 'package:venom/src/presentation/ride/pages/final_data_page.dart';
+import 'package:venom/src/presentation/ride/pages/km_in_bike_page.dart';
+import 'package:venom/src/presentation/ride/pages/rides_page.dart';
+import 'package:venom/src/presentation/ride/pages/new_ride_page.dart';
+import 'package:venom/src/presentation/ride/pages/ride_results_page.dart';
+import 'package:venom/src/presentation/splash/pages/splash_page.dart';
+import 'package:venom/src/presentation/tool_kit/pages/toolkit_page.dart';
+import 'package:venom/src/presentation/vehicle/pages/my_vehicle_page.dart';
 
 part 'router.gr.dart';
 

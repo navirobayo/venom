@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:venom/src/features/ride/domain/failures/ride_failure.dart';
-import 'package:venom/src/peresentation/ride/bloc/final_data/final_data_bloc.dart';
-import 'package:venom/src/peresentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart';
-import 'package:venom/src/peresentation/ride/bloc/new_ride/new_ride_bloc.dart';
-import 'package:venom/src/peresentation/ride/bloc/ride_result/ride_result_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/final_data/final_data_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/new_ride/new_ride_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/ride_result/ride_result_bloc.dart';
 
 import '../../../../injectable/injectable.dart';
 
