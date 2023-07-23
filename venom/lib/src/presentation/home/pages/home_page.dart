@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Ver. 1.0"),
+          title: const Text("Ver. 2.0.0"),
           automaticallyImplyLeading: false,
         ),
         body: Center(
