@@ -25,8 +25,6 @@ If you would like to collaborate in the project feel free to fork the repo and w
 
 - Enjoy the process, it's all about having fun.
 
-Thank you for being part of the Venom community. 
-
 Best regards,
 
 The Venom developer team
