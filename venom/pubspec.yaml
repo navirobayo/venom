@@ -20,6 +20,10 @@ dependencies:
     git:
       url: https://github.com/hamidjalili59/database_service.git
       ref: main
+  timer_picker_spinner:
+    git:
+      url: https://github.com/hamidjalili59/timer_picker_spinner.git
+      ref: main
   dio: ^5.2.1+1
   flutter:
     sdk: flutter
@@ -27,7 +31,6 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.1
   flutter_screenutil: ^5.9.0-beta
-  flutter_spinner_picker: ^0.0.7
   get_it: ^7.6.0
   google_fonts: ^5.1.0
   hive: ^2.2.3
@@ -41,7 +44,6 @@ dependencies:
 dev_dependencies:
   auto_route_generator: ^7.2.0
   build_runner: ^2.3.3
-  flutter_lints: ^2.0.2
   flutter_test:
     sdk: flutter
   freezed: ^2.3.2

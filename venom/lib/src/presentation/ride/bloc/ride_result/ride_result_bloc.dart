@@ -33,13 +33,14 @@ class RideResultBloc extends Bloc<RideResultEvent, RideResultState> {
 
   FutureOr<void> _onAnalyzeRide(
       _AnalyzeRide event, Emitter<RideResultState> emit) {
-    //TODO: Please check all the calculation formulas because the result becomes negative.
     //
-    double distanceTravelled = getIt.get<double>(instanceName: 'odometer') -
-        getIt.get<double>(instanceName: 'odometer2');
+    double distanceTravelled = getIt.get<double>(instanceName: 'odometer2') -
+        getIt.get<double>(instanceName: 'odometer');
     //
+
     double gasUsed = (getIt.get<double>(instanceName: 'gasLevel') -
-        (double.tryParse(getIt.get<Vehicle>().tankCapacity!) ?? 0));
+            getIt.get<double>(instanceName: 'gasLevel2')) *
+        (double.tryParse(getIt.get<Vehicle>().tankCapacity!) ?? 0);
     //
     double gasPrice = gasUsed * (getIt.get<Price>().price ?? 0.0);
     //

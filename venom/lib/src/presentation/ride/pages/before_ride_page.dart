@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinner_picker/flutter_spinner_picker.dart';
+import 'package:timer_picker_spinner/timer_picker_spinner.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/injectable/injectable.dart';
 import 'package:venom/src/presentation/ride/bloc/before_ride/before_ride_bloc.dart';
@@ -26,17 +26,11 @@ class BeforeRidePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  FlutterSpinner(
+                  TimeSelectorSpinner(
                     fontSize: 26.sp,
-                    is24Hour: true,
-                    selectedDate: getIt.get<BeforeRideBloc>().state.maybeWhen(
-                      orElse: () {
-                        return DateTime(1, 1, 1);
-                      },
-                      idle: (timeSelected) {
-                        return timeSelected;
-                      },
-                    ),
+                    selectedFontColor: Colors.white,
+                    unselectedFontColor: Colors.white38,
+                    itemSpace: 25.w,
                     height: 250.h,
                     width: 0.9.sw,
                     onTimeChange: onTimeChange,

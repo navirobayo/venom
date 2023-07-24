@@ -320,14 +320,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.1"
-  flutter_lints:
-    dependency: "direct dev"
-    description:
-      name: flutter_lints
-      sha256: "2118df84ef0c3ca93f96123a616ae8540879991b8b57af2f81b76a7ada49b2a4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
   flutter_native_splash:
     dependency: "direct main"
     description:
@@ -344,14 +336,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.9.0-beta"
-  flutter_spinner_picker:
-    dependency: "direct main"
-    description:
-      name: flutter_spinner_picker
-      sha256: c9ca4cb5d022a90aa54e5b8c893d2b7e4029fc788875efd678e8be6e55ffa2b4
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.7"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -530,14 +514,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.7.1"
-  lints:
-    dependency: transitive
-    description:
-      name: lints
-      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   logger:
     dependency: "direct main"
     description:
@@ -831,6 +807,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  timer_picker_spinner:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: main
+      resolved-ref: aa5207f5c1032b507e8d08d8a8459fa1c59b4682
+      url: "https://github.com/hamidjalili59/timer_picker_spinner.git"
+    source: git
+    version: "0.0.1"
   timing:
     dependency: transitive
     description:

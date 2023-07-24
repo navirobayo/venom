@@ -21,6 +21,14 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const UserAuthPage(),
       );
     },
+    Gas_history.name: (routeData) {
+      final args = routeData.argsAs<Gas_historyArgs>(
+          orElse: () => const Gas_historyArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: GasHistory(key: args.key),
+      );
+    },
     Home.name: (routeData) {
       final args = routeData.argsAs<HomeArgs>(orElse: () => const HomeArgs());
       return AutoRoutePage<dynamic>(
@@ -60,39 +68,9 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     New_ride.name: (routeData) {
-      final args =
-          routeData.argsAs<New_rideArgs>(orElse: () => const New_rideArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: NewRidePage(key: args.key),
-      );
-    },
-    Splash.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SplashPage(),
-      );
-    },
-    Ride_results_page.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const RideResultsPage(),
-      );
-    },
-    My_vehicle.name: (routeData) {
-      final args = routeData.argsAs<My_vehicleArgs>(
-          orElse: () => const My_vehicleArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: MyVehiclePage(key: args.key),
-      );
-    },
-    Gas_history.name: (routeData) {
-      final args = routeData.argsAs<Gas_historyArgs>(
-          orElse: () => const Gas_historyArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: GasHistory(key: args.key),
+        child: NewRidePage(),
       );
     },
     Rides.name: (routeData) {
@@ -101,10 +79,30 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MyRides(),
       );
     },
+    Ride_results_page.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RideResultsPage(),
+      );
+    },
+    Splash.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SplashPage(),
+      );
+    },
     Toolkit.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const ToolKit(),
+      );
+    },
+    My_vehicle.name: (routeData) {
+      final args = routeData.argsAs<My_vehicleArgs>(
+          orElse: () => const My_vehicleArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: MyVehiclePage(key: args.key),
       );
     },
   };
@@ -122,6 +120,34 @@ class Auth extends PageRouteInfo<void> {
   static const String name = 'Auth';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [GasHistory]
+class Gas_history extends PageRouteInfo<Gas_historyArgs> {
+  Gas_history({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          Gas_history.name,
+          args: Gas_historyArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'Gas_history';
+
+  static const PageInfo<Gas_historyArgs> page = PageInfo<Gas_historyArgs>(name);
+}
+
+class Gas_historyArgs {
+  const Gas_historyArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'Gas_historyArgs{key: $key}';
+  }
 }
 
 /// generated route for
@@ -266,30 +292,44 @@ class Km_in_bikeArgs {
 
 /// generated route for
 /// [NewRidePage]
-class New_ride extends PageRouteInfo<New_rideArgs> {
-  New_ride({
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
+class New_ride extends PageRouteInfo<void> {
+  const New_ride({List<PageRouteInfo>? children})
+      : super(
           New_ride.name,
-          args: New_rideArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'New_ride';
 
-  static const PageInfo<New_rideArgs> page = PageInfo<New_rideArgs>(name);
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
-class New_rideArgs {
-  const New_rideArgs({this.key});
+/// generated route for
+/// [MyRides]
+class Rides extends PageRouteInfo<void> {
+  const Rides({List<PageRouteInfo>? children})
+      : super(
+          Rides.name,
+          initialChildren: children,
+        );
 
-  final Key? key;
+  static const String name = 'Rides';
 
-  @override
-  String toString() {
-    return 'New_rideArgs{key: $key}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RideResultsPage]
+class Ride_results_page extends PageRouteInfo<void> {
+  const Ride_results_page({List<PageRouteInfo>? children})
+      : super(
+          Ride_results_page.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'Ride_results_page';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -307,15 +347,15 @@ class Splash extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [RideResultsPage]
-class Ride_results_page extends PageRouteInfo<void> {
-  const Ride_results_page({List<PageRouteInfo>? children})
+/// [ToolKit]
+class Toolkit extends PageRouteInfo<void> {
+  const Toolkit({List<PageRouteInfo>? children})
       : super(
-          Ride_results_page.name,
+          Toolkit.name,
           initialChildren: children,
         );
 
-  static const String name = 'Ride_results_page';
+  static const String name = 'Toolkit';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -346,60 +386,4 @@ class My_vehicleArgs {
   String toString() {
     return 'My_vehicleArgs{key: $key}';
   }
-}
-
-/// generated route for
-/// [GasHistory]
-class Gas_history extends PageRouteInfo<Gas_historyArgs> {
-  Gas_history({
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
-          Gas_history.name,
-          args: Gas_historyArgs(key: key),
-          initialChildren: children,
-        );
-
-  static const String name = 'Gas_history';
-
-  static const PageInfo<Gas_historyArgs> page = PageInfo<Gas_historyArgs>(name);
-}
-
-class Gas_historyArgs {
-  const Gas_historyArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'Gas_historyArgs{key: $key}';
-  }
-}
-
-/// generated route for
-/// [MyRides]
-class Rides extends PageRouteInfo<void> {
-  const Rides({List<PageRouteInfo>? children})
-      : super(
-          Rides.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'Rides';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [ToolKit]
-class Toolkit extends PageRouteInfo<void> {
-  const Toolkit({List<PageRouteInfo>? children})
-      : super(
-          Toolkit.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'Toolkit';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }

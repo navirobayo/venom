@@ -45,11 +45,11 @@ import 'package:venom/src/features/vehicle/domain/use_cases/get_cached_vehicles_
 import 'package:venom/src/injectable/module_injection/features/home_feature_module.dart'
     as _i28;
 import 'package:venom/src/injectable/module_injection/features/price_feature_module.dart'
-    as _i31;
-import 'package:venom/src/injectable/module_injection/features/ride_feature_module.dart'
     as _i29;
-import 'package:venom/src/injectable/module_injection/features/vehicle_feature_module.dart'
+import 'package:venom/src/injectable/module_injection/features/ride_feature_module.dart'
     as _i30;
+import 'package:venom/src/injectable/module_injection/features/vehicle_feature_module.dart'
+    as _i31;
 import 'package:venom/src/presentation/gas_price/bloc/gas_price/gas_price_bloc.dart'
     as _i27;
 import 'package:venom/src/presentation/home/bloc/home_bloc.dart' as _i11;
@@ -131,8 +131,8 @@ extension GetItInjectableX on _i1.GetIt {
 
 class _$HomeFeatureModule extends _i28.HomeFeatureModule {}
 
-class _$RideFeatureModule extends _i29.RideFeatureModule {}
+class _$PriceFeatureModule extends _i29.PriceFeatureModule {}
 
-class _$VehicleFeatureModule extends _i30.VehicleFeatureModule {}
+class _$RideFeatureModule extends _i30.RideFeatureModule {}
 
-class _$PriceFeatureModule extends _i31.PriceFeatureModule {}
+class _$VehicleFeatureModule extends _i31.VehicleFeatureModule {}
