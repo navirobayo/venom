@@ -8,9 +8,21 @@ import 'package:venom/src/peresentation/ride/bloc/new_ride/new_ride_bloc.dart';
 import 'package:venom/src/peresentation/ride/widgets/timer_widget.dart';
 
 @RoutePage(name: 'new_ride')
-class NewRidePage extends StatelessWidget {
+class NewRidePage extends StatefulWidget {
   NewRidePage({super.key});
+
+  @override
+  State<NewRidePage> createState() => _NewRidePageState();
+}
+
+class _NewRidePageState extends State<NewRidePage> {
   late final CountDownController _controller = CountDownController();
+
+  @override
+  void initState() {
+    getIt.resetLazySingleton<NewRideBloc>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +55,10 @@ class NewRidePage extends StatelessWidget {
                               getIt
                                   .get<NewRideBloc>()
                                   .add(NewRideEvent.startTimer());
+                            } else {
+                              if (_controller.isPaused) {
+                                _controller.resume();
+                              }
                             }
                           },
                         );
@@ -97,6 +113,7 @@ class NewRidePage extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
+                            _controller.pause();
                             if (getIt.isRegistered<String>(
                                 instanceName: 'timeTraveled')) {
                               getIt.unregister<String>(
