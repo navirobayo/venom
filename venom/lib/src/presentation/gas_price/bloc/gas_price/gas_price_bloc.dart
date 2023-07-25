@@ -9,6 +9,7 @@ import 'package:venom/src/features/price/domain/use_cases/get_cached_prices_data
 import 'package:venom/src/features/core/models/tuple.dart' as tuple;
 import 'package:venom/src/injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:venom/src/presentation/settings/bloc/default_price/default_price_bloc.dart';
 
 part 'gas_price_state.dart';
 part 'gas_price_event.dart';
@@ -22,6 +23,7 @@ class GasPriceBloc extends Bloc<GasPriceEvent, GasPriceState> {
       : super(const GasPriceState.idle([])) {
     on<_CachePrice>(_onCachePrice);
     on<_DeletePrice>(_onDeletePrice);
+    on<_UpdatePrice>(_onUpdatePrice);
     on<_GetCachedPrices>(_onGetCachePrices);
     add(_GetCachedPrices());
   }
@@ -62,6 +64,11 @@ class GasPriceBloc extends Bloc<GasPriceEvent, GasPriceState> {
             } else {
               getIt.registerSingleton<List<Price>>(r);
             }
+            // Get Default Price From Hive Database
+            getIt
+                .get<DefaultPriceBloc>()
+                .add(DefaultPriceEvent.readDefaultPrice());
+
             emit(GasPriceState.idle(r));
           },
         ));
@@ -90,5 +97,38 @@ class GasPriceBloc extends Bloc<GasPriceEvent, GasPriceState> {
                 emit(GasPriceState.idle(prices));
               },
             ));
+  }
+
+  FutureOr<void> _onUpdatePrice(
+      _UpdatePrice event, Emitter<GasPriceState> emit) async {
+    state.maybeWhen(
+      orElse: () {},
+      idle: (prices) async {
+        List<Price> pricesList = prices.toList();
+        for (var i = 0; i < prices.length; i++) {
+          pricesList[i] = prices[i].copyWith(isDefault: false);
+        }
+        int priceIndex = prices.indexWhere((e) =>
+            e.placeOfPurchase == event.price.placeOfPurchase &&
+            e.price == event.price.price);
+        Price price = Price();
+        price = pricesList[priceIndex].copyWith(isDefault: true);
+        pricesList[priceIndex] = price;
+        await _cachePriceDataUseCase
+            .call(param: tuple.Tuple1(pricesList))
+            .then((value) => value.fold(
+                  (l) => emit(GasPriceState.failure('database Error', l)),
+                  (r) {
+                    if (getIt.isRegistered<List<Price>>()) {
+                      getIt.unregister<List<Price>>();
+                      getIt.registerSingleton<List<Price>>(pricesList);
+                    } else {
+                      getIt.registerSingleton<List<Price>>(pricesList);
+                    }
+                    emit(GasPriceState.idle(pricesList));
+                  },
+                ));
+      },
+    );
   }
 }

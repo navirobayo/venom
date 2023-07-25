@@ -47,7 +47,7 @@ class RideResultsPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                                "Time traveled: ${getIt.get<String>(instanceName: 'timeTraveled')}"),
+                                "Time traveled: ${currentRide.timeTraveled ?? '00:00:00'}"),
                             Text(
                                 'Distance traveled: ${(currentRide.distanceTravelled ?? 0.0)} km'),
                             Text(

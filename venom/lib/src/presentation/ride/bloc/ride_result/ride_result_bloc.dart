@@ -73,7 +73,7 @@ class RideResultBloc extends Bloc<RideResultEvent, RideResultState> {
                 ),
               ),
               (r) {
-                return getIt.get<AppRouter>().replaceNamed('/home');
+                return getIt.get<AppRouter>().navigateNamed('/home');
               },
             ));
   }

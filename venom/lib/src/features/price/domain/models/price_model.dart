@@ -20,6 +20,7 @@ class Price with _$Price {
     @HiveField(0, defaultValue: 0) int? id,
     @HiveField(1, defaultValue: 0.0) double? price,
     @HiveField(2, defaultValue: '') String? placeOfPurchase,
+    @HiveField(3, defaultValue: false) bool? isDefault,
   }) = _Price;
 
   ///das

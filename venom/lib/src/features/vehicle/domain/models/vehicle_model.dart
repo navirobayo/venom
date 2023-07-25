@@ -20,6 +20,7 @@ class Vehicle with _$Vehicle {
     @HiveField(0, defaultValue: 0) int? id,
     @HiveField(1, defaultValue: '') String? name,
     @HiveField(2, defaultValue: '') String? tankCapacity,
+    @HiveField(3, defaultValue: false) bool? isDefault,
   }) = _Vehicle;
 
   ///das

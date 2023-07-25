@@ -493,6 +493,7 @@ mixin _$MyVehicleEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int index) deleteVehicle,
     required TResult Function(Vehicle vehicle) cacheVehicle,
+    required TResult Function(Vehicle vehicle) updateVehicle,
     required TResult Function() getCachedVehicles,
   }) =>
       throw _privateConstructorUsedError;
@@ -500,6 +501,7 @@ mixin _$MyVehicleEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int index)? deleteVehicle,
     TResult? Function(Vehicle vehicle)? cacheVehicle,
+    TResult? Function(Vehicle vehicle)? updateVehicle,
     TResult? Function()? getCachedVehicles,
   }) =>
       throw _privateConstructorUsedError;
@@ -507,6 +509,7 @@ mixin _$MyVehicleEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int index)? deleteVehicle,
     TResult Function(Vehicle vehicle)? cacheVehicle,
+    TResult Function(Vehicle vehicle)? updateVehicle,
     TResult Function()? getCachedVehicles,
     required TResult orElse(),
   }) =>
@@ -515,6 +518,7 @@ mixin _$MyVehicleEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeleteVehicle value) deleteVehicle,
     required TResult Function(_CacheVehicle value) cacheVehicle,
+    required TResult Function(_UpdateVehicle value) updateVehicle,
     required TResult Function(_GetCachedVehicles value) getCachedVehicles,
   }) =>
       throw _privateConstructorUsedError;
@@ -522,6 +526,7 @@ mixin _$MyVehicleEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeleteVehicle value)? deleteVehicle,
     TResult? Function(_CacheVehicle value)? cacheVehicle,
+    TResult? Function(_UpdateVehicle value)? updateVehicle,
     TResult? Function(_GetCachedVehicles value)? getCachedVehicles,
   }) =>
       throw _privateConstructorUsedError;
@@ -529,6 +534,7 @@ mixin _$MyVehicleEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeleteVehicle value)? deleteVehicle,
     TResult Function(_CacheVehicle value)? cacheVehicle,
+    TResult Function(_UpdateVehicle value)? updateVehicle,
     TResult Function(_GetCachedVehicles value)? getCachedVehicles,
     required TResult orElse(),
   }) =>
@@ -619,6 +625,7 @@ class _$_DeleteVehicle implements _DeleteVehicle {
   TResult when<TResult extends Object?>({
     required TResult Function(int index) deleteVehicle,
     required TResult Function(Vehicle vehicle) cacheVehicle,
+    required TResult Function(Vehicle vehicle) updateVehicle,
     required TResult Function() getCachedVehicles,
   }) {
     return deleteVehicle(index);
@@ -629,6 +636,7 @@ class _$_DeleteVehicle implements _DeleteVehicle {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int index)? deleteVehicle,
     TResult? Function(Vehicle vehicle)? cacheVehicle,
+    TResult? Function(Vehicle vehicle)? updateVehicle,
     TResult? Function()? getCachedVehicles,
   }) {
     return deleteVehicle?.call(index);
@@ -639,6 +647,7 @@ class _$_DeleteVehicle implements _DeleteVehicle {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int index)? deleteVehicle,
     TResult Function(Vehicle vehicle)? cacheVehicle,
+    TResult Function(Vehicle vehicle)? updateVehicle,
     TResult Function()? getCachedVehicles,
     required TResult orElse(),
   }) {
@@ -653,6 +662,7 @@ class _$_DeleteVehicle implements _DeleteVehicle {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeleteVehicle value) deleteVehicle,
     required TResult Function(_CacheVehicle value) cacheVehicle,
+    required TResult Function(_UpdateVehicle value) updateVehicle,
     required TResult Function(_GetCachedVehicles value) getCachedVehicles,
   }) {
     return deleteVehicle(this);
@@ -663,6 +673,7 @@ class _$_DeleteVehicle implements _DeleteVehicle {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeleteVehicle value)? deleteVehicle,
     TResult? Function(_CacheVehicle value)? cacheVehicle,
+    TResult? Function(_UpdateVehicle value)? updateVehicle,
     TResult? Function(_GetCachedVehicles value)? getCachedVehicles,
   }) {
     return deleteVehicle?.call(this);
@@ -673,6 +684,7 @@ class _$_DeleteVehicle implements _DeleteVehicle {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeleteVehicle value)? deleteVehicle,
     TResult Function(_CacheVehicle value)? cacheVehicle,
+    TResult Function(_UpdateVehicle value)? updateVehicle,
     TResult Function(_GetCachedVehicles value)? getCachedVehicles,
     required TResult orElse(),
   }) {
@@ -768,6 +780,7 @@ class _$_CacheVehicle implements _CacheVehicle {
   TResult when<TResult extends Object?>({
     required TResult Function(int index) deleteVehicle,
     required TResult Function(Vehicle vehicle) cacheVehicle,
+    required TResult Function(Vehicle vehicle) updateVehicle,
     required TResult Function() getCachedVehicles,
   }) {
     return cacheVehicle(vehicle);
@@ -778,6 +791,7 @@ class _$_CacheVehicle implements _CacheVehicle {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int index)? deleteVehicle,
     TResult? Function(Vehicle vehicle)? cacheVehicle,
+    TResult? Function(Vehicle vehicle)? updateVehicle,
     TResult? Function()? getCachedVehicles,
   }) {
     return cacheVehicle?.call(vehicle);
@@ -788,6 +802,7 @@ class _$_CacheVehicle implements _CacheVehicle {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int index)? deleteVehicle,
     TResult Function(Vehicle vehicle)? cacheVehicle,
+    TResult Function(Vehicle vehicle)? updateVehicle,
     TResult Function()? getCachedVehicles,
     required TResult orElse(),
   }) {
@@ -802,6 +817,7 @@ class _$_CacheVehicle implements _CacheVehicle {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeleteVehicle value) deleteVehicle,
     required TResult Function(_CacheVehicle value) cacheVehicle,
+    required TResult Function(_UpdateVehicle value) updateVehicle,
     required TResult Function(_GetCachedVehicles value) getCachedVehicles,
   }) {
     return cacheVehicle(this);
@@ -812,6 +828,7 @@ class _$_CacheVehicle implements _CacheVehicle {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeleteVehicle value)? deleteVehicle,
     TResult? Function(_CacheVehicle value)? cacheVehicle,
+    TResult? Function(_UpdateVehicle value)? updateVehicle,
     TResult? Function(_GetCachedVehicles value)? getCachedVehicles,
   }) {
     return cacheVehicle?.call(this);
@@ -822,6 +839,7 @@ class _$_CacheVehicle implements _CacheVehicle {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeleteVehicle value)? deleteVehicle,
     TResult Function(_CacheVehicle value)? cacheVehicle,
+    TResult Function(_UpdateVehicle value)? updateVehicle,
     TResult Function(_GetCachedVehicles value)? getCachedVehicles,
     required TResult orElse(),
   }) {
@@ -838,6 +856,161 @@ abstract class _CacheVehicle implements MyVehicleEvent {
   Vehicle get vehicle;
   @JsonKey(ignore: true)
   _$$_CacheVehicleCopyWith<_$_CacheVehicle> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateVehicleCopyWith<$Res> {
+  factory _$$_UpdateVehicleCopyWith(
+          _$_UpdateVehicle value, $Res Function(_$_UpdateVehicle) then) =
+      __$$_UpdateVehicleCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Vehicle vehicle});
+
+  $VehicleCopyWith<$Res> get vehicle;
+}
+
+/// @nodoc
+class __$$_UpdateVehicleCopyWithImpl<$Res>
+    extends _$MyVehicleEventCopyWithImpl<$Res, _$_UpdateVehicle>
+    implements _$$_UpdateVehicleCopyWith<$Res> {
+  __$$_UpdateVehicleCopyWithImpl(
+      _$_UpdateVehicle _value, $Res Function(_$_UpdateVehicle) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? vehicle = null,
+  }) {
+    return _then(_$_UpdateVehicle(
+      null == vehicle
+          ? _value.vehicle
+          : vehicle // ignore: cast_nullable_to_non_nullable
+              as Vehicle,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $VehicleCopyWith<$Res> get vehicle {
+    return $VehicleCopyWith<$Res>(_value.vehicle, (value) {
+      return _then(_value.copyWith(vehicle: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateVehicle implements _UpdateVehicle {
+  _$_UpdateVehicle(this.vehicle);
+
+  @override
+  final Vehicle vehicle;
+
+  @override
+  String toString() {
+    return 'MyVehicleEvent.updateVehicle(vehicle: $vehicle)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateVehicle &&
+            (identical(other.vehicle, vehicle) || other.vehicle == vehicle));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, vehicle);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateVehicleCopyWith<_$_UpdateVehicle> get copyWith =>
+      __$$_UpdateVehicleCopyWithImpl<_$_UpdateVehicle>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int index) deleteVehicle,
+    required TResult Function(Vehicle vehicle) cacheVehicle,
+    required TResult Function(Vehicle vehicle) updateVehicle,
+    required TResult Function() getCachedVehicles,
+  }) {
+    return updateVehicle(vehicle);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int index)? deleteVehicle,
+    TResult? Function(Vehicle vehicle)? cacheVehicle,
+    TResult? Function(Vehicle vehicle)? updateVehicle,
+    TResult? Function()? getCachedVehicles,
+  }) {
+    return updateVehicle?.call(vehicle);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int index)? deleteVehicle,
+    TResult Function(Vehicle vehicle)? cacheVehicle,
+    TResult Function(Vehicle vehicle)? updateVehicle,
+    TResult Function()? getCachedVehicles,
+    required TResult orElse(),
+  }) {
+    if (updateVehicle != null) {
+      return updateVehicle(vehicle);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DeleteVehicle value) deleteVehicle,
+    required TResult Function(_CacheVehicle value) cacheVehicle,
+    required TResult Function(_UpdateVehicle value) updateVehicle,
+    required TResult Function(_GetCachedVehicles value) getCachedVehicles,
+  }) {
+    return updateVehicle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DeleteVehicle value)? deleteVehicle,
+    TResult? Function(_CacheVehicle value)? cacheVehicle,
+    TResult? Function(_UpdateVehicle value)? updateVehicle,
+    TResult? Function(_GetCachedVehicles value)? getCachedVehicles,
+  }) {
+    return updateVehicle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DeleteVehicle value)? deleteVehicle,
+    TResult Function(_CacheVehicle value)? cacheVehicle,
+    TResult Function(_UpdateVehicle value)? updateVehicle,
+    TResult Function(_GetCachedVehicles value)? getCachedVehicles,
+    required TResult orElse(),
+  }) {
+    if (updateVehicle != null) {
+      return updateVehicle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateVehicle implements MyVehicleEvent {
+  factory _UpdateVehicle(final Vehicle vehicle) = _$_UpdateVehicle;
+
+  Vehicle get vehicle;
+  @JsonKey(ignore: true)
+  _$$_UpdateVehicleCopyWith<_$_UpdateVehicle> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -881,6 +1054,7 @@ class _$_GetCachedVehicles implements _GetCachedVehicles {
   TResult when<TResult extends Object?>({
     required TResult Function(int index) deleteVehicle,
     required TResult Function(Vehicle vehicle) cacheVehicle,
+    required TResult Function(Vehicle vehicle) updateVehicle,
     required TResult Function() getCachedVehicles,
   }) {
     return getCachedVehicles();
@@ -891,6 +1065,7 @@ class _$_GetCachedVehicles implements _GetCachedVehicles {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int index)? deleteVehicle,
     TResult? Function(Vehicle vehicle)? cacheVehicle,
+    TResult? Function(Vehicle vehicle)? updateVehicle,
     TResult? Function()? getCachedVehicles,
   }) {
     return getCachedVehicles?.call();
@@ -901,6 +1076,7 @@ class _$_GetCachedVehicles implements _GetCachedVehicles {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int index)? deleteVehicle,
     TResult Function(Vehicle vehicle)? cacheVehicle,
+    TResult Function(Vehicle vehicle)? updateVehicle,
     TResult Function()? getCachedVehicles,
     required TResult orElse(),
   }) {
@@ -915,6 +1091,7 @@ class _$_GetCachedVehicles implements _GetCachedVehicles {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeleteVehicle value) deleteVehicle,
     required TResult Function(_CacheVehicle value) cacheVehicle,
+    required TResult Function(_UpdateVehicle value) updateVehicle,
     required TResult Function(_GetCachedVehicles value) getCachedVehicles,
   }) {
     return getCachedVehicles(this);
@@ -925,6 +1102,7 @@ class _$_GetCachedVehicles implements _GetCachedVehicles {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeleteVehicle value)? deleteVehicle,
     TResult? Function(_CacheVehicle value)? cacheVehicle,
+    TResult? Function(_UpdateVehicle value)? updateVehicle,
     TResult? Function(_GetCachedVehicles value)? getCachedVehicles,
   }) {
     return getCachedVehicles?.call(this);
@@ -935,6 +1113,7 @@ class _$_GetCachedVehicles implements _GetCachedVehicles {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeleteVehicle value)? deleteVehicle,
     TResult Function(_CacheVehicle value)? cacheVehicle,
+    TResult Function(_UpdateVehicle value)? updateVehicle,
     TResult Function(_GetCachedVehicles value)? getCachedVehicles,
     required TResult orElse(),
   }) {

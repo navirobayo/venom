@@ -132,6 +132,4 @@ class kmInBikeGasLevelAndOdometerModel {
   final double gasLevel;
   final double odometer;
   kmInBikeGasLevelAndOdometerModel(this.gasLevel, this.odometer);
-
-  // static double getGasLevel = gasLevel;
 }
