@@ -3,12 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/features/ride/domain/models/ride_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/presentation/ride/bloc/before_ride/before_ride_bloc.dart';
-import 'package:venom/src/presentation/ride/bloc/final_data/final_data_bloc.dart';
-import 'package:venom/src/presentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart';
-import 'package:venom/src/presentation/ride/bloc/new_ride/new_ride_bloc.dart';
 import 'package:venom/src/presentation/ride/bloc/ride_result/ride_result_bloc.dart';
-import 'package:venom/src/presentation/ride/bloc/rides/rides_bloc.dart';
 
 @RoutePage(name: 'ride_results_page')
 class RideResultsPage extends StatelessWidget {
@@ -97,12 +92,6 @@ class RideResultsPage extends StatelessWidget {
                             getIt
                                 .get<RideResultBloc>()
                                 .add(RideResultEvent.saveAndClose(ride));
-                            getIt.resetLazySingleton<NewRideBloc>();
-                            getIt.resetLazySingleton<KmInBikeBloc>();
-                            getIt.resetLazySingleton<BeforeRideBloc>();
-                            getIt.resetLazySingleton<RideResultBloc>();
-                            getIt.resetLazySingleton<FinalDataBloc>();
-                            getIt.resetLazySingleton<RidesBloc>();
                           },
                         );
                   },

@@ -5,8 +5,19 @@ import 'package:venom/src/injectable/injectable.dart';
 import 'package:venom/src/presentation/ride/bloc/rides/rides_bloc.dart';
 
 @RoutePage(name: 'rides')
-class MyRides extends StatelessWidget {
+class MyRides extends StatefulWidget {
   const MyRides({super.key});
+
+  @override
+  State<MyRides> createState() => _MyRidesState();
+}
+
+class _MyRidesState extends State<MyRides> {
+  @override
+  void initState() {
+    getIt.resetLazySingleton<RidesBloc>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

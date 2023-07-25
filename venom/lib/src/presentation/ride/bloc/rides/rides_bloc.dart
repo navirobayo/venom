@@ -50,6 +50,12 @@ class RidesBloc extends Bloc<RidesEvent, RidesState> {
               );
             },
             (r) {
+              if (getIt.isRegistered<List<Ride>>()) {
+                getIt.unregister<List<Ride>>();
+                getIt.registerSingleton<List<Ride>>(r);
+              } else {
+                getIt.registerSingleton<List<Ride>>(r);
+              }
               rides = r;
               return emit(RidesState.idle(r));
             },
