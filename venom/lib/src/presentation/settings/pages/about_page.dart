@@ -18,7 +18,7 @@ class AboutPage extends StatelessWidget {
                 height: 50,
               ),
               Text(
-                "Venom Beta 1.1",
+                "Venom 2.0.0",
                 style: TextStyle(fontSize: 38.0),
               ),
               SizedBox(
@@ -29,10 +29,24 @@ class AboutPage extends StatelessWidget {
                 style: TextStyle(fontSize: 18.0),
               ),
               SizedBox(
+                height: 50,
+              ),
+              Text(
+                "Contributors:",
+                style: TextStyle(fontSize: 24.0),
+              ),
+              SizedBox(
                 height: 25,
               ),
               Text(
                 "github.com/navirobayo",
+                style: TextStyle(fontSize: 18.0),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Text(
+                "github.com/hamidjalili59",
                 style: TextStyle(fontSize: 18.0),
               ),
             ],
