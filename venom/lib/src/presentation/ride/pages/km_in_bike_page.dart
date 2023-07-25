@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart';
 
 @RoutePage(name: 'km_in_bike')
 class KmInBikePage extends StatelessWidget {

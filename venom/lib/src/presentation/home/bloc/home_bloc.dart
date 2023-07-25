@@ -6,8 +6,8 @@ import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/config/utils/function_helper.dart';
 // import 'package:venom/src/features/core/models/tuple.dart' as tuple;
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
-import 'package:venom/src/peresentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
+import 'package:venom/src/presentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
+import 'package:venom/src/presentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
 
 import '../../../features/home/domain/failures/home_failure.dart';
 

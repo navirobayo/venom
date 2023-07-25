@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/features/ride/domain/models/ride_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/ride/bloc/ride_result/ride_result_bloc.dart';
-import 'package:venom/src/peresentation/ride/bloc/rides/rides_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/ride_result/ride_result_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/rides/rides_bloc.dart';
 
 @RoutePage(name: 'ride_results_page')
 class RideResultsPage extends StatelessWidget {

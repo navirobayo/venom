@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venom/src/config/constants/png_assets.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/home/bloc/home_bloc.dart';
+import 'package:venom/src/presentation/home/bloc/home_bloc.dart';
 
 @RoutePage(name: 'splash')
 class SplashPage extends StatelessWidget {

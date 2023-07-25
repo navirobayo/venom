@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/ride/bloc/final_data/final_data_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/final_data/final_data_bloc.dart';
 
 @RoutePage(name: 'final_data')
 class FinalData extends StatelessWidget {

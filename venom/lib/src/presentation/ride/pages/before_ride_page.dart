@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timer_picker_spinner/timer_picker_spinner.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/ride/bloc/before_ride/before_ride_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/before_ride/before_ride_bloc.dart';
 
 @RoutePage(name: 'before_ride')
 class BeforeRidePage extends StatelessWidget {

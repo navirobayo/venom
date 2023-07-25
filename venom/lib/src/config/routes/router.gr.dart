@@ -68,9 +68,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     New_ride.name: (routeData) {
+      final args =
+          routeData.argsAs<New_rideArgs>(orElse: () => const New_rideArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: NewRidePage(),
+        child: NewRidePage(key: args.key),
       );
     },
     Rides.name: (routeData) {
@@ -292,16 +294,30 @@ class Km_in_bikeArgs {
 
 /// generated route for
 /// [NewRidePage]
-class New_ride extends PageRouteInfo<void> {
-  const New_ride({List<PageRouteInfo>? children})
-      : super(
+class New_ride extends PageRouteInfo<New_rideArgs> {
+  New_ride({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           New_ride.name,
+          args: New_rideArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'New_ride';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<New_rideArgs> page = PageInfo<New_rideArgs>(name);
+}
+
+class New_rideArgs {
+  const New_rideArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'New_rideArgs{key: $key}';
+  }
 }
 
 /// generated route for

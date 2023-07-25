@@ -9,8 +9,8 @@ import 'package:venom/src/features/ride/domain/failures/ride_failure.dart';
 import 'package:venom/src/features/ride/domain/models/ride_model.dart';
 import 'package:venom/src/features/vehicle/domain/models/vehicle_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
-import 'package:venom/src/peresentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
-import 'package:venom/src/peresentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
+import 'package:venom/src/presentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
+import 'package:venom/src/presentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
 
 part 'new_ride_state.dart';
 part 'new_ride_event.dart';
