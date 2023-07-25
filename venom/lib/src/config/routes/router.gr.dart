@@ -68,9 +68,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     New_ride.name: (routeData) {
+      final args =
+          routeData.argsAs<New_rideArgs>(orElse: () => const New_rideArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: NewRidePage(),
+        child: NewRidePage(key: args.key),
       );
     },
     Rides.name: (routeData) {
@@ -83,6 +85,30 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const RideResultsPage(),
+      );
+    },
+    About.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AboutPage(),
+      );
+    },
+    DefaultPriceSelector.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DefaultPriceSelectorPage(),
+      );
+    },
+    DefaultVehicleSelector.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DefaultVehicleSelectorPage(),
+      );
+    },
+    Settings.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SettingsPage(),
       );
     },
     Splash.name: (routeData) {
@@ -292,16 +318,30 @@ class Km_in_bikeArgs {
 
 /// generated route for
 /// [NewRidePage]
-class New_ride extends PageRouteInfo<void> {
-  const New_ride({List<PageRouteInfo>? children})
-      : super(
+class New_ride extends PageRouteInfo<New_rideArgs> {
+  New_ride({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           New_ride.name,
+          args: New_rideArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'New_ride';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<New_rideArgs> page = PageInfo<New_rideArgs>(name);
+}
+
+class New_rideArgs {
+  const New_rideArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'New_rideArgs{key: $key}';
+  }
 }
 
 /// generated route for
@@ -328,6 +368,62 @@ class Ride_results_page extends PageRouteInfo<void> {
         );
 
   static const String name = 'Ride_results_page';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AboutPage]
+class About extends PageRouteInfo<void> {
+  const About({List<PageRouteInfo>? children})
+      : super(
+          About.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'About';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DefaultPriceSelectorPage]
+class DefaultPriceSelector extends PageRouteInfo<void> {
+  const DefaultPriceSelector({List<PageRouteInfo>? children})
+      : super(
+          DefaultPriceSelector.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DefaultPriceSelector';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DefaultVehicleSelectorPage]
+class DefaultVehicleSelector extends PageRouteInfo<void> {
+  const DefaultVehicleSelector({List<PageRouteInfo>? children})
+      : super(
+          DefaultVehicleSelector.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DefaultVehicleSelector';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SettingsPage]
+class Settings extends PageRouteInfo<void> {
+  const Settings({List<PageRouteInfo>? children})
+      : super(
+          Settings.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'Settings';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -9,10 +9,7 @@ import 'package:venom/src/presentation/ride/bloc/final_data/final_data_bloc.dart
 class FinalData extends StatelessWidget {
   FinalData({Key? key}) : super(key: key);
 
-  // double _gasLevel2 = 0.5;
   final odometer2 = TextEditingController();
-  // double gasUsed = 0.0;
-  // double gasPrice = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -118,23 +115,6 @@ class FinalData extends StatelessWidget {
                           );
 
                       getIt.get<AppRouter>().pushNamed('/ride_results_page');
-                      // final enteredOdometer2 =
-                      //     double.tryParse(odometer2.text) ?? 0.0;
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => ResultsScreen(
-                      //       userName: widget.userName,
-                      //       timeTraveled: widget.timeTraveled,
-                      //       gasLevel1: widget.gasLevel1,
-                      //       gasLevel2: _gasLevel2,
-                      //       odometer1: widget.odometer1,
-                      //       odometer2: enteredOdometer2,
-                      //       defaultPrice: widget.defaultPrice,
-                      //       defaultTankSize: widget.defaultTankSize,
-                      //     ),
-                      //   ),
-                      // );
                     },
                     child: const Icon(Icons.arrow_forward_ios_rounded),
                   ),

@@ -10,6 +10,10 @@ import 'package:venom/src/presentation/ride/pages/km_in_bike_page.dart';
 import 'package:venom/src/presentation/ride/pages/rides_page.dart';
 import 'package:venom/src/presentation/ride/pages/new_ride_page.dart';
 import 'package:venom/src/presentation/ride/pages/ride_results_page.dart';
+import 'package:venom/src/presentation/settings/pages/about_page.dart';
+import 'package:venom/src/presentation/settings/pages/default_price_selector_page.dart';
+import 'package:venom/src/presentation/settings/pages/default_vehicle_selector_page.dart';
+import 'package:venom/src/presentation/settings/pages/settings_page.dart';
 import 'package:venom/src/presentation/splash/pages/splash_page.dart';
 import 'package:venom/src/presentation/tool_kit/pages/toolkit_page.dart';
 import 'package:venom/src/presentation/vehicle/pages/my_vehicle_page.dart';
@@ -66,6 +70,22 @@ class AppRouter extends _$AppRouter {
     AutoRoute(
       path: "/my_vehicle",
       page: My_vehicle.page,
+    ),
+    AutoRoute(
+      path: "/settings",
+      page: Settings.page,
+    ),
+    AutoRoute(
+      path: "/default_price_selector",
+      page: DefaultPriceSelector.page,
+    ),
+    AutoRoute(
+      path: "/default_vehicle_selector",
+      page: DefaultVehicleSelector.page,
+    ),
+    AutoRoute(
+      path: "/about",
+      page: About.page,
     ),
     AutoRoute(
       path: "/gas_history",

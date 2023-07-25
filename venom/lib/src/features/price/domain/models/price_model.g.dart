@@ -17,22 +17,25 @@ class PriceAdapter extends TypeAdapter<Price> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Price(
-      id: fields[0] == null ? 0 : fields[0] as int?,
-      price: fields[1] == null ? 0.0 : fields[1] as double?,
-      placeOfPurchase: fields[2] == null ? '' : fields[2] as String?,
+      id: fields[0] == null ? 0 : fields[0] as int,
+      price: fields[1] == null ? 0.0 : fields[1] as double,
+      placeOfPurchase: fields[2] == null ? '' : fields[2] as String,
+      isDefault: fields[3] == null ? false : fields[3] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Price obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.price)
       ..writeByte(2)
-      ..write(obj.placeOfPurchase);
+      ..write(obj.placeOfPurchase)
+      ..writeByte(3)
+      ..write(obj.isDefault);
   }
 
   @override
@@ -51,13 +54,15 @@ class PriceAdapter extends TypeAdapter<Price> {
 // **************************************************************************
 
 _$_Price _$$_PriceFromJson(Map<String, dynamic> json) => _$_Price(
-      id: json['id'] as int?,
-      price: (json['price'] as num?)?.toDouble(),
-      placeOfPurchase: json['placeOfPurchase'] as String?,
+      id: json['id'] as int? ?? 0,
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      placeOfPurchase: json['placeOfPurchase'] as String? ?? '',
+      isDefault: json['isDefault'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_PriceToJson(_$_Price instance) => <String, dynamic>{
       'id': instance.id,
       'price': instance.price,
       'placeOfPurchase': instance.placeOfPurchase,
+      'isDefault': instance.isDefault,
     };

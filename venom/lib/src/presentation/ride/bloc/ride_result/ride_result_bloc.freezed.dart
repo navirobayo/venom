@@ -501,21 +501,21 @@ mixin _$RideResultEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() analyzeRide,
     required TResult Function() getRides,
-    required TResult Function() saveAndClose,
+    required TResult Function(Ride? ride) saveAndClose,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? analyzeRide,
     TResult? Function()? getRides,
-    TResult? Function()? saveAndClose,
+    TResult? Function(Ride? ride)? saveAndClose,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? analyzeRide,
     TResult Function()? getRides,
-    TResult Function()? saveAndClose,
+    TResult Function(Ride? ride)? saveAndClose,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -601,7 +601,7 @@ class _$_AnalyzeRide implements _AnalyzeRide {
   TResult when<TResult extends Object?>({
     required TResult Function() analyzeRide,
     required TResult Function() getRides,
-    required TResult Function() saveAndClose,
+    required TResult Function(Ride? ride) saveAndClose,
   }) {
     return analyzeRide();
   }
@@ -611,7 +611,7 @@ class _$_AnalyzeRide implements _AnalyzeRide {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? analyzeRide,
     TResult? Function()? getRides,
-    TResult? Function()? saveAndClose,
+    TResult? Function(Ride? ride)? saveAndClose,
   }) {
     return analyzeRide?.call();
   }
@@ -621,7 +621,7 @@ class _$_AnalyzeRide implements _AnalyzeRide {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? analyzeRide,
     TResult Function()? getRides,
-    TResult Function()? saveAndClose,
+    TResult Function(Ride? ride)? saveAndClose,
     required TResult orElse(),
   }) {
     if (analyzeRide != null) {
@@ -709,7 +709,7 @@ class _$_GetRides implements _GetRides {
   TResult when<TResult extends Object?>({
     required TResult Function() analyzeRide,
     required TResult Function() getRides,
-    required TResult Function() saveAndClose,
+    required TResult Function(Ride? ride) saveAndClose,
   }) {
     return getRides();
   }
@@ -719,7 +719,7 @@ class _$_GetRides implements _GetRides {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? analyzeRide,
     TResult? Function()? getRides,
-    TResult? Function()? saveAndClose,
+    TResult? Function(Ride? ride)? saveAndClose,
   }) {
     return getRides?.call();
   }
@@ -729,7 +729,7 @@ class _$_GetRides implements _GetRides {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? analyzeRide,
     TResult Function()? getRides,
-    TResult Function()? saveAndClose,
+    TResult Function(Ride? ride)? saveAndClose,
     required TResult orElse(),
   }) {
     if (getRides != null) {
@@ -782,6 +782,10 @@ abstract class _$$_SaveAndCloseCopyWith<$Res> {
   factory _$$_SaveAndCloseCopyWith(
           _$_SaveAndClose value, $Res Function(_$_SaveAndClose) then) =
       __$$_SaveAndCloseCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Ride? ride});
+
+  $RideCopyWith<$Res>? get ride;
 }
 
 /// @nodoc
@@ -791,35 +795,71 @@ class __$$_SaveAndCloseCopyWithImpl<$Res>
   __$$_SaveAndCloseCopyWithImpl(
       _$_SaveAndClose _value, $Res Function(_$_SaveAndClose) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ride = freezed,
+  }) {
+    return _then(_$_SaveAndClose(
+      freezed == ride
+          ? _value.ride
+          : ride // ignore: cast_nullable_to_non_nullable
+              as Ride?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RideCopyWith<$Res>? get ride {
+    if (_value.ride == null) {
+      return null;
+    }
+
+    return $RideCopyWith<$Res>(_value.ride!, (value) {
+      return _then(_value.copyWith(ride: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_SaveAndClose implements _SaveAndClose {
-  const _$_SaveAndClose();
+  const _$_SaveAndClose(this.ride);
+
+  @override
+  final Ride? ride;
 
   @override
   String toString() {
-    return 'RideResultEvent.saveAndClose()';
+    return 'RideResultEvent.saveAndClose(ride: $ride)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SaveAndClose);
+        (other.runtimeType == runtimeType &&
+            other is _$_SaveAndClose &&
+            (identical(other.ride, ride) || other.ride == ride));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, ride);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SaveAndCloseCopyWith<_$_SaveAndClose> get copyWith =>
+      __$$_SaveAndCloseCopyWithImpl<_$_SaveAndClose>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() analyzeRide,
     required TResult Function() getRides,
-    required TResult Function() saveAndClose,
+    required TResult Function(Ride? ride) saveAndClose,
   }) {
-    return saveAndClose();
+    return saveAndClose(ride);
   }
 
   @override
@@ -827,9 +867,9 @@ class _$_SaveAndClose implements _SaveAndClose {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? analyzeRide,
     TResult? Function()? getRides,
-    TResult? Function()? saveAndClose,
+    TResult? Function(Ride? ride)? saveAndClose,
   }) {
-    return saveAndClose?.call();
+    return saveAndClose?.call(ride);
   }
 
   @override
@@ -837,11 +877,11 @@ class _$_SaveAndClose implements _SaveAndClose {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? analyzeRide,
     TResult Function()? getRides,
-    TResult Function()? saveAndClose,
+    TResult Function(Ride? ride)? saveAndClose,
     required TResult orElse(),
   }) {
     if (saveAndClose != null) {
-      return saveAndClose();
+      return saveAndClose(ride);
     }
     return orElse();
   }
@@ -882,5 +922,10 @@ class _$_SaveAndClose implements _SaveAndClose {
 }
 
 abstract class _SaveAndClose implements RideResultEvent {
-  const factory _SaveAndClose() = _$_SaveAndClose;
+  const factory _SaveAndClose(final Ride? ride) = _$_SaveAndClose;
+
+  Ride? get ride;
+  @JsonKey(ignore: true)
+  _$$_SaveAndCloseCopyWith<_$_SaveAndClose> get copyWith =>
+      throw _privateConstructorUsedError;
 }

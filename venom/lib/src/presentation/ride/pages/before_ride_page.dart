@@ -29,7 +29,7 @@ class BeforeRidePage extends StatelessWidget {
                   TimeSelectorSpinner(
                     fontSize: 26.sp,
                     selectedFontColor: Colors.white,
-                    unselectedFontColor: Colors.white38,
+                    unselectedFontColor: Colors.white54,
                     itemSpace: 25.w,
                     height: 250.h,
                     width: 0.9.sw,

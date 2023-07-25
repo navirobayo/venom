@@ -493,6 +493,7 @@ mixin _$GasPriceEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int index) deletePrice,
     required TResult Function(Price price) cachePrice,
+    required TResult Function(Price price) updatePrice,
     required TResult Function() getCachedPrices,
   }) =>
       throw _privateConstructorUsedError;
@@ -500,6 +501,7 @@ mixin _$GasPriceEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int index)? deletePrice,
     TResult? Function(Price price)? cachePrice,
+    TResult? Function(Price price)? updatePrice,
     TResult? Function()? getCachedPrices,
   }) =>
       throw _privateConstructorUsedError;
@@ -507,6 +509,7 @@ mixin _$GasPriceEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int index)? deletePrice,
     TResult Function(Price price)? cachePrice,
+    TResult Function(Price price)? updatePrice,
     TResult Function()? getCachedPrices,
     required TResult orElse(),
   }) =>
@@ -515,6 +518,7 @@ mixin _$GasPriceEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeletePrice value) deletePrice,
     required TResult Function(_CachePrice value) cachePrice,
+    required TResult Function(_UpdatePrice value) updatePrice,
     required TResult Function(_GetCachedPrices value) getCachedPrices,
   }) =>
       throw _privateConstructorUsedError;
@@ -522,6 +526,7 @@ mixin _$GasPriceEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeletePrice value)? deletePrice,
     TResult? Function(_CachePrice value)? cachePrice,
+    TResult? Function(_UpdatePrice value)? updatePrice,
     TResult? Function(_GetCachedPrices value)? getCachedPrices,
   }) =>
       throw _privateConstructorUsedError;
@@ -529,6 +534,7 @@ mixin _$GasPriceEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeletePrice value)? deletePrice,
     TResult Function(_CachePrice value)? cachePrice,
+    TResult Function(_UpdatePrice value)? updatePrice,
     TResult Function(_GetCachedPrices value)? getCachedPrices,
     required TResult orElse(),
   }) =>
@@ -619,6 +625,7 @@ class _$_DeletePrice implements _DeletePrice {
   TResult when<TResult extends Object?>({
     required TResult Function(int index) deletePrice,
     required TResult Function(Price price) cachePrice,
+    required TResult Function(Price price) updatePrice,
     required TResult Function() getCachedPrices,
   }) {
     return deletePrice(index);
@@ -629,6 +636,7 @@ class _$_DeletePrice implements _DeletePrice {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int index)? deletePrice,
     TResult? Function(Price price)? cachePrice,
+    TResult? Function(Price price)? updatePrice,
     TResult? Function()? getCachedPrices,
   }) {
     return deletePrice?.call(index);
@@ -639,6 +647,7 @@ class _$_DeletePrice implements _DeletePrice {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int index)? deletePrice,
     TResult Function(Price price)? cachePrice,
+    TResult Function(Price price)? updatePrice,
     TResult Function()? getCachedPrices,
     required TResult orElse(),
   }) {
@@ -653,6 +662,7 @@ class _$_DeletePrice implements _DeletePrice {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeletePrice value) deletePrice,
     required TResult Function(_CachePrice value) cachePrice,
+    required TResult Function(_UpdatePrice value) updatePrice,
     required TResult Function(_GetCachedPrices value) getCachedPrices,
   }) {
     return deletePrice(this);
@@ -663,6 +673,7 @@ class _$_DeletePrice implements _DeletePrice {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeletePrice value)? deletePrice,
     TResult? Function(_CachePrice value)? cachePrice,
+    TResult? Function(_UpdatePrice value)? updatePrice,
     TResult? Function(_GetCachedPrices value)? getCachedPrices,
   }) {
     return deletePrice?.call(this);
@@ -673,6 +684,7 @@ class _$_DeletePrice implements _DeletePrice {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeletePrice value)? deletePrice,
     TResult Function(_CachePrice value)? cachePrice,
+    TResult Function(_UpdatePrice value)? updatePrice,
     TResult Function(_GetCachedPrices value)? getCachedPrices,
     required TResult orElse(),
   }) {
@@ -768,6 +780,7 @@ class _$_CachePrice implements _CachePrice {
   TResult when<TResult extends Object?>({
     required TResult Function(int index) deletePrice,
     required TResult Function(Price price) cachePrice,
+    required TResult Function(Price price) updatePrice,
     required TResult Function() getCachedPrices,
   }) {
     return cachePrice(price);
@@ -778,6 +791,7 @@ class _$_CachePrice implements _CachePrice {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int index)? deletePrice,
     TResult? Function(Price price)? cachePrice,
+    TResult? Function(Price price)? updatePrice,
     TResult? Function()? getCachedPrices,
   }) {
     return cachePrice?.call(price);
@@ -788,6 +802,7 @@ class _$_CachePrice implements _CachePrice {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int index)? deletePrice,
     TResult Function(Price price)? cachePrice,
+    TResult Function(Price price)? updatePrice,
     TResult Function()? getCachedPrices,
     required TResult orElse(),
   }) {
@@ -802,6 +817,7 @@ class _$_CachePrice implements _CachePrice {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeletePrice value) deletePrice,
     required TResult Function(_CachePrice value) cachePrice,
+    required TResult Function(_UpdatePrice value) updatePrice,
     required TResult Function(_GetCachedPrices value) getCachedPrices,
   }) {
     return cachePrice(this);
@@ -812,6 +828,7 @@ class _$_CachePrice implements _CachePrice {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeletePrice value)? deletePrice,
     TResult? Function(_CachePrice value)? cachePrice,
+    TResult? Function(_UpdatePrice value)? updatePrice,
     TResult? Function(_GetCachedPrices value)? getCachedPrices,
   }) {
     return cachePrice?.call(this);
@@ -822,6 +839,7 @@ class _$_CachePrice implements _CachePrice {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeletePrice value)? deletePrice,
     TResult Function(_CachePrice value)? cachePrice,
+    TResult Function(_UpdatePrice value)? updatePrice,
     TResult Function(_GetCachedPrices value)? getCachedPrices,
     required TResult orElse(),
   }) {
@@ -838,6 +856,161 @@ abstract class _CachePrice implements GasPriceEvent {
   Price get price;
   @JsonKey(ignore: true)
   _$$_CachePriceCopyWith<_$_CachePrice> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdatePriceCopyWith<$Res> {
+  factory _$$_UpdatePriceCopyWith(
+          _$_UpdatePrice value, $Res Function(_$_UpdatePrice) then) =
+      __$$_UpdatePriceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Price price});
+
+  $PriceCopyWith<$Res> get price;
+}
+
+/// @nodoc
+class __$$_UpdatePriceCopyWithImpl<$Res>
+    extends _$GasPriceEventCopyWithImpl<$Res, _$_UpdatePrice>
+    implements _$$_UpdatePriceCopyWith<$Res> {
+  __$$_UpdatePriceCopyWithImpl(
+      _$_UpdatePrice _value, $Res Function(_$_UpdatePrice) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? price = null,
+  }) {
+    return _then(_$_UpdatePrice(
+      null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as Price,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PriceCopyWith<$Res> get price {
+    return $PriceCopyWith<$Res>(_value.price, (value) {
+      return _then(_value.copyWith(price: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdatePrice implements _UpdatePrice {
+  _$_UpdatePrice(this.price);
+
+  @override
+  final Price price;
+
+  @override
+  String toString() {
+    return 'GasPriceEvent.updatePrice(price: $price)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdatePrice &&
+            (identical(other.price, price) || other.price == price));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, price);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdatePriceCopyWith<_$_UpdatePrice> get copyWith =>
+      __$$_UpdatePriceCopyWithImpl<_$_UpdatePrice>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int index) deletePrice,
+    required TResult Function(Price price) cachePrice,
+    required TResult Function(Price price) updatePrice,
+    required TResult Function() getCachedPrices,
+  }) {
+    return updatePrice(price);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int index)? deletePrice,
+    TResult? Function(Price price)? cachePrice,
+    TResult? Function(Price price)? updatePrice,
+    TResult? Function()? getCachedPrices,
+  }) {
+    return updatePrice?.call(price);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int index)? deletePrice,
+    TResult Function(Price price)? cachePrice,
+    TResult Function(Price price)? updatePrice,
+    TResult Function()? getCachedPrices,
+    required TResult orElse(),
+  }) {
+    if (updatePrice != null) {
+      return updatePrice(price);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DeletePrice value) deletePrice,
+    required TResult Function(_CachePrice value) cachePrice,
+    required TResult Function(_UpdatePrice value) updatePrice,
+    required TResult Function(_GetCachedPrices value) getCachedPrices,
+  }) {
+    return updatePrice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DeletePrice value)? deletePrice,
+    TResult? Function(_CachePrice value)? cachePrice,
+    TResult? Function(_UpdatePrice value)? updatePrice,
+    TResult? Function(_GetCachedPrices value)? getCachedPrices,
+  }) {
+    return updatePrice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DeletePrice value)? deletePrice,
+    TResult Function(_CachePrice value)? cachePrice,
+    TResult Function(_UpdatePrice value)? updatePrice,
+    TResult Function(_GetCachedPrices value)? getCachedPrices,
+    required TResult orElse(),
+  }) {
+    if (updatePrice != null) {
+      return updatePrice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdatePrice implements GasPriceEvent {
+  factory _UpdatePrice(final Price price) = _$_UpdatePrice;
+
+  Price get price;
+  @JsonKey(ignore: true)
+  _$$_UpdatePriceCopyWith<_$_UpdatePrice> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -881,6 +1054,7 @@ class _$_GetCachedPrices implements _GetCachedPrices {
   TResult when<TResult extends Object?>({
     required TResult Function(int index) deletePrice,
     required TResult Function(Price price) cachePrice,
+    required TResult Function(Price price) updatePrice,
     required TResult Function() getCachedPrices,
   }) {
     return getCachedPrices();
@@ -891,6 +1065,7 @@ class _$_GetCachedPrices implements _GetCachedPrices {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int index)? deletePrice,
     TResult? Function(Price price)? cachePrice,
+    TResult? Function(Price price)? updatePrice,
     TResult? Function()? getCachedPrices,
   }) {
     return getCachedPrices?.call();
@@ -901,6 +1076,7 @@ class _$_GetCachedPrices implements _GetCachedPrices {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int index)? deletePrice,
     TResult Function(Price price)? cachePrice,
+    TResult Function(Price price)? updatePrice,
     TResult Function()? getCachedPrices,
     required TResult orElse(),
   }) {
@@ -915,6 +1091,7 @@ class _$_GetCachedPrices implements _GetCachedPrices {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeletePrice value) deletePrice,
     required TResult Function(_CachePrice value) cachePrice,
+    required TResult Function(_UpdatePrice value) updatePrice,
     required TResult Function(_GetCachedPrices value) getCachedPrices,
   }) {
     return getCachedPrices(this);
@@ -925,6 +1102,7 @@ class _$_GetCachedPrices implements _GetCachedPrices {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeletePrice value)? deletePrice,
     TResult? Function(_CachePrice value)? cachePrice,
+    TResult? Function(_UpdatePrice value)? updatePrice,
     TResult? Function(_GetCachedPrices value)? getCachedPrices,
   }) {
     return getCachedPrices?.call(this);
@@ -935,6 +1113,7 @@ class _$_GetCachedPrices implements _GetCachedPrices {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeletePrice value)? deletePrice,
     TResult Function(_CachePrice value)? cachePrice,
+    TResult Function(_UpdatePrice value)? updatePrice,
     TResult Function(_GetCachedPrices value)? getCachedPrices,
     required TResult orElse(),
   }) {

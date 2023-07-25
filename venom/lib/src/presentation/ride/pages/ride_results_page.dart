@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:venom/src/features/ride/domain/models/ride_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
+import 'package:venom/src/presentation/ride/bloc/before_ride/before_ride_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/final_data/final_data_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/new_ride/new_ride_bloc.dart';
 import 'package:venom/src/presentation/ride/bloc/ride_result/ride_result_bloc.dart';
 import 'package:venom/src/presentation/ride/bloc/rides/rides_bloc.dart';
 
@@ -47,7 +51,7 @@ class RideResultsPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                                "Time traveled: ${getIt.get<String>(instanceName: 'timeTraveled')}"),
+                                "Time traveled: ${currentRide.timeTraveled ?? '00:00:00'}"),
                             Text(
                                 'Distance traveled: ${(currentRide.distanceTravelled ?? 0.0)} km'),
                             Text(
@@ -87,10 +91,20 @@ class RideResultsPage extends StatelessWidget {
                         MaterialStateProperty.all(Theme.of(context).focusColor),
                   ),
                   onPressed: () async {
-                    getIt.resetLazySingleton<RidesBloc>();
-                    getIt
-                        .get<RideResultBloc>()
-                        .add(RideResultEvent.saveAndClose());
+                    getIt.get<RideResultBloc>().state.maybeWhen(
+                          orElse: () {},
+                          idle: (ride) {
+                            getIt
+                                .get<RideResultBloc>()
+                                .add(RideResultEvent.saveAndClose(ride));
+                            getIt.resetLazySingleton<NewRideBloc>();
+                            getIt.resetLazySingleton<KmInBikeBloc>();
+                            getIt.resetLazySingleton<BeforeRideBloc>();
+                            getIt.resetLazySingleton<RideResultBloc>();
+                            getIt.resetLazySingleton<FinalDataBloc>();
+                            getIt.resetLazySingleton<RidesBloc>();
+                          },
+                        );
                   },
                   child: const Text("Save and close"),
                 ),

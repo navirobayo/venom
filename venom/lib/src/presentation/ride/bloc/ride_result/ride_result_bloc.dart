@@ -40,9 +40,9 @@ class RideResultBloc extends Bloc<RideResultEvent, RideResultState> {
 
     double gasUsed = (getIt.get<double>(instanceName: 'gasLevel') -
             getIt.get<double>(instanceName: 'gasLevel2')) *
-        (double.tryParse(getIt.get<Vehicle>().tankCapacity!) ?? 0);
+        (double.tryParse(getIt.get<Vehicle>().tankCapacity) ?? 0);
     //
-    double gasPrice = gasUsed * (getIt.get<Price>().price ?? 0.0);
+    double gasPrice = gasUsed * (getIt.get<Price>().price);
     //
     double averageSpeed = (distanceTravelled / getIt.get<int>()) * 3600;
     //
@@ -54,14 +54,14 @@ class RideResultBloc extends Bloc<RideResultEvent, RideResultState> {
       gasUsed: gasUsed.toStringAsFixed(2),
       timeTraveled: getIt.get<String>(instanceName: 'timeTraveled'),
     );
-    if (!rides.contains(ride)) {
-      rides.add(ride);
-    }
     emit(RideResultState.idle(ride));
   }
 
   FutureOr<void> _onSaveAndClose(
       _SaveAndClose event, Emitter<RideResultState> emit) async {
+    if (event.ride != null) {
+      rides.add(event.ride!);
+    }
     await _cacheRideDataUseCase
         .call(param: tuple.Tuple1(rides))
         .then((value) => value.fold(
@@ -73,18 +73,22 @@ class RideResultBloc extends Bloc<RideResultEvent, RideResultState> {
                 ),
               ),
               (r) {
-                return getIt.get<AppRouter>().replaceNamed('/home');
+                if (event.ride != null) {
+                  return getIt.get<AppRouter>().navigateNamed('/home');
+                }
               },
             ));
   }
 
   FutureOr<void> _onGetRides(
       _GetRides event, Emitter<RideResultState> emit) async {
-    await _getCachedRideDataUseCase.call().then((value) => value.fold(
-          (l) => rides = [],
-          (r) {
-            rides = r.toList();
-          },
-        ));
+    await _getCachedRideDataUseCase.call().then((value) {
+      return value.fold(
+        (l) => rides = [],
+        (r) {
+          rides = r.toList();
+        },
+      );
+    });
   }
 }

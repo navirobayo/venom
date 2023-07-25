@@ -9,6 +9,7 @@ import 'package:venom/src/features/core/models/tuple.dart' as tuple;
 import 'package:venom/src/features/vehicle/domain/use_cases/cache_vehicles_data_use_case.dart';
 import 'package:venom/src/features/vehicle/domain/use_cases/get_cached_vehicles_data_use_case.dart';
 import 'package:venom/src/injectable/injectable.dart';
+import 'package:venom/src/presentation/settings/bloc/default_vehicle/default_vehicle_bloc.dart';
 
 part 'my_vehicle_state.dart';
 part 'my_vehicle_event.dart';
@@ -23,7 +24,8 @@ class MyVehicleBloc extends Bloc<MyVehicleEvent, MyVehicleState> {
       : super(const MyVehicleState.idle([])) {
     on<_CacheVehicle>(_onCacheVehicle);
     on<_DeleteVehicle>(_onDeleteVehicle);
-    on<_GetCachedVehicles>(_onGetCacheVehicles);
+    on<_GetCachedVehicles>(_onGetCachedVehicles);
+    on<_UpdateVehicle>(_onUpdateVehicle);
     add(_GetCachedVehicles());
   }
 
@@ -45,12 +47,16 @@ class MyVehicleBloc extends Bloc<MyVehicleEvent, MyVehicleState> {
                 } else {
                   getIt.registerSingleton<List<Vehicle>>(vehicles);
                 }
+                if (vehicles.length == 1) {
+                  getIt.get<DefaultVehicleBloc>().add(
+                      DefaultVehicleEvent.setDefaultVehicle(vehicles.first));
+                }
                 emit(MyVehicleState.idle(vehicles));
               },
             ));
   }
 
-  FutureOr<void> _onGetCacheVehicles(
+  FutureOr<void> _onGetCachedVehicles(
       _GetCachedVehicles event, Emitter<MyVehicleState> emit) async {
     await _getcachedVehicleDataUseCase.call().then((value) => value.fold(
           (l) {
@@ -63,6 +69,12 @@ class MyVehicleBloc extends Bloc<MyVehicleEvent, MyVehicleState> {
             } else {
               getIt.registerSingleton<List<Vehicle>>(r);
             }
+
+            // Get Default Vehicle From Hive Database
+            getIt
+                .get<DefaultVehicleBloc>()
+                .add(DefaultVehicleEvent.readDefaultVehicle());
+
             emit(MyVehicleState.idle(r));
           },
         ));
@@ -91,5 +103,40 @@ class MyVehicleBloc extends Bloc<MyVehicleEvent, MyVehicleState> {
                 emit(MyVehicleState.idle(vehicles));
               },
             ));
+  }
+
+  FutureOr<void> _onUpdateVehicle(
+      _UpdateVehicle event, Emitter<MyVehicleState> emit) async {
+    state.maybeWhen(
+      orElse: () {},
+      idle: (vehicles) async {
+        List<Vehicle> vehiclesList = vehicles.toList();
+        for (var i = 0; i < vehicles.length; i++) {
+          vehiclesList[i] = vehicles[i].copyWith(isDefault: false);
+        }
+        int vehicleIndex = vehicles.indexWhere((e) =>
+            e.tankCapacity == event.vehicle.tankCapacity &&
+            e.name == event.vehicle.name);
+        Vehicle vehicle = Vehicle();
+        vehicle = vehiclesList[vehicleIndex].copyWith(isDefault: true);
+        vehiclesList[vehicleIndex] = vehicle;
+        await _cacheVehicleDataUseCase
+            .call(param: tuple.Tuple1(vehiclesList))
+            .then(
+              (value) => value.fold(
+                (l) => emit(MyVehicleState.failure('database Error', l)),
+                (r) {
+                  if (getIt.isRegistered<List<Vehicle>>()) {
+                    getIt.unregister<List<Vehicle>>();
+                    getIt.registerSingleton<List<Vehicle>>(vehiclesList);
+                  } else {
+                    getIt.registerSingleton<List<Vehicle>>(vehiclesList);
+                  }
+                  emit(MyVehicleState.idle(vehiclesList));
+                },
+              ),
+            );
+      },
+    );
   }
 }

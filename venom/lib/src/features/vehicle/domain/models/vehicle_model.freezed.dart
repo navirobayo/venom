@@ -21,11 +21,13 @@ Vehicle _$VehicleFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Vehicle {
   @HiveField(0, defaultValue: 0)
-  int? get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   @HiveField(1, defaultValue: '')
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @HiveField(2, defaultValue: '')
-  String? get tankCapacity => throw _privateConstructorUsedError;
+  String get tankCapacity => throw _privateConstructorUsedError;
+  @HiveField(3, defaultValue: false)
+  bool get isDefault => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,9 +40,10 @@ abstract class $VehicleCopyWith<$Res> {
       _$VehicleCopyWithImpl<$Res, Vehicle>;
   @useResult
   $Res call(
-      {@HiveField(0, defaultValue: 0) int? id,
-      @HiveField(1, defaultValue: '') String? name,
-      @HiveField(2, defaultValue: '') String? tankCapacity});
+      {@HiveField(0, defaultValue: 0) int id,
+      @HiveField(1, defaultValue: '') String name,
+      @HiveField(2, defaultValue: '') String tankCapacity,
+      @HiveField(3, defaultValue: false) bool isDefault});
 }
 
 /// @nodoc
@@ -56,23 +59,28 @@ class _$VehicleCopyWithImpl<$Res, $Val extends Vehicle>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? tankCapacity = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? tankCapacity = null,
+    Object? isDefault = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      name: freezed == name
+              as int,
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      tankCapacity: freezed == tankCapacity
+              as String,
+      tankCapacity: null == tankCapacity
           ? _value.tankCapacity
           : tankCapacity // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      isDefault: null == isDefault
+          ? _value.isDefault
+          : isDefault // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -85,9 +93,10 @@ abstract class _$$_VehicleCopyWith<$Res> implements $VehicleCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0, defaultValue: 0) int? id,
-      @HiveField(1, defaultValue: '') String? name,
-      @HiveField(2, defaultValue: '') String? tankCapacity});
+      {@HiveField(0, defaultValue: 0) int id,
+      @HiveField(1, defaultValue: '') String name,
+      @HiveField(2, defaultValue: '') String tankCapacity,
+      @HiveField(3, defaultValue: false) bool isDefault});
 }
 
 /// @nodoc
@@ -100,23 +109,28 @@ class __$$_VehicleCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? tankCapacity = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? tankCapacity = null,
+    Object? isDefault = null,
   }) {
     return _then(_$_Vehicle(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      name: freezed == name
+              as int,
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      tankCapacity: freezed == tankCapacity
+              as String,
+      tankCapacity: null == tankCapacity
           ? _value.tankCapacity
           : tankCapacity // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      isDefault: null == isDefault
+          ? _value.isDefault
+          : isDefault // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -125,26 +139,34 @@ class __$$_VehicleCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Vehicle implements _Vehicle {
   _$_Vehicle(
-      {@HiveField(0, defaultValue: 0) this.id,
-      @HiveField(1, defaultValue: '') this.name,
-      @HiveField(2, defaultValue: '') this.tankCapacity});
+      {@HiveField(0, defaultValue: 0) this.id = 0,
+      @HiveField(1, defaultValue: '') this.name = '',
+      @HiveField(2, defaultValue: '') this.tankCapacity = '',
+      @HiveField(3, defaultValue: false) this.isDefault = false});
 
   factory _$_Vehicle.fromJson(Map<String, dynamic> json) =>
       _$$_VehicleFromJson(json);
 
   @override
+  @JsonKey()
   @HiveField(0, defaultValue: 0)
-  final int? id;
+  final int id;
   @override
+  @JsonKey()
   @HiveField(1, defaultValue: '')
-  final String? name;
+  final String name;
   @override
+  @JsonKey()
   @HiveField(2, defaultValue: '')
-  final String? tankCapacity;
+  final String tankCapacity;
+  @override
+  @JsonKey()
+  @HiveField(3, defaultValue: false)
+  final bool isDefault;
 
   @override
   String toString() {
-    return 'Vehicle(id: $id, name: $name, tankCapacity: $tankCapacity)';
+    return 'Vehicle(id: $id, name: $name, tankCapacity: $tankCapacity, isDefault: $isDefault)';
   }
 
   @override
@@ -155,12 +177,15 @@ class _$_Vehicle implements _Vehicle {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.tankCapacity, tankCapacity) ||
-                other.tankCapacity == tankCapacity));
+                other.tankCapacity == tankCapacity) &&
+            (identical(other.isDefault, isDefault) ||
+                other.isDefault == isDefault));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, tankCapacity);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, tankCapacity, isDefault);
 
   @JsonKey(ignore: true)
   @override
@@ -178,21 +203,25 @@ class _$_Vehicle implements _Vehicle {
 
 abstract class _Vehicle implements Vehicle {
   factory _Vehicle(
-      {@HiveField(0, defaultValue: 0) final int? id,
-      @HiveField(1, defaultValue: '') final String? name,
-      @HiveField(2, defaultValue: '') final String? tankCapacity}) = _$_Vehicle;
+      {@HiveField(0, defaultValue: 0) final int id,
+      @HiveField(1, defaultValue: '') final String name,
+      @HiveField(2, defaultValue: '') final String tankCapacity,
+      @HiveField(3, defaultValue: false) final bool isDefault}) = _$_Vehicle;
 
   factory _Vehicle.fromJson(Map<String, dynamic> json) = _$_Vehicle.fromJson;
 
   @override
   @HiveField(0, defaultValue: 0)
-  int? get id;
+  int get id;
   @override
   @HiveField(1, defaultValue: '')
-  String? get name;
+  String get name;
   @override
   @HiveField(2, defaultValue: '')
-  String? get tankCapacity;
+  String get tankCapacity;
+  @override
+  @HiveField(3, defaultValue: false)
+  bool get isDefault;
   @override
   @JsonKey(ignore: true)
   _$$_VehicleCopyWith<_$_Vehicle> get copyWith =>

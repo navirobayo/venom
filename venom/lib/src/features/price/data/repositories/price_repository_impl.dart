@@ -6,17 +6,17 @@ import 'package:venom/src/features/price/domain/models/price_model.dart';
 import 'package:venom/src/features/price/domain/repositories/price_repository.dart';
 
 class PriceRepositoryImpl extends PriceRepository {
-  final PriceLocalDataSource _localDS;
+  final PriceLocalDataSource _priceslocalDS;
   final String tokenFieldKey = 'token';
 
-  PriceRepositoryImpl(this._localDS);
+  PriceRepositoryImpl(this._priceslocalDS);
 
   @override
   Future<Either<PriceFailure, void>> cachePricesData(
       {required List<Price> prices}) {
-    PriceList vehicleList = PriceList(prices: prices);
-    return _localDS
-        .cacheData(fieldKey: 'prices', value: vehicleList)
+    PriceList pricesList = PriceList(prices: prices);
+    return _priceslocalDS
+        .cacheData(fieldKey: 'prices', value: pricesList)
         .then((value) => value.fold(
               (l) => left(PriceFailure.database(l)),
               (r) {
@@ -27,15 +27,17 @@ class PriceRepositoryImpl extends PriceRepository {
 
   @override
   Future<Either<PriceFailure, List<Price>>> getCachedPricesData() =>
-      _localDS.getCachedData(fieldKey: 'prices').then((value) => value.fold(
-            (l) => left(PriceFailure.database(l)),
-            (r) {
-              if (r == null) {
-                return left(PriceFailure.nullParam());
-              } else if (r.prices == null) {
-                return left(PriceFailure.nullParam());
-              }
-              return right(r.prices!.toList());
-            },
-          ));
+      _priceslocalDS
+          .getCachedData(fieldKey: 'prices')
+          .then((value) => value.fold(
+                (l) => left(PriceFailure.database(l)),
+                (r) {
+                  if (r == null) {
+                    return left(PriceFailure.nullParam());
+                  } else if (r.prices == null) {
+                    return left(PriceFailure.nullParam());
+                  }
+                  return right(r.prices!.toList());
+                },
+              ));
 }

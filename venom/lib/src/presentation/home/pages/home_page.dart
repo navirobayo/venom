@@ -10,6 +10,8 @@ import 'package:venom/src/presentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart
 import 'package:venom/src/presentation/ride/bloc/new_ride/new_ride_bloc.dart';
 import 'package:venom/src/presentation/ride/bloc/ride_result/ride_result_bloc.dart';
 import 'package:venom/src/presentation/ride/bloc/rides/rides_bloc.dart';
+import 'package:venom/src/presentation/settings/bloc/default_price/default_price_bloc.dart';
+import 'package:venom/src/presentation/settings/bloc/default_vehicle/default_vehicle_bloc.dart';
 import 'package:venom/src/presentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
 
 @RoutePage(name: 'home')
@@ -29,6 +31,8 @@ class HomePage extends StatelessWidget {
         BlocProvider(create: (_) => getIt.get<RideResultBloc>()),
         BlocProvider(create: (_) => getIt.get<KmInBikeBloc>()),
         BlocProvider(create: (_) => getIt.get<MyVehicleBloc>()),
+        BlocProvider(create: (_) => getIt.get<DefaultPriceBloc>()),
+        BlocProvider(create: (_) => getIt.get<DefaultVehicleBloc>()),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -152,6 +156,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.more_vert),
               onPressed: () {
+                getIt.get<AppRouter>().pushNamed('/settings');
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(
