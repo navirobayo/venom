@@ -68,7 +68,10 @@ class MyRides extends StatelessWidget {
                       child: ListTile(
                         leading: const Icon(Icons.add_road_rounded, size: 40),
                         title: Text("${rides[index].gasPrice} \$"),
-                        subtitle: Text("${rides[index].distanceTravelled} km"),
+                        subtitle: Text(
+                          "${rides[index].distanceTravelled} km",
+                          style: TextStyle(color: Colors.white54),
+                        ),
                         onLongPress: () async {
                           final result = await showMenu(
                             context: context,

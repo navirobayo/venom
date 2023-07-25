@@ -46,6 +46,12 @@ class GasPriceBloc extends Bloc<GasPriceEvent, GasPriceState> {
                 } else {
                   getIt.registerSingleton<List<Price>>(prices);
                 }
+
+                if (prices.length == 1) {
+                  getIt.get<DefaultPriceBloc>().add(
+                        DefaultPriceEvent.setDefaultPrice(prices.first),
+                      );
+                }
                 emit(GasPriceState.idle(prices));
               },
             ));

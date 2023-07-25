@@ -25,15 +25,15 @@ class DefaultPriceBloc extends Bloc<DefaultPriceEvent, DefaultPriceState> {
       getIt.get<GasPriceBloc>().state.maybeWhen(
             orElse: () {},
             idle: (prices) {
-              if (prices.isNotEmpty &&
-                  prices.firstWhere((element) => element.isDefault == true) !=
-                      -1) {
-                emit(
-                  DefaultPriceState.idle(
-                      price: prices
-                          .firstWhere((element) => element.isDefault == true)),
-                );
-              } else {
+              try {
+                if (prices.isNotEmpty) {
+                  emit(
+                    DefaultPriceState.idle(
+                        price: prices.firstWhere(
+                            (element) => element.isDefault == true)),
+                  );
+                }
+              } catch (e) {
                 emit(DefaultPriceState.idle(price: prices.last));
               }
             },

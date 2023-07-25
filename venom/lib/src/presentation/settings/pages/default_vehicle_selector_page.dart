@@ -42,13 +42,13 @@ class DefaultVehicleSelectorPage extends StatelessWidget {
                 children: [
                   const Spacer(),
                   Text(
-                    (defaultVehicle.tankCapacity ?? '00'),
+                    (defaultVehicle.tankCapacity),
                     style: const TextStyle(fontSize: 48.0),
                   ),
                   const Text("-GAL", style: TextStyle(fontSize: 48.0)),
                   const Spacer(),
                   Text(
-                    (defaultVehicle.name ?? 'None'),
+                    (defaultVehicle.name),
                   ),
                   const Spacer(),
                 ],
@@ -114,7 +114,7 @@ class DefaultVehicleSelectorPage extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final vehicle = vehicles[index];
                                 return ListTile(
-                                  title: Text(vehicle.name!),
+                                  title: Text(vehicle.name),
                                   onTap: () {
                                     Navigator.pop(context, vehicle);
                                   },

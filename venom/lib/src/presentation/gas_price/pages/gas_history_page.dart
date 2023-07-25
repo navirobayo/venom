@@ -10,6 +10,8 @@ class GasHistory extends StatelessWidget {
   GasHistory({super.key});
 
   final TextEditingController _fuelPrice = TextEditingController(text: '');
+  final TextEditingController _placeOfPurchase =
+      TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,10 @@ class GasHistory extends StatelessWidget {
                       child: ListTile(
                         leading: const Icon(Icons.gas_meter_outlined, size: 40),
                         title: Text("${prices[index].price.toString()} \$"),
-                        subtitle: Text(prices[index].placeOfPurchase ?? ''),
+                        subtitle: Text(
+                          prices[index].placeOfPurchase,
+                          style: TextStyle(color: Colors.white54),
+                        ),
                         onLongPress: () async {
                           final result = await showMenu(
                             context: context,
@@ -110,7 +115,6 @@ class GasHistory extends StatelessWidget {
               await showDialog<Price>(
                 context: context,
                 builder: (BuildContext context) {
-                  String placeOfPurchase = "";
                   return AlertDialog(
                     title: const Text("Add Price"),
                     content: Column(
@@ -124,7 +128,7 @@ class GasHistory extends StatelessWidget {
                         TextField(
                           decoration: const InputDecoration(
                               labelText: "Place of purchase"),
-                          onChanged: (value) => placeOfPurchase = value,
+                          controller: _placeOfPurchase,
                         ),
                       ],
                     ),
@@ -138,8 +142,8 @@ class GasHistory extends StatelessWidget {
                           getIt
                               .get<GasPriceBloc>()
                               .add(GasPriceEvent.cachePrice(Price(
-                                placeOfPurchase: placeOfPurchase,
-                                price: double.tryParse(_fuelPrice.text),
+                                placeOfPurchase: _placeOfPurchase.text,
+                                price: double.tryParse(_fuelPrice.text) ?? 0.0,
                               )));
                           Navigator.pop(context);
                         },

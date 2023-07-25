@@ -8,7 +8,8 @@ import 'package:venom/src/presentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.d
 @RoutePage(name: 'my_vehicle')
 class MyVehiclePage extends StatelessWidget {
   MyVehiclePage({super.key});
-  final TextEditingController nameController = TextEditingController(text: '');
+  final TextEditingController _nameController = TextEditingController(text: '');
+  final TextEditingController _tankCapacity = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +66,11 @@ class MyVehiclePage extends StatelessWidget {
                           ),
                           child: ListTile(
                             leading: const Icon(Icons.motorcycle, size: 40),
-                            title: Text(vehicles[index].name ?? ''),
-                            subtitle: Text(vehicles[index].tankCapacity ?? ''),
+                            title: Text(vehicles[index].name),
+                            subtitle: Text(
+                              vehicles[index].tankCapacity,
+                              style: TextStyle(color: Colors.white54),
+                            ),
                             onLongPress: () async {
                               final result = await showMenu(
                                 context: context,
@@ -116,7 +120,6 @@ class MyVehiclePage extends StatelessWidget {
               await showDialog<Vehicle>(
                 context: context,
                 builder: (BuildContext context) {
-                  String tankCapacity = "";
                   return AlertDialog(
                     title: const Text("Add Vehicle"),
                     content: Column(
@@ -124,13 +127,13 @@ class MyVehiclePage extends StatelessWidget {
                       children: [
                         TextField(
                           decoration: const InputDecoration(labelText: "Name"),
-                          controller: nameController,
+                          controller: _nameController,
                         ),
                         TextField(
                           decoration: const InputDecoration(
                               labelText: "Tank Capacity in GAL"),
                           keyboardType: TextInputType.number,
-                          onChanged: (value) => tankCapacity = value,
+                          controller: _tankCapacity,
                         ),
                       ],
                     ),
@@ -143,8 +146,8 @@ class MyVehiclePage extends StatelessWidget {
                         onPressed: () async {
                           getIt.get<MyVehicleBloc>().add(
                               MyVehicleEvent.cacheVehicle(Vehicle(
-                                  name: nameController.text,
-                                  tankCapacity: tankCapacity)));
+                                  name: _nameController.text,
+                                  tankCapacity: _tankCapacity.text)));
                           Navigator.pop(context);
                         },
                         child: const Text("Add"),

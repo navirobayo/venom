@@ -17,10 +17,10 @@ part 'price_model.g.dart';
 class Price with _$Price {
   ///adsasd
   factory Price({
-    @HiveField(0, defaultValue: 0) int? id,
-    @HiveField(1, defaultValue: 0.0) double? price,
-    @HiveField(2, defaultValue: '') String? placeOfPurchase,
-    @HiveField(3, defaultValue: false) bool? isDefault,
+    @HiveField(0, defaultValue: 0) @Default(0) int id,
+    @HiveField(1, defaultValue: 0.0) @Default(0.0) double price,
+    @HiveField(2, defaultValue: '') @Default('') String placeOfPurchase,
+    @HiveField(3, defaultValue: false) @Default(false) bool isDefault,
   }) = _Price;
 
   ///das

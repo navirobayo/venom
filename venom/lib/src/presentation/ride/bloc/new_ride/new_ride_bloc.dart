@@ -1,16 +1,17 @@
 import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:venom/src/features/price/domain/models/price_model.dart';
-// import 'package:venom/src/features/core/models/tuple.dart' as tuple;
 import 'package:venom/src/features/ride/domain/failures/ride_failure.dart';
 import 'package:venom/src/features/ride/domain/models/ride_model.dart';
 import 'package:venom/src/features/vehicle/domain/models/vehicle_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
+import 'package:venom/src/presentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
 import 'package:venom/src/presentation/settings/bloc/default_price/default_price_bloc.dart';
 import 'package:venom/src/presentation/settings/bloc/default_vehicle/default_vehicle_bloc.dart';
+import 'package:venom/src/presentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
 
 part 'new_ride_state.dart';
 part 'new_ride_event.dart';
@@ -37,43 +38,44 @@ class NewRideBloc extends Bloc<NewRideEvent, NewRideState> {
 
   FutureOr<void> _onGetPriceData(
       _GetPriceData event, Emitter<NewRideState> emit) {
-    _defaultPrice = getIt.get<DefaultPriceBloc>().state.price!;
-    // getIt.get<GasPriceBloc>().state.maybeWhen(
-    //       orElse: () {},
-    //       idle: (prices) {
-    //         if (prices.isNotEmpty) {
-    //           _defaultPrice = prices.last;
-    //
-    if (getIt.isRegistered<Price>()) {
-      getIt.unregister<Price>();
-      getIt.registerSingleton<Price>(_defaultPrice);
-    } else {
-      getIt.registerSingleton<Price>(_defaultPrice);
-    }
+    getIt.get<GasPriceBloc>().state.maybeWhen(
+          orElse: () {},
+          idle: (prices) {
+            if (prices.isEmpty) {
+              return;
+            }
+            _defaultPrice =
+                getIt.get<DefaultPriceBloc>().state.price ?? prices.last;
+            if (getIt.isRegistered<Price>()) {
+              getIt.unregister<Price>();
+              getIt.registerSingleton<Price>(_defaultPrice);
+            } else {
+              getIt.registerSingleton<Price>(_defaultPrice);
+            }
 
-    //
-    emit(NewRideState.idle(_isStarted, _defaultVehicle, _defaultPrice));
-    // }
-    // },
-    // );
+            emit(NewRideState.idle(_isStarted, _defaultVehicle, _defaultPrice));
+          },
+        );
   }
 
   FutureOr<void> _onGetVehicleData(
       _GetVehicleData event, Emitter<NewRideState> emit) {
-    // getIt.get<MyVehicleBloc>().state.maybeWhen(
-    //       orElse: () {},
-    //       idle: (vehicles) {
-    //         if (vehicles.isNotEmpty) {
-    _defaultVehicle = getIt.get<DefaultVehicleBloc>().state.vehicle!;
-    if (getIt.isRegistered<Vehicle>()) {
-      getIt.unregister<Vehicle>();
-      getIt.registerSingleton<Vehicle>(_defaultVehicle);
-    } else {
-      getIt.registerSingleton<Vehicle>(_defaultVehicle);
-    }
-    emit(NewRideState.idle(_isStarted, _defaultVehicle, _defaultPrice));
-    //     }
-    //   },
-    // );
+    getIt.get<MyVehicleBloc>().state.maybeWhen(
+          orElse: () {},
+          idle: (vehicles) {
+            if (vehicles.isEmpty) {
+              return;
+            }
+            _defaultVehicle =
+                getIt.get<DefaultVehicleBloc>().state.vehicle ?? vehicles.last;
+            if (getIt.isRegistered<Vehicle>()) {
+              getIt.unregister<Vehicle>();
+              getIt.registerSingleton<Vehicle>(_defaultVehicle);
+            } else {
+              getIt.registerSingleton<Vehicle>(_defaultVehicle);
+            }
+            emit(NewRideState.idle(_isStarted, _defaultVehicle, _defaultPrice));
+          },
+        );
   }
 }

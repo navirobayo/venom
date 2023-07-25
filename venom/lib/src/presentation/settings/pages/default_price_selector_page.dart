@@ -43,12 +43,12 @@ class DefaultPriceSelectorPage extends StatelessWidget {
                   const Spacer(),
                   const Text("\$", style: TextStyle(fontSize: 48.0)),
                   Text(
-                    (defaultPrice.price ?? 0).toString().padLeft(2, '0'),
+                    (defaultPrice.price).toString().padLeft(2, '0'),
                     style: const TextStyle(fontSize: 48.0),
                   ),
                   const Spacer(),
                   Text(
-                    (defaultPrice.placeOfPurchase ?? ''),
+                    (defaultPrice.placeOfPurchase),
                   ),
                   const Spacer(),
                 ],
@@ -113,7 +113,7 @@ class DefaultPriceSelectorPage extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final price = prices[index];
                                 return ListTile(
-                                  title: Text(price.placeOfPurchase!),
+                                  title: Text(price.placeOfPurchase),
                                   subtitle: Text(price.price.toString()),
                                   onTap: () {
                                     Navigator.pop(context, price);

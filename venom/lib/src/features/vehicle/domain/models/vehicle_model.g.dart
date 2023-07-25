@@ -17,10 +17,10 @@ class VehicleAdapter extends TypeAdapter<Vehicle> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Vehicle(
-      id: fields[0] == null ? 0 : fields[0] as int?,
-      name: fields[1] == null ? '' : fields[1] as String?,
-      tankCapacity: fields[2] == null ? '' : fields[2] as String?,
-      isDefault: fields[3] == null ? false : fields[3] as bool?,
+      id: fields[0] == null ? 0 : fields[0] as int,
+      name: fields[1] == null ? '' : fields[1] as String,
+      tankCapacity: fields[2] == null ? '' : fields[2] as String,
+      isDefault: fields[3] == null ? false : fields[3] as bool,
     );
   }
 
@@ -54,10 +54,10 @@ class VehicleAdapter extends TypeAdapter<Vehicle> {
 // **************************************************************************
 
 _$_Vehicle _$$_VehicleFromJson(Map<String, dynamic> json) => _$_Vehicle(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      tankCapacity: json['tankCapacity'] as String?,
-      isDefault: json['isDefault'] as bool?,
+      id: json['id'] as int? ?? 0,
+      name: json['name'] as String? ?? '',
+      tankCapacity: json['tankCapacity'] as String? ?? '',
+      isDefault: json['isDefault'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_VehicleToJson(_$_Vehicle instance) =>

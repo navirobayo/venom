@@ -47,6 +47,10 @@ class MyVehicleBloc extends Bloc<MyVehicleEvent, MyVehicleState> {
                 } else {
                   getIt.registerSingleton<List<Vehicle>>(vehicles);
                 }
+                if (vehicles.length == 1) {
+                  getIt.get<DefaultVehicleBloc>().add(
+                      DefaultVehicleEvent.setDefaultVehicle(vehicles.first));
+                }
                 emit(MyVehicleState.idle(vehicles));
               },
             ));

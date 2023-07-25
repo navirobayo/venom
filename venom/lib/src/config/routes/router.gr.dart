@@ -87,6 +87,30 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RideResultsPage(),
       );
     },
+    About.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AboutPage(),
+      );
+    },
+    DefaultPriceSelector.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DefaultPriceSelectorPage(),
+      );
+    },
+    DefaultVehicleSelector.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DefaultVehicleSelectorPage(),
+      );
+    },
+    Settings.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SettingsPage(),
+      );
+    },
     Splash.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -105,30 +129,6 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: MyVehiclePage(key: args.key),
-      );
-    },
-    Settings.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SettingsPage(),
-      );
-    },
-    DefaultPriceSelector.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const DefaultPriceSelectorPage(),
-      );
-    },
-    About.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AboutPage(),
-      );
-    },
-    DefaultVehicleSelector.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const DefaultVehicleSelectorPage(),
       );
     },
   };
@@ -373,6 +373,62 @@ class Ride_results_page extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [AboutPage]
+class About extends PageRouteInfo<void> {
+  const About({List<PageRouteInfo>? children})
+      : super(
+          About.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'About';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DefaultPriceSelectorPage]
+class DefaultPriceSelector extends PageRouteInfo<void> {
+  const DefaultPriceSelector({List<PageRouteInfo>? children})
+      : super(
+          DefaultPriceSelector.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DefaultPriceSelector';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DefaultVehicleSelectorPage]
+class DefaultVehicleSelector extends PageRouteInfo<void> {
+  const DefaultVehicleSelector({List<PageRouteInfo>? children})
+      : super(
+          DefaultVehicleSelector.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DefaultVehicleSelector';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SettingsPage]
+class Settings extends PageRouteInfo<void> {
+  const Settings({List<PageRouteInfo>? children})
+      : super(
+          Settings.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'Settings';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [SplashPage]
 class Splash extends PageRouteInfo<void> {
   const Splash({List<PageRouteInfo>? children})
@@ -426,60 +482,4 @@ class My_vehicleArgs {
   String toString() {
     return 'My_vehicleArgs{key: $key}';
   }
-}
-
-/// generated route for
-/// [SettingsPage]
-class Settings extends PageRouteInfo<void> {
-  const Settings({List<PageRouteInfo>? children})
-      : super(
-          Settings.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'Settings';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [DefaultPriceSelectorPage]
-class DefaultPriceSelector extends PageRouteInfo<void> {
-  const DefaultPriceSelector({List<PageRouteInfo>? children})
-      : super(
-          DefaultPriceSelector.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'DefaultPriceSelector';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [AboutPage]
-class About extends PageRouteInfo<void> {
-  const About({List<PageRouteInfo>? children})
-      : super(
-          About.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'About';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [DefaultVehicleSelectorPage]
-class DefaultVehicleSelector extends PageRouteInfo<void> {
-  const DefaultVehicleSelector({List<PageRouteInfo>? children})
-      : super(
-          DefaultVehicleSelector.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'DefaultVehicleSelector';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }

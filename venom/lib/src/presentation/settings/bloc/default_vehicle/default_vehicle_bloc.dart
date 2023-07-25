@@ -26,15 +26,13 @@ class DefaultVehicleBloc
       getIt.get<MyVehicleBloc>().state.maybeWhen(
             orElse: () {},
             idle: (vehicles) {
-              if (vehicles.isNotEmpty &&
-                  vehicles.firstWhere((element) => element.isDefault == true) !=
-                      -1) {
-                emit(
-                  DefaultVehicleState.idle(
+              try {
+                if (vehicles.isNotEmpty) {
+                  emit(DefaultVehicleState.idle(
                       vehicle: vehicles
-                          .firstWhere((element) => element.isDefault == true)),
-                );
-              } else {
+                          .firstWhere((element) => element.isDefault == true)));
+                }
+              } catch (e) {
                 emit(DefaultVehicleState.idle(vehicle: vehicles.last));
               }
             },
