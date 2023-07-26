@@ -13,6 +13,11 @@ import 'package:venom/src/features/ride/domain/use_cases/cache_rides_data_use_ca
 import 'package:venom/src/features/ride/domain/use_cases/get_cached_rides_use_case.dart';
 import 'package:venom/src/features/vehicle/domain/models/vehicle_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
+import 'package:venom/src/presentation/ride/bloc/before_ride/before_ride_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/final_data/final_data_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/km_in_bike/km_in_bike_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/new_ride/new_ride_bloc.dart';
+import 'package:venom/src/presentation/ride/bloc/rides/rides_bloc.dart';
 
 part 'ride_result_state.dart';
 part 'ride_result_event.dart';
@@ -74,6 +79,12 @@ class RideResultBloc extends Bloc<RideResultEvent, RideResultState> {
               ),
               (r) {
                 if (event.ride != null) {
+                  getIt.resetLazySingleton<NewRideBloc>();
+                  getIt.resetLazySingleton<KmInBikeBloc>();
+                  getIt.resetLazySingleton<BeforeRideBloc>();
+                  getIt.resetLazySingleton<FinalDataBloc>();
+                  getIt.resetLazySingleton<RidesBloc>();
+                  getIt.resetLazySingleton<RideResultBloc>();
                   return getIt.get<AppRouter>().navigateNamed('/home');
                 }
               },
