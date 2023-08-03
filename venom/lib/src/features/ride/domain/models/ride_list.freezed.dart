@@ -21,7 +21,7 @@ RideList _$RideListFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RideList {
   @HiveField(0, defaultValue: [])
-  List<Ride>? get rides => throw _privateConstructorUsedError;
+  List<Ride> get rides => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $RideListCopyWith<$Res> {
   factory $RideListCopyWith(RideList value, $Res Function(RideList) then) =
       _$RideListCopyWithImpl<$Res, RideList>;
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Ride>? rides});
+  $Res call({@HiveField(0, defaultValue: []) List<Ride> rides});
 }
 
 /// @nodoc
@@ -50,13 +50,13 @@ class _$RideListCopyWithImpl<$Res, $Val extends RideList>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? rides = freezed,
+    Object? rides = null,
   }) {
     return _then(_value.copyWith(
-      rides: freezed == rides
+      rides: null == rides
           ? _value.rides
           : rides // ignore: cast_nullable_to_non_nullable
-              as List<Ride>?,
+              as List<Ride>,
     ) as $Val);
   }
 }
@@ -68,7 +68,7 @@ abstract class _$$_RideListCopyWith<$Res> implements $RideListCopyWith<$Res> {
       __$$_RideListCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Ride>? rides});
+  $Res call({@HiveField(0, defaultValue: []) List<Ride> rides});
 }
 
 /// @nodoc
@@ -82,13 +82,13 @@ class __$$_RideListCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? rides = freezed,
+    Object? rides = null,
   }) {
     return _then(_$_RideList(
-      rides: freezed == rides
+      rides: null == rides
           ? _value._rides
           : rides // ignore: cast_nullable_to_non_nullable
-              as List<Ride>?,
+              as List<Ride>,
     ));
   }
 }
@@ -96,21 +96,21 @@ class __$$_RideListCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_RideList implements _RideList {
-  _$_RideList({@HiveField(0, defaultValue: []) final List<Ride>? rides})
+  _$_RideList(
+      {@HiveField(0, defaultValue: []) final List<Ride> rides = const []})
       : _rides = rides;
 
   factory _$_RideList.fromJson(Map<String, dynamic> json) =>
       _$$_RideListFromJson(json);
 
-  final List<Ride>? _rides;
+  final List<Ride> _rides;
   @override
+  @JsonKey()
   @HiveField(0, defaultValue: [])
-  List<Ride>? get rides {
-    final value = _rides;
-    if (value == null) return null;
+  List<Ride> get rides {
     if (_rides is EqualUnmodifiableListView) return _rides;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_rides);
   }
 
   @override
@@ -146,14 +146,14 @@ class _$_RideList implements _RideList {
 }
 
 abstract class _RideList implements RideList {
-  factory _RideList({@HiveField(0, defaultValue: []) final List<Ride>? rides}) =
+  factory _RideList({@HiveField(0, defaultValue: []) final List<Ride> rides}) =
       _$_RideList;
 
   factory _RideList.fromJson(Map<String, dynamic> json) = _$_RideList.fromJson;
 
   @override
   @HiveField(0, defaultValue: [])
-  List<Ride>? get rides;
+  List<Ride> get rides;
   @override
   @JsonKey(ignore: true)
   _$$_RideListCopyWith<_$_RideList> get copyWith =>

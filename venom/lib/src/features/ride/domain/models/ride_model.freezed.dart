@@ -20,18 +20,18 @@ Ride _$RideFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Ride {
-  @HiveField(0, defaultValue: 0)
-  int? get id => throw _privateConstructorUsedError;
+  @HiveField(0, defaultValue: '')
+  String get id => throw _privateConstructorUsedError;
   @HiveField(1, defaultValue: '')
-  String? get timeTraveled => throw _privateConstructorUsedError;
+  String get timeTraveled => throw _privateConstructorUsedError;
   @HiveField(2, defaultValue: '')
-  String? get distanceTravelled => throw _privateConstructorUsedError;
+  String get distanceTravelled => throw _privateConstructorUsedError;
   @HiveField(3, defaultValue: '')
-  String? get gasUsed => throw _privateConstructorUsedError;
+  String get gasUsed => throw _privateConstructorUsedError;
   @HiveField(4, defaultValue: '')
-  String? get gasPrice => throw _privateConstructorUsedError;
+  String get gasPrice => throw _privateConstructorUsedError;
   @HiveField(5, defaultValue: '')
-  String? get averageSpeed => throw _privateConstructorUsedError;
+  String get averageSpeed => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,12 +44,12 @@ abstract class $RideCopyWith<$Res> {
       _$RideCopyWithImpl<$Res, Ride>;
   @useResult
   $Res call(
-      {@HiveField(0, defaultValue: 0) int? id,
-      @HiveField(1, defaultValue: '') String? timeTraveled,
-      @HiveField(2, defaultValue: '') String? distanceTravelled,
-      @HiveField(3, defaultValue: '') String? gasUsed,
-      @HiveField(4, defaultValue: '') String? gasPrice,
-      @HiveField(5, defaultValue: '') String? averageSpeed});
+      {@HiveField(0, defaultValue: '') String id,
+      @HiveField(1, defaultValue: '') String timeTraveled,
+      @HiveField(2, defaultValue: '') String distanceTravelled,
+      @HiveField(3, defaultValue: '') String gasUsed,
+      @HiveField(4, defaultValue: '') String gasPrice,
+      @HiveField(5, defaultValue: '') String averageSpeed});
 }
 
 /// @nodoc
@@ -65,38 +65,38 @@ class _$RideCopyWithImpl<$Res, $Val extends Ride>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? timeTraveled = freezed,
-    Object? distanceTravelled = freezed,
-    Object? gasUsed = freezed,
-    Object? gasPrice = freezed,
-    Object? averageSpeed = freezed,
+    Object? id = null,
+    Object? timeTraveled = null,
+    Object? distanceTravelled = null,
+    Object? gasUsed = null,
+    Object? gasPrice = null,
+    Object? averageSpeed = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      timeTraveled: freezed == timeTraveled
+              as String,
+      timeTraveled: null == timeTraveled
           ? _value.timeTraveled
           : timeTraveled // ignore: cast_nullable_to_non_nullable
-              as String?,
-      distanceTravelled: freezed == distanceTravelled
+              as String,
+      distanceTravelled: null == distanceTravelled
           ? _value.distanceTravelled
           : distanceTravelled // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gasUsed: freezed == gasUsed
+              as String,
+      gasUsed: null == gasUsed
           ? _value.gasUsed
           : gasUsed // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gasPrice: freezed == gasPrice
+              as String,
+      gasPrice: null == gasPrice
           ? _value.gasPrice
           : gasPrice // ignore: cast_nullable_to_non_nullable
-              as String?,
-      averageSpeed: freezed == averageSpeed
+              as String,
+      averageSpeed: null == averageSpeed
           ? _value.averageSpeed
           : averageSpeed // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -108,12 +108,12 @@ abstract class _$$_RideCopyWith<$Res> implements $RideCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0, defaultValue: 0) int? id,
-      @HiveField(1, defaultValue: '') String? timeTraveled,
-      @HiveField(2, defaultValue: '') String? distanceTravelled,
-      @HiveField(3, defaultValue: '') String? gasUsed,
-      @HiveField(4, defaultValue: '') String? gasPrice,
-      @HiveField(5, defaultValue: '') String? averageSpeed});
+      {@HiveField(0, defaultValue: '') String id,
+      @HiveField(1, defaultValue: '') String timeTraveled,
+      @HiveField(2, defaultValue: '') String distanceTravelled,
+      @HiveField(3, defaultValue: '') String gasUsed,
+      @HiveField(4, defaultValue: '') String gasPrice,
+      @HiveField(5, defaultValue: '') String averageSpeed});
 }
 
 /// @nodoc
@@ -125,38 +125,38 @@ class __$$_RideCopyWithImpl<$Res> extends _$RideCopyWithImpl<$Res, _$_Ride>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? timeTraveled = freezed,
-    Object? distanceTravelled = freezed,
-    Object? gasUsed = freezed,
-    Object? gasPrice = freezed,
-    Object? averageSpeed = freezed,
+    Object? id = null,
+    Object? timeTraveled = null,
+    Object? distanceTravelled = null,
+    Object? gasUsed = null,
+    Object? gasPrice = null,
+    Object? averageSpeed = null,
   }) {
     return _then(_$_Ride(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      timeTraveled: freezed == timeTraveled
+              as String,
+      timeTraveled: null == timeTraveled
           ? _value.timeTraveled
           : timeTraveled // ignore: cast_nullable_to_non_nullable
-              as String?,
-      distanceTravelled: freezed == distanceTravelled
+              as String,
+      distanceTravelled: null == distanceTravelled
           ? _value.distanceTravelled
           : distanceTravelled // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gasUsed: freezed == gasUsed
+              as String,
+      gasUsed: null == gasUsed
           ? _value.gasUsed
           : gasUsed // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gasPrice: freezed == gasPrice
+              as String,
+      gasPrice: null == gasPrice
           ? _value.gasPrice
           : gasPrice // ignore: cast_nullable_to_non_nullable
-              as String?,
-      averageSpeed: freezed == averageSpeed
+              as String,
+      averageSpeed: null == averageSpeed
           ? _value.averageSpeed
           : averageSpeed // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -165,33 +165,39 @@ class __$$_RideCopyWithImpl<$Res> extends _$RideCopyWithImpl<$Res, _$_Ride>
 @JsonSerializable()
 class _$_Ride implements _Ride {
   _$_Ride(
-      {@HiveField(0, defaultValue: 0) this.id,
-      @HiveField(1, defaultValue: '') this.timeTraveled,
-      @HiveField(2, defaultValue: '') this.distanceTravelled,
-      @HiveField(3, defaultValue: '') this.gasUsed,
-      @HiveField(4, defaultValue: '') this.gasPrice,
-      @HiveField(5, defaultValue: '') this.averageSpeed});
+      {@HiveField(0, defaultValue: '') this.id = '0',
+      @HiveField(1, defaultValue: '') this.timeTraveled = '0',
+      @HiveField(2, defaultValue: '') this.distanceTravelled = '0',
+      @HiveField(3, defaultValue: '') this.gasUsed = '0',
+      @HiveField(4, defaultValue: '') this.gasPrice = '0',
+      @HiveField(5, defaultValue: '') this.averageSpeed = '0'});
 
   factory _$_Ride.fromJson(Map<String, dynamic> json) => _$$_RideFromJson(json);
 
   @override
-  @HiveField(0, defaultValue: 0)
-  final int? id;
+  @JsonKey()
+  @HiveField(0, defaultValue: '')
+  final String id;
   @override
+  @JsonKey()
   @HiveField(1, defaultValue: '')
-  final String? timeTraveled;
+  final String timeTraveled;
   @override
+  @JsonKey()
   @HiveField(2, defaultValue: '')
-  final String? distanceTravelled;
+  final String distanceTravelled;
   @override
+  @JsonKey()
   @HiveField(3, defaultValue: '')
-  final String? gasUsed;
+  final String gasUsed;
   @override
+  @JsonKey()
   @HiveField(4, defaultValue: '')
-  final String? gasPrice;
+  final String gasPrice;
   @override
+  @JsonKey()
   @HiveField(5, defaultValue: '')
-  final String? averageSpeed;
+  final String averageSpeed;
 
   @override
   String toString() {
@@ -236,33 +242,33 @@ class _$_Ride implements _Ride {
 
 abstract class _Ride implements Ride {
   factory _Ride(
-      {@HiveField(0, defaultValue: 0) final int? id,
-      @HiveField(1, defaultValue: '') final String? timeTraveled,
-      @HiveField(2, defaultValue: '') final String? distanceTravelled,
-      @HiveField(3, defaultValue: '') final String? gasUsed,
-      @HiveField(4, defaultValue: '') final String? gasPrice,
-      @HiveField(5, defaultValue: '') final String? averageSpeed}) = _$_Ride;
+      {@HiveField(0, defaultValue: '') final String id,
+      @HiveField(1, defaultValue: '') final String timeTraveled,
+      @HiveField(2, defaultValue: '') final String distanceTravelled,
+      @HiveField(3, defaultValue: '') final String gasUsed,
+      @HiveField(4, defaultValue: '') final String gasPrice,
+      @HiveField(5, defaultValue: '') final String averageSpeed}) = _$_Ride;
 
   factory _Ride.fromJson(Map<String, dynamic> json) = _$_Ride.fromJson;
 
   @override
-  @HiveField(0, defaultValue: 0)
-  int? get id;
+  @HiveField(0, defaultValue: '')
+  String get id;
   @override
   @HiveField(1, defaultValue: '')
-  String? get timeTraveled;
+  String get timeTraveled;
   @override
   @HiveField(2, defaultValue: '')
-  String? get distanceTravelled;
+  String get distanceTravelled;
   @override
   @HiveField(3, defaultValue: '')
-  String? get gasUsed;
+  String get gasUsed;
   @override
   @HiveField(4, defaultValue: '')
-  String? get gasPrice;
+  String get gasPrice;
   @override
   @HiveField(5, defaultValue: '')
-  String? get averageSpeed;
+  String get averageSpeed;
   @override
   @JsonKey(ignore: true)
   _$$_RideCopyWith<_$_Ride> get copyWith => throw _privateConstructorUsedError;

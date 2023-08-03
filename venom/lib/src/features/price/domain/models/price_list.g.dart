@@ -8,7 +8,7 @@ part of 'price_list.dart';
 
 class PriceListAdapter extends TypeAdapter<PriceList> {
   @override
-  final int typeId = 9;
+  final int typeId = 19;
 
   @override
   PriceList read(BinaryReader reader) {
@@ -17,7 +17,7 @@ class PriceListAdapter extends TypeAdapter<PriceList> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PriceList(
-      prices: fields[0] == null ? [] : (fields[0] as List?)?.cast<Price>(),
+      prices: fields[0] == null ? [] : (fields[0] as List).cast<Price>(),
     );
   }
 
@@ -46,8 +46,9 @@ class PriceListAdapter extends TypeAdapter<PriceList> {
 
 _$_PriceList _$$_PriceListFromJson(Map<String, dynamic> json) => _$_PriceList(
       prices: (json['prices'] as List<dynamic>?)
-          ?.map((e) => Price.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Price.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_PriceListToJson(_$_PriceList instance) =>

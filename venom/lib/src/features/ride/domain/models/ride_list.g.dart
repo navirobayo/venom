@@ -17,7 +17,7 @@ class RideListAdapter extends TypeAdapter<RideList> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return RideList(
-      rides: fields[0] == null ? [] : (fields[0] as List?)?.cast<Ride>(),
+      rides: fields[0] == null ? [] : (fields[0] as List).cast<Ride>(),
     );
   }
 
@@ -46,8 +46,9 @@ class RideListAdapter extends TypeAdapter<RideList> {
 
 _$_RideList _$$_RideListFromJson(Map<String, dynamic> json) => _$_RideList(
       rides: (json['rides'] as List<dynamic>?)
-          ?.map((e) => Ride.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Ride.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_RideListToJson(_$_RideList instance) =>

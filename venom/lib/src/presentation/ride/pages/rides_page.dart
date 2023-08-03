@@ -51,7 +51,7 @@ class _MyRidesState extends State<MyRides> {
                   itemCount: rides.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Dismissible(
-                      key: Key(rides[index].id.toString()),
+                      key: Key(rides[index].id),
                       onDismissed: (direction) async {
                         getIt
                             .get<RidesBloc>()

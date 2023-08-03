@@ -38,7 +38,7 @@ class MyVehiclePage extends StatelessWidget {
                   return vehicles.isEmpty
                       ? SizedBox()
                       : Dismissible(
-                          key: Key(vehicles[index].id.toString()),
+                          key: Key(vehicles[index].id),
                           onDismissed: (direction) async {
                             getIt
                                 .get<MyVehicleBloc>()

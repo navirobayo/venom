@@ -28,10 +28,10 @@ class RideRepositoryImpl extends RideRepository {
     return _localDS
         .getCachedData(fieldKey: 'rides')
         .then((value) => value.fold((l) => left(RideFailure.database(l)), (r) {
-              if (r == null || r.rides!.isEmpty) {
+              if (r == null || r.rides.isEmpty) {
                 return left(RideFailure.nullParam());
               }
-              return right(r.rides ?? []);
+              return right(r.rides);
             }));
   }
 }

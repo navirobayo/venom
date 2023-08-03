@@ -21,7 +21,7 @@ VehicleList _$VehicleListFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$VehicleList {
   @HiveField(0, defaultValue: [])
-  List<Vehicle>? get vehicles => throw _privateConstructorUsedError;
+  List<Vehicle> get vehicles => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $VehicleListCopyWith<$Res> {
           VehicleList value, $Res Function(VehicleList) then) =
       _$VehicleListCopyWithImpl<$Res, VehicleList>;
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Vehicle>? vehicles});
+  $Res call({@HiveField(0, defaultValue: []) List<Vehicle> vehicles});
 }
 
 /// @nodoc
@@ -51,13 +51,13 @@ class _$VehicleListCopyWithImpl<$Res, $Val extends VehicleList>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? vehicles = freezed,
+    Object? vehicles = null,
   }) {
     return _then(_value.copyWith(
-      vehicles: freezed == vehicles
+      vehicles: null == vehicles
           ? _value.vehicles
           : vehicles // ignore: cast_nullable_to_non_nullable
-              as List<Vehicle>?,
+              as List<Vehicle>,
     ) as $Val);
   }
 }
@@ -70,7 +70,7 @@ abstract class _$$_VehicleListCopyWith<$Res>
       __$$_VehicleListCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Vehicle>? vehicles});
+  $Res call({@HiveField(0, defaultValue: []) List<Vehicle> vehicles});
 }
 
 /// @nodoc
@@ -84,13 +84,13 @@ class __$$_VehicleListCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? vehicles = freezed,
+    Object? vehicles = null,
   }) {
     return _then(_$_VehicleList(
-      vehicles: freezed == vehicles
+      vehicles: null == vehicles
           ? _value._vehicles
           : vehicles // ignore: cast_nullable_to_non_nullable
-              as List<Vehicle>?,
+              as List<Vehicle>,
     ));
   }
 }
@@ -99,21 +99,20 @@ class __$$_VehicleListCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_VehicleList implements _VehicleList {
   _$_VehicleList(
-      {@HiveField(0, defaultValue: []) final List<Vehicle>? vehicles})
+      {@HiveField(0, defaultValue: []) final List<Vehicle> vehicles = const []})
       : _vehicles = vehicles;
 
   factory _$_VehicleList.fromJson(Map<String, dynamic> json) =>
       _$$_VehicleListFromJson(json);
 
-  final List<Vehicle>? _vehicles;
+  final List<Vehicle> _vehicles;
   @override
+  @JsonKey()
   @HiveField(0, defaultValue: [])
-  List<Vehicle>? get vehicles {
-    final value = _vehicles;
-    if (value == null) return null;
+  List<Vehicle> get vehicles {
     if (_vehicles is EqualUnmodifiableListView) return _vehicles;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_vehicles);
   }
 
   @override
@@ -150,7 +149,7 @@ class _$_VehicleList implements _VehicleList {
 
 abstract class _VehicleList implements VehicleList {
   factory _VehicleList(
-          {@HiveField(0, defaultValue: []) final List<Vehicle>? vehicles}) =
+          {@HiveField(0, defaultValue: []) final List<Vehicle> vehicles}) =
       _$_VehicleList;
 
   factory _VehicleList.fromJson(Map<String, dynamic> json) =
@@ -158,7 +157,7 @@ abstract class _VehicleList implements VehicleList {
 
   @override
   @HiveField(0, defaultValue: [])
-  List<Vehicle>? get vehicles;
+  List<Vehicle> get vehicles;
   @override
   @JsonKey(ignore: true)
   _$$_VehicleListCopyWith<_$_VehicleList> get copyWith =>

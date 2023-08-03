@@ -8,7 +8,7 @@ part of 'vehicle_list.dart';
 
 class VehicleListAdapter extends TypeAdapter<VehicleList> {
   @override
-  final int typeId = 8;
+  final int typeId = 18;
 
   @override
   VehicleList read(BinaryReader reader) {
@@ -17,7 +17,7 @@ class VehicleListAdapter extends TypeAdapter<VehicleList> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return VehicleList(
-      vehicles: fields[0] == null ? [] : (fields[0] as List?)?.cast<Vehicle>(),
+      vehicles: fields[0] == null ? [] : (fields[0] as List).cast<Vehicle>(),
     );
   }
 
@@ -47,8 +47,9 @@ class VehicleListAdapter extends TypeAdapter<VehicleList> {
 _$_VehicleList _$$_VehicleListFromJson(Map<String, dynamic> json) =>
     _$_VehicleList(
       vehicles: (json['vehicles'] as List<dynamic>?)
-          ?.map((e) => Vehicle.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Vehicle.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_VehicleListToJson(_$_VehicleList instance) =>

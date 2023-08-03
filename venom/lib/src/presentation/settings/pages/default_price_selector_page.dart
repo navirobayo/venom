@@ -23,7 +23,7 @@ class DefaultPriceSelectorPage extends StatelessWidget {
               idle: (prices) {
                 if (prices.isEmpty) {
                   return Price(
-                      id: 0, isDefault: false, placeOfPurchase: '', price: 0);
+                      id: '0', isDefault: false, placeOfPurchase: '', price: 0);
                 } else {
                   return prices.last;
                 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 import 'package:venom/src/features/vehicle/domain/failures/vehicle_failure.dart';
 import 'package:venom/src/features/vehicle/domain/models/vehicle_model.dart';
 import 'package:venom/src/features/core/models/tuple.dart' as tuple;
@@ -35,7 +36,7 @@ class MyVehicleBloc extends Bloc<MyVehicleEvent, MyVehicleState> {
     if (getIt.isRegistered<List<Vehicle>>()) {
       vehicles = getIt.get<List<Vehicle>>().toList();
     }
-    vehicles.add(event.vehicle.copyWith(id: vehicles.length + 1));
+    vehicles.add(event.vehicle.copyWith(id: getIt.get<Uuid>().v8()));
     await _cacheVehicleDataUseCase
         .call(param: tuple.Tuple1(vehicles))
         .then((value) => value.fold(

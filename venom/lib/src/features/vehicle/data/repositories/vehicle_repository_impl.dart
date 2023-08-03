@@ -32,10 +32,8 @@ class VehicleRepositoryImpl extends VehicleRepository {
             (r) {
               if (r == null) {
                 return left(VehicleFailure.nullParam());
-              } else if (r.vehicles == null) {
-                return left(VehicleFailure.nullParam());
               }
-              return right(r.vehicles!.toList());
+              return right(r.vehicles.toList());
             },
           ));
 }

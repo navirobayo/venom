@@ -34,10 +34,8 @@ class PriceRepositoryImpl extends PriceRepository {
                 (r) {
                   if (r == null) {
                     return left(PriceFailure.nullParam());
-                  } else if (r.prices == null) {
-                    return left(PriceFailure.nullParam());
                   }
-                  return right(r.prices!.toList());
+                  return right(r.prices.toList());
                 },
               ));
 }

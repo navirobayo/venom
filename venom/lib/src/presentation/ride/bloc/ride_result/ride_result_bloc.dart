@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/features/core/models/tuple.dart' as tuple;
 
@@ -52,7 +53,7 @@ class RideResultBloc extends Bloc<RideResultEvent, RideResultState> {
     double averageSpeed = (distanceTravelled / getIt.get<int>()) * 3600;
     //
     Ride ride = Ride(
-      id: rides.length + 1,
+      id: getIt.get<Uuid>().v8(),
       averageSpeed: averageSpeed.toStringAsFixed(2),
       distanceTravelled: distanceTravelled.toStringAsFixed(2),
       gasPrice: gasPrice.toStringAsFixed(2),

@@ -17,12 +17,12 @@ part 'ride_model.g.dart';
 class Ride with _$Ride {
   ///adsasd
   factory Ride({
-    @HiveField(0, defaultValue: 0) int? id,
-    @HiveField(1, defaultValue: '') String? timeTraveled,
-    @HiveField(2, defaultValue: '') String? distanceTravelled,
-    @HiveField(3, defaultValue: '') String? gasUsed,
-    @HiveField(4, defaultValue: '') String? gasPrice,
-    @HiveField(5, defaultValue: '') String? averageSpeed,
+    @HiveField(0, defaultValue: '') @Default('0') String id,
+    @HiveField(1, defaultValue: '') @Default('0') String timeTraveled,
+    @HiveField(2, defaultValue: '') @Default('0') String distanceTravelled,
+    @HiveField(3, defaultValue: '') @Default('0') String gasUsed,
+    @HiveField(4, defaultValue: '') @Default('0') String gasPrice,
+    @HiveField(5, defaultValue: '') @Default('0') String averageSpeed,
   }) = _Ride;
 
   ///das
