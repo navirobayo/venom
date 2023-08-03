@@ -20,8 +20,8 @@ Price _$PriceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Price {
-  @HiveField(0, defaultValue: 0)
-  int get id => throw _privateConstructorUsedError;
+  @HiveField(0, defaultValue: '')
+  String get id => throw _privateConstructorUsedError;
   @HiveField(1, defaultValue: 0.0)
   double get price => throw _privateConstructorUsedError;
   @HiveField(2, defaultValue: '')
@@ -40,7 +40,7 @@ abstract class $PriceCopyWith<$Res> {
       _$PriceCopyWithImpl<$Res, Price>;
   @useResult
   $Res call(
-      {@HiveField(0, defaultValue: 0) int id,
+      {@HiveField(0, defaultValue: '') String id,
       @HiveField(1, defaultValue: 0.0) double price,
       @HiveField(2, defaultValue: '') String placeOfPurchase,
       @HiveField(3, defaultValue: false) bool isDefault});
@@ -68,7 +68,7 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -92,7 +92,7 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0, defaultValue: 0) int id,
+      {@HiveField(0, defaultValue: '') String id,
       @HiveField(1, defaultValue: 0.0) double price,
       @HiveField(2, defaultValue: '') String placeOfPurchase,
       @HiveField(3, defaultValue: false) bool isDefault});
@@ -116,7 +116,7 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -137,7 +137,7 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
 @JsonSerializable()
 class _$_Price implements _Price {
   _$_Price(
-      {@HiveField(0, defaultValue: 0) this.id = 0,
+      {@HiveField(0, defaultValue: '') this.id = '',
       @HiveField(1, defaultValue: 0.0) this.price = 0.0,
       @HiveField(2, defaultValue: '') this.placeOfPurchase = '',
       @HiveField(3, defaultValue: false) this.isDefault = false});
@@ -147,8 +147,8 @@ class _$_Price implements _Price {
 
   @override
   @JsonKey()
-  @HiveField(0, defaultValue: 0)
-  final int id;
+  @HiveField(0, defaultValue: '')
+  final String id;
   @override
   @JsonKey()
   @HiveField(1, defaultValue: 0.0)
@@ -201,7 +201,7 @@ class _$_Price implements _Price {
 
 abstract class _Price implements Price {
   factory _Price(
-      {@HiveField(0, defaultValue: 0) final int id,
+      {@HiveField(0, defaultValue: '') final String id,
       @HiveField(1, defaultValue: 0.0) final double price,
       @HiveField(2, defaultValue: '') final String placeOfPurchase,
       @HiveField(3, defaultValue: false) final bool isDefault}) = _$_Price;
@@ -209,8 +209,8 @@ abstract class _Price implements Price {
   factory _Price.fromJson(Map<String, dynamic> json) = _$_Price.fromJson;
 
   @override
-  @HiveField(0, defaultValue: 0)
-  int get id;
+  @HiveField(0, defaultValue: '')
+  String get id;
   @override
   @HiveField(1, defaultValue: 0.0)
   double get price;

@@ -1,6 +1,7 @@
 import 'package:api_service/api_service.dart';
 import 'package:database_service/database_service.dart';
 import 'package:dio/dio.dart';
+import 'package:uuid/uuid.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/core/interceptors/auth_header_suplier.dart';
 import 'package:venom/src/core/interceptors/request_interceptor.dart';
@@ -26,6 +27,7 @@ class MainModulesInjection {
     );
     getIt.registerLazySingleton<AppRouter>(() => AppRouter());
     getIt.registerLazySingleton<AuthHeaderSupplier>(() => AuthHeaderSupplier());
+    getIt.registerLazySingleton<Uuid>(() => Uuid());
   }
 
   //

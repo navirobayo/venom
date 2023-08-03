@@ -40,21 +40,20 @@ class RideResultsPage extends StatelessWidget {
                                 distanceTravelled: '0',
                                 gasPrice: '0',
                                 gasUsed: '0',
-                                id: 0,
+                                id: '0',
                                 timeTraveled: '0');
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Text("Time traveled: ${currentRide.timeTraveled}"),
                             Text(
-                                "Time traveled: ${currentRide.timeTraveled ?? '00:00:00'}"),
+                                'Distance traveled: ${currentRide.distanceTravelled} km'),
                             Text(
-                                'Distance traveled: ${(currentRide.distanceTravelled ?? 0.0)} km'),
+                                "Fuel used in this ride: ${currentRide.gasUsed} Gallons"),
                             Text(
-                                "Fuel used in this ride: ${currentRide.gasUsed ?? 0.0} Gallons"),
+                                'Money spent in this ride: \$${currentRide.gasPrice}'),
                             Text(
-                                'Money spent in this ride: \$${currentRide.gasPrice ?? 0.0}'),
-                            Text(
-                                "Average speed: ${currentRide.averageSpeed ?? 0.0} km/h"),
+                                "Average speed: ${currentRide.averageSpeed} km/h"),
                           ],
                         );
                       },

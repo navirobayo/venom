@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 import 'package:venom/src/features/price/domain/failures/price_failure.dart';
 import 'package:venom/src/features/price/domain/models/price_model.dart';
 import 'package:venom/src/features/price/domain/use_cases/cache_prices_data_use_case.dart';
@@ -34,7 +35,7 @@ class GasPriceBloc extends Bloc<GasPriceEvent, GasPriceState> {
     if (getIt.isRegistered<List<Price>>()) {
       prices = getIt.get<List<Price>>().toList();
     }
-    prices.add(event.price.copyWith(id: prices.length + 1));
+    prices.add(event.price.copyWith(id: getIt.get<Uuid>().v8()));
     await _cachePriceDataUseCase
         .call(param: tuple.Tuple1(prices))
         .then((value) => value.fold(

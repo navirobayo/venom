@@ -14,11 +14,11 @@ part 'vehicle_list.g.dart';
 )
 
 /// asd
-@HiveType(typeId: 8)
+@HiveType(typeId: 18)
 class VehicleList with _$VehicleList {
   ///adsasd
   factory VehicleList({
-    @HiveField(0, defaultValue: []) List<Vehicle>? vehicles,
+    @HiveField(0, defaultValue: []) @Default([]) List<Vehicle> vehicles,
   }) = _VehicleList;
 
   ///das

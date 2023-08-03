@@ -17,12 +17,12 @@ class RideAdapter extends TypeAdapter<Ride> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Ride(
-      id: fields[0] == null ? 0 : fields[0] as int?,
-      timeTraveled: fields[1] == null ? '' : fields[1] as String?,
-      distanceTravelled: fields[2] == null ? '' : fields[2] as String?,
-      gasUsed: fields[3] == null ? '' : fields[3] as String?,
-      gasPrice: fields[4] == null ? '' : fields[4] as String?,
-      averageSpeed: fields[5] == null ? '' : fields[5] as String?,
+      id: fields[0] == null ? '' : fields[0] as String,
+      timeTraveled: fields[1] == null ? '' : fields[1] as String,
+      distanceTravelled: fields[2] == null ? '' : fields[2] as String,
+      gasUsed: fields[3] == null ? '' : fields[3] as String,
+      gasPrice: fields[4] == null ? '' : fields[4] as String,
+      averageSpeed: fields[5] == null ? '' : fields[5] as String,
     );
   }
 
@@ -60,12 +60,12 @@ class RideAdapter extends TypeAdapter<Ride> {
 // **************************************************************************
 
 _$_Ride _$$_RideFromJson(Map<String, dynamic> json) => _$_Ride(
-      id: json['id'] as int?,
-      timeTraveled: json['timeTraveled'] as String?,
-      distanceTravelled: json['distanceTravelled'] as String?,
-      gasUsed: json['gasUsed'] as String?,
-      gasPrice: json['gasPrice'] as String?,
-      averageSpeed: json['averageSpeed'] as String?,
+      id: json['id'] as String? ?? '0',
+      timeTraveled: json['timeTraveled'] as String? ?? '0',
+      distanceTravelled: json['distanceTravelled'] as String? ?? '0',
+      gasUsed: json['gasUsed'] as String? ?? '0',
+      gasPrice: json['gasPrice'] as String? ?? '0',
+      averageSpeed: json['averageSpeed'] as String? ?? '0',
     );
 
 Map<String, dynamic> _$$_RideToJson(_$_Ride instance) => <String, dynamic>{

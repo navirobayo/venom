@@ -20,8 +20,8 @@ Vehicle _$VehicleFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Vehicle {
-  @HiveField(0, defaultValue: 0)
-  int get id => throw _privateConstructorUsedError;
+  @HiveField(0, defaultValue: '')
+  String get id => throw _privateConstructorUsedError;
   @HiveField(1, defaultValue: '')
   String get name => throw _privateConstructorUsedError;
   @HiveField(2, defaultValue: '')
@@ -40,7 +40,7 @@ abstract class $VehicleCopyWith<$Res> {
       _$VehicleCopyWithImpl<$Res, Vehicle>;
   @useResult
   $Res call(
-      {@HiveField(0, defaultValue: 0) int id,
+      {@HiveField(0, defaultValue: '') String id,
       @HiveField(1, defaultValue: '') String name,
       @HiveField(2, defaultValue: '') String tankCapacity,
       @HiveField(3, defaultValue: false) bool isDefault});
@@ -68,7 +68,7 @@ class _$VehicleCopyWithImpl<$Res, $Val extends Vehicle>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -93,7 +93,7 @@ abstract class _$$_VehicleCopyWith<$Res> implements $VehicleCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0, defaultValue: 0) int id,
+      {@HiveField(0, defaultValue: '') String id,
       @HiveField(1, defaultValue: '') String name,
       @HiveField(2, defaultValue: '') String tankCapacity,
       @HiveField(3, defaultValue: false) bool isDefault});
@@ -118,7 +118,7 @@ class __$$_VehicleCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -139,7 +139,7 @@ class __$$_VehicleCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Vehicle implements _Vehicle {
   _$_Vehicle(
-      {@HiveField(0, defaultValue: 0) this.id = 0,
+      {@HiveField(0, defaultValue: '') this.id = '',
       @HiveField(1, defaultValue: '') this.name = '',
       @HiveField(2, defaultValue: '') this.tankCapacity = '',
       @HiveField(3, defaultValue: false) this.isDefault = false});
@@ -149,8 +149,8 @@ class _$_Vehicle implements _Vehicle {
 
   @override
   @JsonKey()
-  @HiveField(0, defaultValue: 0)
-  final int id;
+  @HiveField(0, defaultValue: '')
+  final String id;
   @override
   @JsonKey()
   @HiveField(1, defaultValue: '')
@@ -203,7 +203,7 @@ class _$_Vehicle implements _Vehicle {
 
 abstract class _Vehicle implements Vehicle {
   factory _Vehicle(
-      {@HiveField(0, defaultValue: 0) final int id,
+      {@HiveField(0, defaultValue: '') final String id,
       @HiveField(1, defaultValue: '') final String name,
       @HiveField(2, defaultValue: '') final String tankCapacity,
       @HiveField(3, defaultValue: false) final bool isDefault}) = _$_Vehicle;
@@ -211,8 +211,8 @@ abstract class _Vehicle implements Vehicle {
   factory _Vehicle.fromJson(Map<String, dynamic> json) = _$_Vehicle.fromJson;
 
   @override
-  @HiveField(0, defaultValue: 0)
-  int get id;
+  @HiveField(0, defaultValue: '')
+  String get id;
   @override
   @HiveField(1, defaultValue: '')
   String get name;

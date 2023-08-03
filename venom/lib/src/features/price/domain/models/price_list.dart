@@ -14,11 +14,11 @@ part 'price_list.g.dart';
 )
 
 /// asd
-@HiveType(typeId: 9)
+@HiveType(typeId: 19)
 class PriceList with _$PriceList {
   ///adsasd
   factory PriceList({
-    @HiveField(0, defaultValue: []) List<Price>? prices,
+    @HiveField(0, defaultValue: []) @Default([]) List<Price> prices,
   }) = _PriceList;
 
   ///das

@@ -18,7 +18,7 @@ part 'ride_list.g.dart';
 class RideList with _$RideList {
   ///adsasd
   factory RideList({
-    @HiveField(0, defaultValue: []) List<Ride>? rides,
+    @HiveField(0, defaultValue: []) @Default([]) List<Ride> rides,
   }) = _RideList;
 
   ///das

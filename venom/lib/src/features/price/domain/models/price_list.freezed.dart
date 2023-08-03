@@ -21,7 +21,7 @@ PriceList _$PriceListFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PriceList {
   @HiveField(0, defaultValue: [])
-  List<Price>? get prices => throw _privateConstructorUsedError;
+  List<Price> get prices => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $PriceListCopyWith<$Res> {
   factory $PriceListCopyWith(PriceList value, $Res Function(PriceList) then) =
       _$PriceListCopyWithImpl<$Res, PriceList>;
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Price>? prices});
+  $Res call({@HiveField(0, defaultValue: []) List<Price> prices});
 }
 
 /// @nodoc
@@ -50,13 +50,13 @@ class _$PriceListCopyWithImpl<$Res, $Val extends PriceList>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? prices = freezed,
+    Object? prices = null,
   }) {
     return _then(_value.copyWith(
-      prices: freezed == prices
+      prices: null == prices
           ? _value.prices
           : prices // ignore: cast_nullable_to_non_nullable
-              as List<Price>?,
+              as List<Price>,
     ) as $Val);
   }
 }
@@ -68,7 +68,7 @@ abstract class _$$_PriceListCopyWith<$Res> implements $PriceListCopyWith<$Res> {
       __$$_PriceListCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Price>? prices});
+  $Res call({@HiveField(0, defaultValue: []) List<Price> prices});
 }
 
 /// @nodoc
@@ -82,13 +82,13 @@ class __$$_PriceListCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? prices = freezed,
+    Object? prices = null,
   }) {
     return _then(_$_PriceList(
-      prices: freezed == prices
+      prices: null == prices
           ? _value._prices
           : prices // ignore: cast_nullable_to_non_nullable
-              as List<Price>?,
+              as List<Price>,
     ));
   }
 }
@@ -96,21 +96,21 @@ class __$$_PriceListCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PriceList implements _PriceList {
-  _$_PriceList({@HiveField(0, defaultValue: []) final List<Price>? prices})
+  _$_PriceList(
+      {@HiveField(0, defaultValue: []) final List<Price> prices = const []})
       : _prices = prices;
 
   factory _$_PriceList.fromJson(Map<String, dynamic> json) =>
       _$$_PriceListFromJson(json);
 
-  final List<Price>? _prices;
+  final List<Price> _prices;
   @override
+  @JsonKey()
   @HiveField(0, defaultValue: [])
-  List<Price>? get prices {
-    final value = _prices;
-    if (value == null) return null;
+  List<Price> get prices {
     if (_prices is EqualUnmodifiableListView) return _prices;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_prices);
   }
 
   @override
@@ -147,7 +147,7 @@ class _$_PriceList implements _PriceList {
 
 abstract class _PriceList implements PriceList {
   factory _PriceList(
-          {@HiveField(0, defaultValue: []) final List<Price>? prices}) =
+          {@HiveField(0, defaultValue: []) final List<Price> prices}) =
       _$_PriceList;
 
   factory _PriceList.fromJson(Map<String, dynamic> json) =
@@ -155,7 +155,7 @@ abstract class _PriceList implements PriceList {
 
   @override
   @HiveField(0, defaultValue: [])
-  List<Price>? get prices;
+  List<Price> get prices;
   @override
   @JsonKey(ignore: true)
   _$$_PriceListCopyWith<_$_PriceList> get copyWith =>

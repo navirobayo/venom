@@ -25,6 +25,7 @@ dependencies:
       url: https://github.com/hamidjalili59/timer_picker_spinner.git
       ref: main
   dio: ^5.2.1+1
+  uuid: ^4.0.0-beta3-1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3

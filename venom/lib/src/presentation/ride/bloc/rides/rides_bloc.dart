@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 import 'package:venom/src/features/core/models/tuple.dart' as tuple;
 import 'package:venom/src/features/ride/domain/failures/ride_failure.dart';
 import 'package:venom/src/features/ride/domain/models/ride_model.dart';
@@ -73,7 +74,7 @@ class RidesBloc extends Bloc<RidesEvent, RidesState> {
     if (getIt.isRegistered<List<Ride>>()) {
       rides = getIt.get<List<Ride>>().toList();
     }
-    rides.add(event.ride.copyWith(id: rides.length + 1));
+    rides.add(event.ride.copyWith(id: getIt.get<Uuid>().v8()));
     await _cacheRideDataUseCase
         .call(param: tuple.Tuple1(rides))
         .then((value) => value.fold(

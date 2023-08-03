@@ -23,7 +23,7 @@ class DefaultVehicleSelectorPage extends StatelessWidget {
               idle: (vehicles) {
                 if (vehicles.isEmpty) {
                   return Vehicle(
-                      id: 0, isDefault: false, tankCapacity: '', name: '');
+                      id: '0', isDefault: false, tankCapacity: '', name: '');
                 } else {
                   return vehicles.last;
                 }

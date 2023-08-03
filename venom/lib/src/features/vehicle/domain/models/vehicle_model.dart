@@ -13,11 +13,11 @@ part 'vehicle_model.g.dart';
 )
 
 /// asd
-@HiveType(typeId: 7)
+@HiveType(typeId: 17)
 class Vehicle with _$Vehicle {
   ///adsasd
   factory Vehicle({
-    @HiveField(0, defaultValue: 0) @Default(0) int id,
+    @HiveField(0, defaultValue: '') @Default('') String id,
     @HiveField(1, defaultValue: '') @Default('') String name,
     @HiveField(2, defaultValue: '') @Default('') String tankCapacity,
     @HiveField(3, defaultValue: false) @Default(false) bool isDefault,
