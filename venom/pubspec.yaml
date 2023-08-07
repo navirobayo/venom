@@ -54,8 +54,10 @@ dev_dependencies:
   json_serializable: ^6.6.1
 
 flutter_native_splash:
-  image: "assets/icon/icon.png"
-
+  color: "#000000"
+  image: assets/icon/icon.png
+  android_12:
+    image: assets/icon/icon.png
   
 flutter_launcher_icons:
   android: "launcher_icon"
