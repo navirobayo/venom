@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:venom/components/flutter_monokai_theme.dart';
+import 'package:venom/components/theme_and_font_manager/theme_and_font_manager.dart';
 import 'package:venom/presentation/welcome_screen/welcome_screen.dart';
 
 void main() {
@@ -8,16 +7,18 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    final themeAndFontManager = ThemeAndFontManager.instance;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Venom Beta',
-      theme: FlutterMonokaiTheme.lightTheme,
-      darkTheme: FlutterMonokaiTheme.darkTheme,
-      themeMode: ThemeMode.dark,
+      title: 'Venom 2.0.0',
+      theme: themeAndFontManager.selectedLightTheme,
+      darkTheme: themeAndFontManager.selectedDarkTheme,
+      themeMode: ThemeMode.system, // Use system settings for light/dark mode
       home: WelcomeScreen(),
     );
   }
