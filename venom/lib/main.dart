@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venom/components/flutter_monokai_theme.dart';
 import 'package:venom/presentation/welcome_screen/welcome_screen.dart';
 
 void main() {
@@ -14,16 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Venom Beta',
-      theme: ThemeData(
-        textTheme:
-            GoogleFonts.chakraPetchTextTheme(Theme.of(context).textTheme),
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        textTheme: GoogleFonts.chakraPetchTextTheme(Theme.of(context).textTheme)
-            .apply(bodyColor: Colors.white),
-        brightness: Brightness.dark,
-      ),
+      theme: FlutterMonokaiTheme.lightTheme,
+      darkTheme: FlutterMonokaiTheme.darkTheme,
       themeMode: ThemeMode.dark,
       home: WelcomeScreen(),
     );
