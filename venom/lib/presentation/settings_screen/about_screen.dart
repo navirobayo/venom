@@ -16,30 +16,37 @@ class AboutScreen extends StatelessWidget {
                 height: 50,
               ),
               Text(
-                "Venom Beta 1.1",
+                "Venom 2.0.0",
                 style: TextStyle(fontSize: 38.0),
               ),
               SizedBox(
                 height: 50,
               ),
               Text(
-                "An open source app!",
+                "An open source app.",
                 style: TextStyle(fontSize: 18.0),
               ),
               SizedBox(
                 height: 25,
               ),
               Text(
-                "github.com/navirobayo",
+                "A big thanks to the Venom developer team for their contributions:",
                 style: TextStyle(fontSize: 18.0),
               ),
-              /* SizedBox(
+              SizedBox(
                 height: 25,
               ),
               Text(
-                "Collaborators:",
+                "Back-end dev: github.com/hamidjalili59",
                 style: TextStyle(fontSize: 18.0),
-              ), */
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Text(
+                "Front-end dev: github.com/navirobayo",
+                style: TextStyle(fontSize: 18.0),
+              ),
             ],
           ),
         ));
