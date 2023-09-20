@@ -22,6 +22,7 @@ class SplashPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt.get<HomeBloc>(),
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: BlocConsumer(
           bloc: getIt.get<HomeBloc>(),
           listener: (context, state) {},
@@ -34,13 +35,11 @@ class SplashPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.fitHeight,
-                      image: AssetImage(
-                        PngAssets.icon,
-                      ),
+                      image: AssetImage(PngAssets.icon),
                     ),
                   ),
                   child: ColoredBox(
-                    color: const Color(0x851c3729),
+                    color: Theme.of(context).colorScheme.background,
                     child: BackdropFilter(
                       filter: ImageFilter.blur(
                         sigmaX: 2,
@@ -60,7 +59,7 @@ class SplashPage extends StatelessWidget {
                   width: 1.sw,
                   height: 1.sh,
                   child: ColoredBox(
-                    color: const Color(0x851c3729),
+                    color: Theme.of(context).colorScheme.background,
                     child: BackdropFilter(
                       filter: ImageFilter.blur(
                         sigmaX: 2,

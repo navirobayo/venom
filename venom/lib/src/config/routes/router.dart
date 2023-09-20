@@ -13,6 +13,7 @@ import 'package:venom/src/presentation/ride/pages/rides_page.dart';
 import 'package:venom/src/presentation/settings/pages/about_page.dart';
 import 'package:venom/src/presentation/settings/pages/default_price_selector_page.dart';
 import 'package:venom/src/presentation/settings/pages/default_vehicle_selector_page.dart';
+import 'package:venom/src/presentation/settings/pages/set_theme_page.dart';
 import 'package:venom/src/presentation/settings/pages/settings_page.dart';
 import 'package:venom/src/presentation/splash/pages/splash_page.dart';
 import 'package:venom/src/presentation/tool_kit/pages/toolkit_page.dart';
@@ -78,6 +79,10 @@ class AppRouter extends _$AppRouter {
     AutoRoute(
       path: '/default_price_selector',
       page: DefaultPriceSelector.page,
+    ),
+    AutoRoute(
+      path: '/setTheme',
+      page: SetTheme.page,
     ),
     AutoRoute(
       path: '/default_vehicle_selector',

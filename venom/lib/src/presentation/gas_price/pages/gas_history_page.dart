@@ -70,6 +70,7 @@ class GasHistory extends StatelessWidget {
                       subtitle: Text(
                         prices[index].placeOfPurchase,
                         style: const TextStyle(color: Colors.white54),
+                        // style: const TextStyle(color: Colors.white54),
                       ),
                       onLongPress: () async {
                         final result = await showMenu(

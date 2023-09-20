@@ -32,11 +32,14 @@ class SettingsPage extends StatelessWidget {
             },
           ),
           // Implement this when Theme Service is Ready.
-          /*const ListTile(
-            leading: Icon(Icons.palette_outlined),
-            title: Text("Theme"),
-            trailing: Icon(Icons.arrow_forward_ios),
-          ),*/
+          ListTile(
+            leading: const Icon(Icons.palette_outlined),
+            title: const Text('Theme'),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              getIt.get<AppRouter>().pushNamed('/setTheme');
+            },
+          ),
           ListTile(
             leading: const Icon(Icons.info_outline_rounded),
             title: const Text('About'),

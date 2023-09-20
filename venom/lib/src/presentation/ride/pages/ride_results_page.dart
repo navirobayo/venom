@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venom/src/features/ride/domain/models/ride_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
 import 'package:venom/src/presentation/ride/bloc/ride_result/ride_result_bloc.dart';
@@ -57,6 +58,7 @@ class RideResultsPage extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 20.h),
               SizedBox(
                 height: 50,
                 child: ElevatedButton(
@@ -72,9 +74,7 @@ class RideResultsPage extends StatelessWidget {
                   child: const Text('Analyze ride'),
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              SizedBox(height: 20.h),
               SizedBox(
                 height: 50,
                 child: ElevatedButton(

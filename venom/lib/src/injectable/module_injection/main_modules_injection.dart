@@ -9,6 +9,7 @@ import 'package:venom/src/features/price/domain/models/price_list.dart';
 import 'package:venom/src/features/price/domain/models/price_model.dart';
 import 'package:venom/src/features/ride/domain/models/ride_list.dart';
 import 'package:venom/src/features/ride/domain/models/ride_model.dart';
+import 'package:venom/src/features/theme/domain/models/venom_theme_data.dart';
 import 'package:venom/src/features/vehicle/domain/models/vehicle_list.dart';
 import 'package:venom/src/features/vehicle/domain/models/vehicle_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
@@ -44,5 +45,7 @@ class MainModulesInjection {
     await databaseService.registerAdapter<Price>(PriceAdapter());
     await databaseService.registerAdapter<VehicleList>(VehicleListAdapter());
     await databaseService.registerAdapter<Vehicle>(VehicleAdapter());
+    await databaseService
+        .registerAdapter<VenomThemeData>(VenomThemeDataAdapter());
   }
 }

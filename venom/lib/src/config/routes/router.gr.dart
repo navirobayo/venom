@@ -127,6 +127,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: MyVehiclePage(key: args.key),
       );
     },
+    SetTheme.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SetThemePage(),
+      );
+    },
   };
 }
 
@@ -450,4 +456,18 @@ class My_vehicleArgs {
   String toString() {
     return 'My_vehicleArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [SetThemePage]
+class SetTheme extends PageRouteInfo<void> {
+  const SetTheme({List<PageRouteInfo>? children})
+      : super(
+          SetTheme.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SetTheme';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

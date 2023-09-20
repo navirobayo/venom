@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/injectable/injectable.dart';
 import 'package:venom/src/presentation/gas_price/bloc/gas_price/gas_price_bloc.dart';
@@ -45,7 +46,15 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              Center(child: Text('Welcome, $userName')),
+              Center(
+                child: Text(
+                  'Welcome, $userName',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontSize: 22.sp),
+                ),
+              ),
               const SizedBox(
                 height: 50,
               ),
@@ -54,6 +63,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Card(
                     clipBehavior: Clip.hardEdge,
+                    elevation: 3,
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(30),
                       onTap: () {
@@ -71,6 +81,7 @@ class HomePage extends StatelessWidget {
                   ),
                   Card(
                     clipBehavior: Clip.hardEdge,
+                    elevation: 3,
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(30),
                       onTap: () {
@@ -93,6 +104,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Card(
                     clipBehavior: Clip.hardEdge,
+                    elevation: 3,
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(30),
                       onTap: () {
@@ -110,6 +122,7 @@ class HomePage extends StatelessWidget {
                   ),
                   Card(
                     clipBehavior: Clip.hardEdge,
+                    elevation: 3,
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(30),
                       onTap: () {
