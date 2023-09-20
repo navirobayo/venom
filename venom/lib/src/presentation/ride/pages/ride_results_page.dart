@@ -8,8 +8,8 @@ import 'package:venom/src/presentation/ride/bloc/ride_result/ride_result_bloc.da
 @RoutePage(name: 'ride_results_page')
 class RideResultsPage extends StatelessWidget {
   const RideResultsPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class RideResultsPage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Results"),
+            title: const Text('Results'),
           ),
           body: ListView(
             children: [
@@ -27,37 +27,35 @@ class RideResultsPage extends StatelessWidget {
               ),
               Card(
                 child: SizedBox(
-                    width: 150,
-                    height: 300,
-                    child: state.maybeWhen(
-                      orElse: () {
-                        return SizedBox();
-                      },
-                      idle: (ride) {
-                        Ride currentRide = ride ??
-                            Ride(
-                                averageSpeed: '0',
-                                distanceTravelled: '0',
-                                gasPrice: '0',
-                                gasUsed: '0',
-                                id: '0',
-                                timeTraveled: '0');
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Time traveled: ${currentRide.timeTraveled}"),
-                            Text(
-                                'Distance traveled: ${currentRide.distanceTravelled} km'),
-                            Text(
-                                "Fuel used in this ride: ${currentRide.gasUsed} Gallons"),
-                            Text(
-                                'Money spent in this ride: \$${currentRide.gasPrice}'),
-                            Text(
-                                "Average speed: ${currentRide.averageSpeed} km/h"),
-                          ],
-                        );
-                      },
-                    )),
+                  width: 150,
+                  height: 300,
+                  child: state.maybeWhen(
+                    orElse: () {
+                      return const SizedBox();
+                    },
+                    idle: (ride) {
+                      final currentRide = ride ?? Ride();
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Time traveled: ${currentRide.timeTraveled}'),
+                          Text(
+                            'Distance traveled: ${currentRide.distanceTravelled} km',
+                          ),
+                          Text(
+                            'Fuel used in this ride: ${currentRide.gasUsed} Gallons',
+                          ),
+                          Text(
+                            'Money spent in this ride: \$${currentRide.gasPrice}',
+                          ),
+                          Text(
+                            'Average speed: ${currentRide.averageSpeed} km/h',
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
               ),
               SizedBox(
                 height: 50,
@@ -69,9 +67,9 @@ class RideResultsPage extends StatelessWidget {
                   onPressed: () {
                     getIt
                         .get<RideResultBloc>()
-                        .add(RideResultEvent.analyzeRide());
+                        .add(const RideResultEvent.analyzeRide());
                   },
-                  child: const Text("Analyze ride"),
+                  child: const Text('Analyze ride'),
                 ),
               ),
               const SizedBox(
@@ -94,9 +92,9 @@ class RideResultsPage extends StatelessWidget {
                           },
                         );
                   },
-                  child: const Text("Save and close"),
+                  child: const Text('Save and close'),
                 ),
-              )
+              ),
             ],
           ),
         );

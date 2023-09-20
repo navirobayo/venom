@@ -15,26 +15,27 @@ import 'package:venom/src/injectable/injectable.dart';
 
 class MainModulesInjection {
   MainModulesInjection() {
-    getIt.registerSingleton<Dio>(Dio());
-    getIt.registerLazySingleton<ApiService>(
-      () => ApiServiceImpl(
-        interceptors: [getIt.get<RequestInterceptor>()],
-        dio: getIt.get<Dio>(),
-      ),
-    );
-    getIt.registerLazySingleton<DatabaseService>(
-      () => DatabaseServiceImpl(),
-    );
-    getIt.registerLazySingleton<AppRouter>(() => AppRouter());
-    getIt.registerLazySingleton<AuthHeaderSupplier>(() => AuthHeaderSupplier());
-    getIt.registerLazySingleton<Uuid>(() => Uuid());
+    getIt
+      ..registerSingleton<Dio>(Dio())
+      ..registerLazySingleton<ApiService>(
+        () => ApiServiceImpl(
+          interceptors: [getIt.get<RequestInterceptor>()],
+          dio: getIt.get<Dio>(),
+        ),
+      )
+      ..registerLazySingleton<DatabaseService>(
+        DatabaseServiceImpl.new,
+      )
+      ..registerLazySingleton<AppRouter>(AppRouter.new)
+      ..registerLazySingleton<AuthHeaderSupplier>(AuthHeaderSupplier.new)
+      ..registerLazySingleton<Uuid>(Uuid.new);
   }
 
   //
-  Future initDatabase() async =>
-      await getIt.get<DatabaseService>().initialize();
+  Future<void> initDatabase() async =>
+      getIt.get<DatabaseService>().initialize();
 
-  Future registerHiveAdapters() async {
+  Future<void> registerHiveAdapters() async {
     final databaseService = getIt.get<DatabaseService>();
 
     await databaseService.registerAdapter<RideList>(RideListAdapter());

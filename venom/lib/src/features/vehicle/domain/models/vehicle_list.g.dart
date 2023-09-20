@@ -49,7 +49,7 @@ _$_VehicleList _$$_VehicleListFromJson(Map<String, dynamic> json) =>
       vehicles: (json['vehicles'] as List<dynamic>?)
               ?.map((e) => Vehicle.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          const [],
+          const <Vehicle>[],
     );
 
 Map<String, dynamic> _$$_VehicleListToJson(_$_VehicleList instance) =>

@@ -16,9 +16,9 @@ class FinalDataBloc extends Bloc<FinalDataEvent, FinalDataState> {
   }
 
   FutureOr<void> _onChangeGasLevel(
-      _ChangeGasLevel event, Emitter<FinalDataState> emit) {
+      _ChangeGasLevel event, Emitter<FinalDataState> emit,) {
     if (event.value == null) {
-      emit(FinalDataState.failure('null param', RideFailure.nullParam()));
+      emit(const FinalDataState.failure('null param', RideFailure.nullParam()));
     } else {
       emit(FinalDataState.idle(event.value!));
     }

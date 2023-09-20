@@ -15,22 +15,27 @@ part 'default_vehicle_bloc.freezed.dart';
 @lazySingleton
 class DefaultVehicleBloc
     extends Bloc<DefaultVehicleEvent, DefaultVehicleState> {
-  DefaultVehicleBloc() : super(DefaultVehicleState.idle()) {
+  DefaultVehicleBloc() : super(const DefaultVehicleState.idle()) {
     on<_ReadDefaultVehicle>(_onReadDefaultVehicle);
     on<_SetDefaultVehicle>(_onSetDefaultVehicle);
   }
 
   FutureOr<void> _onReadDefaultVehicle(
-      _ReadDefaultVehicle event, Emitter<DefaultVehicleState> emit) async {
+    _ReadDefaultVehicle event,
+    Emitter<DefaultVehicleState> emit,
+  ) async {
     try {
       getIt.get<MyVehicleBloc>().state.maybeWhen(
             orElse: () {},
             idle: (vehicles) {
               try {
                 if (vehicles.isNotEmpty) {
-                  emit(DefaultVehicleState.idle(
+                  emit(
+                    DefaultVehicleState.idle(
                       vehicle: vehicles
-                          .firstWhere((element) => element.isDefault == true)));
+                          .firstWhere((element) => element.isDefault == true),
+                    ),
+                  );
                 }
               } catch (e) {
                 emit(DefaultVehicleState.idle(vehicle: vehicles.last));
@@ -41,11 +46,13 @@ class DefaultVehicleBloc
   }
 
   FutureOr<void> _onSetDefaultVehicle(
-      _SetDefaultVehicle event, Emitter<DefaultVehicleState> emit) async {
+    _SetDefaultVehicle event,
+    Emitter<DefaultVehicleState> emit,
+  ) async {
     try {
-      Vehicle vehicle = event.vehicle!.copyWith(isDefault: true);
+      final vehicle = event.vehicle!.copyWith(isDefault: true);
       getIt.get<MyVehicleBloc>().add(MyVehicleEvent.updateVehicle(vehicle));
-      await Future.delayed(Duration(milliseconds: 250));
+      await Future<void>.delayed(const Duration(milliseconds: 250));
       add(DefaultVehicleEvent.readDefaultVehicle());
     } catch (_) {}
   }

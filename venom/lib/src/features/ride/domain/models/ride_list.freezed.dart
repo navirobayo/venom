@@ -20,7 +20,7 @@ RideList _$RideListFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RideList {
-  @HiveField(0, defaultValue: [])
+  @HiveField(0, defaultValue: <Ride>[])
   List<Ride> get rides => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $RideListCopyWith<$Res> {
   factory $RideListCopyWith(RideList value, $Res Function(RideList) then) =
       _$RideListCopyWithImpl<$Res, RideList>;
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Ride> rides});
+  $Res call({@HiveField(0, defaultValue: <Ride>[]) List<Ride> rides});
 }
 
 /// @nodoc
@@ -68,7 +68,7 @@ abstract class _$$_RideListCopyWith<$Res> implements $RideListCopyWith<$Res> {
       __$$_RideListCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Ride> rides});
+  $Res call({@HiveField(0, defaultValue: <Ride>[]) List<Ride> rides});
 }
 
 /// @nodoc
@@ -97,7 +97,8 @@ class __$$_RideListCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RideList implements _RideList {
   _$_RideList(
-      {@HiveField(0, defaultValue: []) final List<Ride> rides = const []})
+      {@HiveField(0, defaultValue: <Ride>[])
+      final List<Ride> rides = const <Ride>[]})
       : _rides = rides;
 
   factory _$_RideList.fromJson(Map<String, dynamic> json) =>
@@ -106,7 +107,7 @@ class _$_RideList implements _RideList {
   final List<Ride> _rides;
   @override
   @JsonKey()
-  @HiveField(0, defaultValue: [])
+  @HiveField(0, defaultValue: <Ride>[])
   List<Ride> get rides {
     if (_rides is EqualUnmodifiableListView) return _rides;
     // ignore: implicit_dynamic_type
@@ -146,13 +147,14 @@ class _$_RideList implements _RideList {
 }
 
 abstract class _RideList implements RideList {
-  factory _RideList({@HiveField(0, defaultValue: []) final List<Ride> rides}) =
+  factory _RideList(
+          {@HiveField(0, defaultValue: <Ride>[]) final List<Ride> rides}) =
       _$_RideList;
 
   factory _RideList.fromJson(Map<String, dynamic> json) = _$_RideList.fromJson;
 
   @override
-  @HiveField(0, defaultValue: [])
+  @HiveField(0, defaultValue: <Ride>[])
   List<Ride> get rides;
   @override
   @JsonKey(ignore: true)

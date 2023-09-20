@@ -1,5 +1,5 @@
-import 'package:hive/hive.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 import 'package:venom/src/features/price/domain/models/price_model.dart';
 
 part 'price_list.freezed.dart';
@@ -18,7 +18,9 @@ part 'price_list.g.dart';
 class PriceList with _$PriceList {
   ///adsasd
   factory PriceList({
-    @HiveField(0, defaultValue: []) @Default([]) List<Price> prices,
+    @HiveField(0, defaultValue: <Price>[])
+    @Default(<Price>[])
+    List<Price> prices,
   }) = _PriceList;
 
   ///das

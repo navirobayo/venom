@@ -17,122 +17,123 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
-    Future.delayed(Duration(seconds: 2))
+    Future<void>.delayed(const Duration(seconds: 2))
         .whenComplete(() => getIt.get<AppRouter>().replaceNamed('/intro'));
     return BlocProvider(
       create: (_) => getIt.get<HomeBloc>(),
       child: Scaffold(
-          body: BlocConsumer(
-              bloc: getIt.get<HomeBloc>(),
-              listener: (context, state) {},
-              builder: (context, state) {
-                return getIt.get<HomeBloc>().state.maybeWhen(
-                  orElse: () {
-                    return Container(
-                      width: 1.sw,
-                      height: 1.sh,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.fitHeight,
-                          image: AssetImage(
-                            PngAssets.icon,
-                          ),
+        body: BlocConsumer(
+          bloc: getIt.get<HomeBloc>(),
+          listener: (context, state) {},
+          builder: (context, state) {
+            return getIt.get<HomeBloc>().state.maybeWhen(
+              orElse: () {
+                return Container(
+                  width: 1.sw,
+                  height: 1.sh,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fitHeight,
+                      image: AssetImage(
+                        PngAssets.icon,
+                      ),
+                    ),
+                  ),
+                  child: ColoredBox(
+                    color: const Color(0x851c3729),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                        sigmaX: 2,
+                        sigmaY: 2,
+                      ),
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
                         ),
                       ),
-                      child: Container(
-                        color: Color(0x851c3729),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(
-                            sigmaX: 2.0,
-                            sigmaY: 2.0,
-                          ),
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
+                    ),
+                  ),
+                );
+              },
+              failure: (failure, message) {
+                return SizedBox(
+                  width: 1.sw,
+                  height: 1.sh,
+                  child: ColoredBox(
+                    color: const Color(0x851c3729),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                        sigmaX: 2,
+                        sigmaY: 2,
                       ),
-                    );
-                  },
-                  failure: (failure, message) {
-                    return SizedBox(
-                      width: 1.sw,
-                      height: 1.sh,
-                      child: Container(
-                        color: Color(0x851c3729),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(
-                            sigmaX: 2.0,
-                            sigmaY: 2.0,
-                          ),
-                          child: Center(
-                            child: SizedBox(
-                              width: 0.8.sw,
-                              height: 230.h,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.all(16.r),
-                                    width: 0.8.sw,
-                                    decoration: BoxDecoration(
-                                        color: Colors.blueGrey.withOpacity(0.4),
-                                        borderRadius:
-                                            BorderRadius.circular(26.r)),
-                                    child: Text(
-                                      'Please Try Again',
-                                      textAlign: TextAlign.center,
-                                      textDirection: TextDirection.rtl,
-                                      style: TextStyle(
-                                        fontSize: 22.sp,
-                                        color: Colors.white,
+                      child: Center(
+                        child: SizedBox(
+                          width: 0.8.sw,
+                          height: 230.h,
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(16.r),
+                                width: 0.8.sw,
+                                decoration: BoxDecoration(
+                                  color: Colors.blueGrey.withOpacity(0.4),
+                                  borderRadius: BorderRadius.circular(26.r),
+                                ),
+                                child: Text(
+                                  'Please Try Again',
+                                  textAlign: TextAlign.center,
+                                  textDirection: TextDirection.rtl,
+                                  style: TextStyle(
+                                    fontSize: 22.sp,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 35.h),
+                              InkWell(
+                                onTap: () {
+                                  getIt.get<HomeBloc>().add(
+                                        const HomeEvent.checkDataIsAvailable(),
+                                      );
+                                },
+                                child: Container(
+                                  width: 110.w,
+                                  height: 50.h,
+                                  decoration: BoxDecoration(
+                                    color: Colors.blueGrey.withOpacity(0.75),
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.white54,
+                                        blurRadius: 15,
+                                        spreadRadius: 0.1,
                                       ),
+                                    ],
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Try Again',
+                                    textAlign: TextAlign.center,
+                                    textDirection: TextDirection.rtl,
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                      color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(height: 35.h),
-                                  InkWell(
-                                    onTap: () {
-                                      getIt.get<HomeBloc>().add(
-                                          HomeEvent.checkDataIsAvailable());
-                                    },
-                                    child: Container(
-                                      width: 110.w,
-                                      height: 50.h,
-                                      decoration: BoxDecoration(
-                                        color:
-                                            Colors.blueGrey.withOpacity(0.75),
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.white54,
-                                            blurRadius: 15,
-                                            spreadRadius: 0.1,
-                                          )
-                                        ],
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'Try Again',
-                                        textAlign: TextAlign.center,
-                                        textDirection: TextDirection.rtl,
-                                        style: TextStyle(
-                                          fontSize: 20.sp,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 );
-              })),
+              },
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -15,7 +15,7 @@ class IntroPage extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
-        title: const Text("Venom Beta 1.0"),
+        title: const Text('Venom Beta 1.0'),
       ),
       body: Center(
         child: Column(
@@ -23,11 +23,11 @@ class IntroPage extends StatelessWidget {
             const SizedBox(
               height: 150,
             ),
-            const Text("Venom Beta 1.0", style: TextStyle(fontSize: 45)),
+            const Text('Venom Beta 1.0', style: TextStyle(fontSize: 45)),
             const SizedBox(
               height: 50,
             ),
-            Container(
+            SizedBox(
               width: 300,
               child: TextField(
                 controller: _nameController,
@@ -38,22 +38,25 @@ class IntroPage extends StatelessWidget {
                       content: SizedBox(
                         width: 0.5.sw,
                         height: 80.h,
-                        child: Center(child: Text('Username is required')),
+                        child:
+                            const Center(child: Text('Username is required')),
                       ),
-                    ).show(context);
+                    ).show<void>(context);
                     return;
                   }
                   if (getIt.isRegistered<String>()) {
-                    getIt.unregister<String>();
-                    getIt.registerSingleton<String>(value);
+                    getIt
+                      ..unregister<String>()
+                      ..registerSingleton<String>(value);
                   } else {
                     getIt.registerSingleton<String>(value);
                   }
-                  getIt.get<AppRouter>().pushNamed('/home');
+                  await getIt.get<AppRouter>().pushNamed('/home');
                 },
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Enter your username"),
+                  border: OutlineInputBorder(),
+                  labelText: 'Enter your username',
+                ),
               ),
             ),
             const SizedBox(
@@ -69,13 +72,13 @@ class IntroPage extends StatelessWidget {
               content: SizedBox(
                 width: 0.5.sw,
                 height: 80.h,
-                child: Center(child: Text('Username is required')),
+                child: const Center(child: Text('Username is required')),
               ),
-            ).show(context);
+            ).show<void>(context);
             return;
           }
           getIt.registerSingleton<String>(_nameController.text);
-          getIt.get<AppRouter>().pushNamed('/home');
+          await getIt.get<AppRouter>().pushNamed('/home');
         },
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         child: Icon(Icons.check_rounded, size: 26.r),

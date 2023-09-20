@@ -6,23 +6,21 @@ import 'package:venom/src/features/vehicle/domain/models/vehicle_model.dart';
 import 'package:venom/src/features/vehicle/domain/repositories/vehicle_repository.dart';
 
 class VehicleRepositoryImpl extends VehicleRepository {
+
+  VehicleRepositoryImpl(this._localDS);
   final VehicleLocalDataSource _localDS;
   final String tokenFieldKey = 'token';
 
-  VehicleRepositoryImpl(this._localDS);
-
   @override
   Future<Either<VehicleFailure, void>> cacheVehiclesData(
-      {required List<Vehicle> vehicles}) {
-    VehicleList vehicleList = VehicleList(vehicles: vehicles);
+      {required List<Vehicle> vehicles,}) {
+    final vehicleList = VehicleList(vehicles: vehicles);
     return _localDS
         .cacheData(fieldKey: 'vehicles', value: vehicleList)
         .then((value) => value.fold(
               (l) => left(VehicleFailure.database(l)),
-              (r) {
-                return right(r);
-              },
-            ));
+              right,
+            ),);
   }
 
   @override
@@ -31,9 +29,9 @@ class VehicleRepositoryImpl extends VehicleRepository {
             (l) => left(VehicleFailure.database(l)),
             (r) {
               if (r == null) {
-                return left(VehicleFailure.nullParam());
+                return left(const VehicleFailure.nullParam());
               }
               return right(r.vehicles.toList());
             },
-          ));
+          ),);
 }

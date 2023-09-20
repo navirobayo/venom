@@ -48,7 +48,7 @@ _$_RideList _$$_RideListFromJson(Map<String, dynamic> json) => _$_RideList(
       rides: (json['rides'] as List<dynamic>?)
               ?.map((e) => Ride.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          const [],
+          const <Ride>[],
     );
 
 Map<String, dynamic> _$$_RideListToJson(_$_RideList instance) =>

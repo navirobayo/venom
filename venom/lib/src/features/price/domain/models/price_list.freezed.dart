@@ -20,7 +20,7 @@ PriceList _$PriceListFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PriceList {
-  @HiveField(0, defaultValue: [])
+  @HiveField(0, defaultValue: <Price>[])
   List<Price> get prices => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $PriceListCopyWith<$Res> {
   factory $PriceListCopyWith(PriceList value, $Res Function(PriceList) then) =
       _$PriceListCopyWithImpl<$Res, PriceList>;
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Price> prices});
+  $Res call({@HiveField(0, defaultValue: <Price>[]) List<Price> prices});
 }
 
 /// @nodoc
@@ -68,7 +68,7 @@ abstract class _$$_PriceListCopyWith<$Res> implements $PriceListCopyWith<$Res> {
       __$$_PriceListCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Price> prices});
+  $Res call({@HiveField(0, defaultValue: <Price>[]) List<Price> prices});
 }
 
 /// @nodoc
@@ -97,7 +97,8 @@ class __$$_PriceListCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PriceList implements _PriceList {
   _$_PriceList(
-      {@HiveField(0, defaultValue: []) final List<Price> prices = const []})
+      {@HiveField(0, defaultValue: <Price>[])
+      final List<Price> prices = const <Price>[]})
       : _prices = prices;
 
   factory _$_PriceList.fromJson(Map<String, dynamic> json) =>
@@ -106,7 +107,7 @@ class _$_PriceList implements _PriceList {
   final List<Price> _prices;
   @override
   @JsonKey()
-  @HiveField(0, defaultValue: [])
+  @HiveField(0, defaultValue: <Price>[])
   List<Price> get prices {
     if (_prices is EqualUnmodifiableListView) return _prices;
     // ignore: implicit_dynamic_type
@@ -147,14 +148,14 @@ class _$_PriceList implements _PriceList {
 
 abstract class _PriceList implements PriceList {
   factory _PriceList(
-          {@HiveField(0, defaultValue: []) final List<Price> prices}) =
+          {@HiveField(0, defaultValue: <Price>[]) final List<Price> prices}) =
       _$_PriceList;
 
   factory _PriceList.fromJson(Map<String, dynamic> json) =
       _$_PriceList.fromJson;
 
   @override
-  @HiveField(0, defaultValue: [])
+  @HiveField(0, defaultValue: <Price>[])
   List<Price> get prices;
   @override
   @JsonKey(ignore: true)

@@ -6,23 +6,21 @@ import 'package:venom/src/features/price/domain/models/price_model.dart';
 import 'package:venom/src/features/price/domain/repositories/price_repository.dart';
 
 class PriceRepositoryImpl extends PriceRepository {
+
+  PriceRepositoryImpl(this._priceslocalDS);
   final PriceLocalDataSource _priceslocalDS;
   final String tokenFieldKey = 'token';
 
-  PriceRepositoryImpl(this._priceslocalDS);
-
   @override
   Future<Either<PriceFailure, void>> cachePricesData(
-      {required List<Price> prices}) {
-    PriceList pricesList = PriceList(prices: prices);
+      {required List<Price> prices,}) {
+    final pricesList = PriceList(prices: prices);
     return _priceslocalDS
         .cacheData(fieldKey: 'prices', value: pricesList)
         .then((value) => value.fold(
               (l) => left(PriceFailure.database(l)),
-              (r) {
-                return right(r);
-              },
-            ));
+              right,
+            ),);
   }
 
   @override
@@ -33,9 +31,9 @@ class PriceRepositoryImpl extends PriceRepository {
                 (l) => left(PriceFailure.database(l)),
                 (r) {
                   if (r == null) {
-                    return left(PriceFailure.nullParam());
+                    return left(const PriceFailure.nullParam());
                   }
                   return right(r.prices.toList());
                 },
-              ));
+              ),);
 }

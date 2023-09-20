@@ -7,14 +7,6 @@ part 'user_info_response.g.dart';
 @HiveType(typeId: 3)
 @JsonSerializable()
 class UserInfoResponse {
-  @HiveField(0)
-  final String name;
-  @HiveField(1)
-  final String family;
-  @HiveField(2)
-  final String phoneNumber;
-  @HiveField(3)
-  final String type;
 
   UserInfoResponse({
     required this.name,
@@ -25,6 +17,14 @@ class UserInfoResponse {
 
   factory UserInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$UserInfoResponseFromJson(json);
+  @HiveField(0)
+  final String name;
+  @HiveField(1)
+  final String family;
+  @HiveField(2)
+  final String phoneNumber;
+  @HiveField(3)
+  final String type;
 
   Map<String, dynamic> toJson() => _$UserInfoResponseToJson(this);
 }

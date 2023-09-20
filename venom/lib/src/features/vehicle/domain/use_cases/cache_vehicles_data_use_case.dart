@@ -13,7 +13,7 @@ class CacheVehicleDataUseCase
 
   @override
   Future<Either<VehicleFailure, void>> call(
-          {tuple.Tuple1<List<Vehicle>>? param}) =>
+          {tuple.Tuple1<List<Vehicle>>? param,}) =>
       (param == null)
           ? Future.value(left(const VehicleFailure.nullParam()))
           : repo.cacheVehiclesData(vehicles: param.value1);

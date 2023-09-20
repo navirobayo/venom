@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ConverterSwitch extends StatefulWidget {
-  final ValueChanged<bool> onChanged;
 
   const ConverterSwitch({
-    Key? key,
-    required this.onChanged,
-  }) : super(key: key);
+    required this.onChanged, super.key,
+  });
+  final ValueChanged<bool> onChanged;
 
   @override
   State<ConverterSwitch> createState() => _ConverterSwitchState();

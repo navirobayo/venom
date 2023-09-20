@@ -15,7 +15,7 @@ class DefaultPriceSelectorPage extends StatelessWidget {
     return BlocBuilder<DefaultPriceBloc, DefaultPriceState>(
       bloc: getIt.get<DefaultPriceBloc>(),
       builder: (context, state) {
-        final Price defaultPrice = state.price ??
+        final defaultPrice = state.price ??
             (getIt.get<GasPriceBloc>().state.maybeWhen(
               orElse: () {
                 return Price();
@@ -23,7 +23,8 @@ class DefaultPriceSelectorPage extends StatelessWidget {
               idle: (prices) {
                 if (prices.isEmpty) {
                   return Price(
-                      id: '0', isDefault: false, placeOfPurchase: '', price: 0);
+                    id: '0',
+                  );
                 } else {
                   return prices.last;
                 }
@@ -31,7 +32,7 @@ class DefaultPriceSelectorPage extends StatelessWidget {
             ));
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Default Price"),
+            title: const Text('Default Price'),
           ),
           body: ListView(
             children: [
@@ -41,14 +42,14 @@ class DefaultPriceSelectorPage extends StatelessWidget {
               Row(
                 children: [
                   const Spacer(),
-                  const Text("\$", style: TextStyle(fontSize: 48.0)),
+                  const Text(r'$', style: TextStyle(fontSize: 48)),
                   Text(
-                    (defaultPrice.price).toString().padLeft(2, '0'),
-                    style: const TextStyle(fontSize: 48.0),
+                    defaultPrice!.price.toString().padLeft(2, '0'),
+                    style: const TextStyle(fontSize: 48),
                   ),
                   const Spacer(),
                   Text(
-                    (defaultPrice.placeOfPurchase),
+                    defaultPrice.placeOfPurchase,
                   ),
                   const Spacer(),
                 ],
@@ -62,14 +63,16 @@ class DefaultPriceSelectorPage extends StatelessWidget {
                       MaterialStateProperty.all(Theme.of(context).focusColor),
                 ),
                 onPressed: () async {
-                  getIt.get<GasPriceBloc>().state.maybeWhen(orElse: () {
-                    showDialog(
+                  await getIt.get<GasPriceBloc>().state.maybeWhen(
+                    orElse: () {
+                      showDialog<void>(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
                             title: const Text('No current prices'),
                             content: const Text(
-                                'Please add them in "Gas prices" screen'),
+                              'Please add them in "Gas prices" screen',
+                            ),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -79,16 +82,19 @@ class DefaultPriceSelectorPage extends StatelessWidget {
                               ),
                             ],
                           );
-                        });
-                  }, idle: (prices) async {
-                    if (prices.isEmpty) {
-                      return showDialog(
+                        },
+                      );
+                    },
+                    idle: (prices) async {
+                      if (prices.isEmpty) {
+                        return showDialog<void>(
                           context: context,
                           builder: (context) {
                             return AlertDialog(
                               title: const Text('No current prices'),
                               content: const Text(
-                                  'Please add them in "Gas prices" screen'),
+                                'Please add them in "Gas prices" screen',
+                              ),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -98,40 +104,43 @@ class DefaultPriceSelectorPage extends StatelessWidget {
                                 ),
                               ],
                             );
-                          });
-                    }
-                    final selectedPrice = await showDialog<Price>(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text('Select a price'),
-                          content: SizedBox(
-                            width: double.maxFinite,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: prices.length,
-                              itemBuilder: (context, index) {
-                                final price = prices[index];
-                                return ListTile(
-                                  title: Text(price.placeOfPurchase),
-                                  subtitle: Text(price.price.toString()),
-                                  onTap: () {
-                                    Navigator.pop(context, price);
-                                  },
-                                );
-                              },
-                            ),
-                          ),
+                          },
                         );
-                      },
-                    );
+                      }
+                      final selectedPrice = await showDialog<Price>(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Select a price'),
+                            content: SizedBox(
+                              width: double.maxFinite,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: prices.length,
+                                itemBuilder: (context, index) {
+                                  final price = prices[index];
+                                  return ListTile(
+                                    title: Text(price.placeOfPurchase),
+                                    subtitle: Text(price.price.toString()),
+                                    onTap: () {
+                                      Navigator.pop(context, price);
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      );
 
-                    if (selectedPrice != null) {
-                      // Insert the selected price as the new default price
-                      getIt.get<DefaultPriceBloc>().add(
-                          DefaultPriceEvent.setDefaultPrice(selectedPrice));
-                    }
-                  });
+                      if (selectedPrice != null) {
+                        // Insert the selected price as the new default price
+                        getIt.get<DefaultPriceBloc>().add(
+                              DefaultPriceEvent.setDefaultPrice(selectedPrice),
+                            );
+                      }
+                    },
+                  );
                 },
                 child: const Text('Select price'),
               ),

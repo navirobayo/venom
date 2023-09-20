@@ -1,5 +1,5 @@
-import 'package:hive/hive.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 
 part 'vehicle_model.freezed.dart';
 part 'vehicle_model.g.dart';

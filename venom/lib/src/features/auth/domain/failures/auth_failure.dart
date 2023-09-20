@@ -3,7 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:venom/src/features/core/failures/database_failure.dart';
-import '../../../core/failures/failure.dart';
+import 'package:venom/src/features/core/failures/failure.dart';
 
 part 'auth_failure.freezed.dart';
 
@@ -16,5 +16,5 @@ class AuthFailure extends Failure with _$AuthFailure {
   ///
   const factory AuthFailure.api(DioException failure) = _Api;
   const factory AuthFailure.nullParam() = _NullParam;
-  const factory AuthFailure.database(DatabaseFailure failure) = _Database;
+  const factory AuthFailure.database(DatabaseFailure<void> failure) = _Database;
 }

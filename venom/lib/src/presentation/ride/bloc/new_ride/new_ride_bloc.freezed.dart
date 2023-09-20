@@ -19,7 +19,7 @@ mixin _$NewRideState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)
         idle,
     required TResult Function(String message, RideFailure failure) failure,
     required TResult Function() loading,
@@ -28,7 +28,7 @@ mixin _$NewRideState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)?
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)?
         idle,
     TResult? Function(String message, RideFailure failure)? failure,
     TResult? Function()? loading,
@@ -37,7 +37,7 @@ mixin _$NewRideState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)?
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)?
         idle,
     TResult Function(String message, RideFailure failure)? failure,
     TResult Function()? loading,
@@ -91,7 +91,7 @@ abstract class _$$_IdleCopyWith<$Res> {
   factory _$$_IdleCopyWith(_$_Idle value, $Res Function(_$_Idle) then) =
       __$$_IdleCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool isStarted, Vehicle defaultVehicle, Price defaultPrice});
+  $Res call({Vehicle defaultVehicle, Price defaultPrice, bool? isStarted});
 
   $VehicleCopyWith<$Res> get defaultVehicle;
   $PriceCopyWith<$Res> get defaultPrice;
@@ -107,15 +107,11 @@ class __$$_IdleCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isStarted = null,
     Object? defaultVehicle = null,
     Object? defaultPrice = null,
+    Object? isStarted = freezed,
   }) {
     return _then(_$_Idle(
-      null == isStarted
-          ? _value.isStarted
-          : isStarted // ignore: cast_nullable_to_non_nullable
-              as bool,
       null == defaultVehicle
           ? _value.defaultVehicle
           : defaultVehicle // ignore: cast_nullable_to_non_nullable
@@ -124,6 +120,10 @@ class __$$_IdleCopyWithImpl<$Res>
           ? _value.defaultPrice
           : defaultPrice // ignore: cast_nullable_to_non_nullable
               as Price,
+      isStarted: freezed == isStarted
+          ? _value.isStarted
+          : isStarted // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -147,18 +147,18 @@ class __$$_IdleCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Idle implements _Idle {
-  const _$_Idle(this.isStarted, this.defaultVehicle, this.defaultPrice);
+  const _$_Idle(this.defaultVehicle, this.defaultPrice, {this.isStarted});
 
-  @override
-  final bool isStarted;
   @override
   final Vehicle defaultVehicle;
   @override
   final Price defaultPrice;
+  @override
+  final bool? isStarted;
 
   @override
   String toString() {
-    return 'NewRideState.idle(isStarted: $isStarted, defaultVehicle: $defaultVehicle, defaultPrice: $defaultPrice)';
+    return 'NewRideState.idle(defaultVehicle: $defaultVehicle, defaultPrice: $defaultPrice, isStarted: $isStarted)';
   }
 
   @override
@@ -166,17 +166,17 @@ class _$_Idle implements _Idle {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Idle &&
-            (identical(other.isStarted, isStarted) ||
-                other.isStarted == isStarted) &&
             (identical(other.defaultVehicle, defaultVehicle) ||
                 other.defaultVehicle == defaultVehicle) &&
             (identical(other.defaultPrice, defaultPrice) ||
-                other.defaultPrice == defaultPrice));
+                other.defaultPrice == defaultPrice) &&
+            (identical(other.isStarted, isStarted) ||
+                other.isStarted == isStarted));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, isStarted, defaultVehicle, defaultPrice);
+      Object.hash(runtimeType, defaultVehicle, defaultPrice, isStarted);
 
   @JsonKey(ignore: true)
   @override
@@ -188,38 +188,38 @@ class _$_Idle implements _Idle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)
         idle,
     required TResult Function(String message, RideFailure failure) failure,
     required TResult Function() loading,
   }) {
-    return idle(isStarted, defaultVehicle, defaultPrice);
+    return idle(defaultVehicle, defaultPrice, isStarted);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)?
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)?
         idle,
     TResult? Function(String message, RideFailure failure)? failure,
     TResult? Function()? loading,
   }) {
-    return idle?.call(isStarted, defaultVehicle, defaultPrice);
+    return idle?.call(defaultVehicle, defaultPrice, isStarted);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)?
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)?
         idle,
     TResult Function(String message, RideFailure failure)? failure,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (idle != null) {
-      return idle(isStarted, defaultVehicle, defaultPrice);
+      return idle(defaultVehicle, defaultPrice, isStarted);
     }
     return orElse();
   }
@@ -260,12 +260,12 @@ class _$_Idle implements _Idle {
 }
 
 abstract class _Idle implements NewRideState {
-  const factory _Idle(final bool isStarted, final Vehicle defaultVehicle,
-      final Price defaultPrice) = _$_Idle;
+  const factory _Idle(final Vehicle defaultVehicle, final Price defaultPrice,
+      {final bool? isStarted}) = _$_Idle;
 
-  bool get isStarted;
   Vehicle get defaultVehicle;
   Price get defaultPrice;
+  bool? get isStarted;
   @JsonKey(ignore: true)
   _$$_IdleCopyWith<_$_Idle> get copyWith => throw _privateConstructorUsedError;
 }
@@ -352,7 +352,7 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)
         idle,
     required TResult Function(String message, RideFailure failure) failure,
     required TResult Function() loading,
@@ -364,7 +364,7 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)?
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)?
         idle,
     TResult? Function(String message, RideFailure failure)? failure,
     TResult? Function()? loading,
@@ -376,7 +376,7 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)?
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)?
         idle,
     TResult Function(String message, RideFailure failure)? failure,
     TResult Function()? loading,
@@ -472,7 +472,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)
         idle,
     required TResult Function(String message, RideFailure failure) failure,
     required TResult Function() loading,
@@ -484,7 +484,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)?
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)?
         idle,
     TResult? Function(String message, RideFailure failure)? failure,
     TResult? Function()? loading,
@@ -496,7 +496,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            bool isStarted, Vehicle defaultVehicle, Price defaultPrice)?
+            Vehicle defaultVehicle, Price defaultPrice, bool? isStarted)?
         idle,
     TResult Function(String message, RideFailure failure)? failure,
     TResult Function()? loading,

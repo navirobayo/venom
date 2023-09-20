@@ -1,12 +1,14 @@
 class AuthHeaderSupplier {
   String _token = '';
 
-  String getToken() {
+  String get token {
     if (_token.isNotEmpty) {
       return _token;
     }
     return '';
   }
 
-  void setToken(String value) => _token = value;
+  set token(String value) {
+    _token = value;
+  }
 }

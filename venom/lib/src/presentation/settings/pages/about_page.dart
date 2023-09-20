@@ -9,7 +9,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("About"),
+          title: const Text('About'),
         ),
         body: const Center(
           child: Column(
@@ -18,39 +18,39 @@ class AboutPage extends StatelessWidget {
                 height: 50,
               ),
               Text(
-                "Venom 2.0.0",
-                style: TextStyle(fontSize: 38.0),
+                'Venom 2.0.0',
+                style: TextStyle(fontSize: 38),
               ),
               SizedBox(
                 height: 50,
               ),
               Text(
-                "An open source app!",
-                style: TextStyle(fontSize: 18.0),
+                'An open source app!',
+                style: TextStyle(fontSize: 18),
               ),
               SizedBox(
                 height: 50,
               ),
               Text(
-                "Contributors:",
-                style: TextStyle(fontSize: 24.0),
+                'Contributors:',
+                style: TextStyle(fontSize: 24),
               ),
               SizedBox(
                 height: 25,
               ),
               Text(
-                "github.com/navirobayo",
-                style: TextStyle(fontSize: 18.0),
+                'github.com/navirobayo',
+                style: TextStyle(fontSize: 18),
               ),
               SizedBox(
                 height: 25,
               ),
               Text(
-                "github.com/hamidjalili59",
-                style: TextStyle(fontSize: 18.0),
+                'github.com/hamidjalili59',
+                style: TextStyle(fontSize: 18),
               ),
             ],
           ),
-        ));
+        ),);
   }
 }

@@ -17,17 +17,16 @@ part 'rides_bloc.freezed.dart';
 
 @lazySingleton
 class RidesBloc extends Bloc<RidesEvent, RidesState> {
-  final GetCachedRideDataUseCase _getCachedRideDataUseCase;
-  final CacheRideDataUseCase _cacheRideDataUseCase;
-
   RidesBloc(this._getCachedRideDataUseCase, this._cacheRideDataUseCase)
-      : super(RidesState.idle([])) {
+      : super(const RidesState.idle([])) {
     on<_GetRides>(_onGetRides);
     on<_CacheRide>(_onCacheRide);
     on<_DeleteRide>(_onDeleteRide);
     on<_GetCachedRides>(_onGetCacheRides);
-    add(_GetRides());
+    add(const _GetRides());
   }
+  final GetCachedRideDataUseCase _getCachedRideDataUseCase;
+  final CacheRideDataUseCase _cacheRideDataUseCase;
   List<Ride> rides = List.empty(growable: true);
 
   FutureOr<void> _onGetRides(_GetRides event, Emitter<RidesState> emit) async {
@@ -40,7 +39,7 @@ class RidesBloc extends Bloc<RidesEvent, RidesState> {
                 orElse: () {},
                 database: (failure) {
                   emit(
-                    RidesState.failure('can\'t get datas', l),
+                    RidesState.failure("can't get datas", l),
                   );
                 },
                 nullParam: () {
@@ -52,8 +51,9 @@ class RidesBloc extends Bloc<RidesEvent, RidesState> {
             },
             (r) {
               if (getIt.isRegistered<List<Ride>>()) {
-                getIt.unregister<List<Ride>>();
-                getIt.registerSingleton<List<Ride>>(r);
+                getIt
+                  ..unregister<List<Ride>>()
+                  ..registerSingleton<List<Ride>>(r);
               } else {
                 getIt.registerSingleton<List<Ride>>(r);
               }
@@ -64,73 +64,84 @@ class RidesBloc extends Bloc<RidesEvent, RidesState> {
         },
       );
     } catch (e) {
-      emit(RidesState.failure('failed', RideFailure.cancelledByUser()));
+      emit(const RidesState.failure('failed', RideFailure.cancelledByUser()));
     }
   }
 
   FutureOr<void> _onCacheRide(
-      _CacheRide event, Emitter<RidesState> emit) async {
-    List<Ride> rides = [];
+    _CacheRide event,
+    Emitter<RidesState> emit,
+  ) async {
+    var rides = <Ride>[];
     if (getIt.isRegistered<List<Ride>>()) {
       rides = getIt.get<List<Ride>>().toList();
     }
     rides.add(event.ride.copyWith(id: getIt.get<Uuid>().v8()));
-    await _cacheRideDataUseCase
-        .call(param: tuple.Tuple1(rides))
-        .then((value) => value.fold(
-              (l) => emit(RidesState.failure('database Error', l)),
-              (r) {
-                if (getIt.isRegistered<List<Ride>>()) {
-                  getIt.unregister<List<Ride>>();
-                  getIt.registerSingleton<List<Ride>>(rides);
-                } else {
-                  getIt.registerSingleton<List<Ride>>(rides);
-                }
-                emit(RidesState.idle(rides));
-              },
-            ));
+    await _cacheRideDataUseCase.call(param: tuple.Tuple1(rides)).then(
+          (value) => value.fold(
+            (l) => emit(RidesState.failure('database Error', l)),
+            (r) {
+              if (getIt.isRegistered<List<Ride>>()) {
+                getIt
+                  ..unregister<List<Ride>>()
+                  ..registerSingleton<List<Ride>>(rides);
+              } else {
+                getIt.registerSingleton<List<Ride>>(rides);
+              }
+              emit(RidesState.idle(rides));
+            },
+          ),
+        );
   }
 
   FutureOr<void> _onGetCacheRides(
-      _GetCachedRides event, Emitter<RidesState> emit) async {
-    await _getCachedRideDataUseCase.call().then((value) => value.fold(
-          (l) {
-            emit(RidesState.failure('No Data', l));
-          },
-          (r) {
-            if (getIt.isRegistered<List<Ride>>()) {
-              getIt.unregister<List<Ride>>();
-              getIt.registerSingleton<List<Ride>>(r);
-            } else {
-              getIt.registerSingleton<List<Ride>>(r);
-            }
-            emit(RidesState.idle(r));
-          },
-        ));
+    _GetCachedRides event,
+    Emitter<RidesState> emit,
+  ) async {
+    await _getCachedRideDataUseCase.call().then(
+          (value) => value.fold(
+            (l) {
+              emit(RidesState.failure('No Data', l));
+            },
+            (r) {
+              if (getIt.isRegistered<List<Ride>>()) {
+                getIt
+                  ..unregister<List<Ride>>()
+                  ..registerSingleton<List<Ride>>(r);
+              } else {
+                getIt.registerSingleton<List<Ride>>(r);
+              }
+              emit(RidesState.idle(r));
+            },
+          ),
+        );
   }
 
   FutureOr<void> _onDeleteRide(
-      _DeleteRide event, Emitter<RidesState> emit) async {
-    List<Ride> ridess = [];
+    _DeleteRide event,
+    Emitter<RidesState> emit,
+  ) async {
+    var ridess = <Ride>[];
     if (getIt.isRegistered<List<Ride>>()) {
       ridess = getIt.get<List<Ride>>().toList();
     }
     if (ridess.isNotEmpty) {
       ridess.removeAt(event.index);
     }
-    await _cacheRideDataUseCase
-        .call(param: tuple.Tuple1(ridess))
-        .then((value) => value.fold(
-              (l) => emit(RidesState.failure('database Error', l)),
-              (r) {
-                if (getIt.isRegistered<List<Ride>>()) {
-                  getIt.unregister<List<Ride>>();
-                  getIt.registerSingleton<List<Ride>>(ridess);
-                } else {
-                  getIt.registerSingleton<List<Ride>>(ridess);
-                }
-                emit(RidesState.idle(ridess));
-              },
-            ));
+    await _cacheRideDataUseCase.call(param: tuple.Tuple1(ridess)).then(
+          (value) => value.fold(
+            (l) => emit(RidesState.failure('database Error', l)),
+            (r) {
+              if (getIt.isRegistered<List<Ride>>()) {
+                getIt
+                  ..unregister<List<Ride>>()
+                  ..registerSingleton<List<Ride>>(ridess);
+              } else {
+                getIt.registerSingleton<List<Ride>>(ridess);
+              }
+              emit(RidesState.idle(ridess));
+            },
+          ),
+        );
   }
 }

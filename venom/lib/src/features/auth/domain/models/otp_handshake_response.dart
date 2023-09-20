@@ -7,12 +7,12 @@ part 'otp_handshake_response.g.dart';
 @HiveType(typeId: 0)
 @JsonSerializable()
 class OtpHandshakeResponse {
+  OtpHandshakeResponse({required this.verifyCode});
+
+  factory OtpHandshakeResponse.fromJson(Map<String, dynamic> json) =>
+      _$OtpHandshakeResponseFromJson(json);
   @HiveField(0)
   final String verifyCode;
 
-  OtpHandshakeResponse({required this.verifyCode});
-  
-  factory OtpHandshakeResponse.fromJson(Map<String,dynamic>json) => _$OtpHandshakeResponseFromJson(json);
-
-  Map<String, dynamic> toJson()=> _$OtpHandshakeResponseToJson(this);
+  Map<String, dynamic> toJson() => _$OtpHandshakeResponseToJson(this);
 }

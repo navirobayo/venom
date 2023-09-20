@@ -36,6 +36,6 @@ class Application extends StatelessWidget {
             routeInformationParser: _appRouter.defaultRouteParser(),
             debugShowCheckedModeBanner: false,
           );
-        });
+        },);
   }
 }

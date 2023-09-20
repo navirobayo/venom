@@ -16,120 +16,128 @@ class KmInBikePage extends StatelessWidget {
       bloc: getIt.get<KmInBikeBloc>(),
       builder: (context, state) {
         return Scaffold(
-            appBar: AppBar(
-              title: const Text("Time Picker Spinner"),
-            ),
-            body: Container(
-              padding: const EdgeInsets.only(top: 50),
-              child: Column(
-                children: <Widget>[
-                  Center(child: Text("Drive safe, ${getIt.get<String>()}")),
-                  Padding(
-                    padding: const EdgeInsets.all(50.0),
-                    child: TextField(
-                      controller: odometer1,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'KM that you see in the odometer',
-                      ),
-                      textAlign: TextAlign.center,
-                      textAlignVertical: TextAlignVertical.center,
-                      keyboardType: TextInputType.number,
+          appBar: AppBar(
+            title: const Text('Time Picker Spinner'),
+          ),
+          body: Container(
+            padding: const EdgeInsets.only(top: 50),
+            child: Column(
+              children: <Widget>[
+                Center(child: Text('Drive safe, ${getIt.get<String>()}')),
+                Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: TextField(
+                    controller: odometer1,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'KM that you see in the odometer',
                     ),
+                    textAlign: TextAlign.center,
+                    textAlignVertical: TextAlignVertical.center,
+                    keyboardType: TextInputType.number,
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  const Text("Gas level:"),
-                  Slider(
-                    value: getIt.get<KmInBikeBloc>().state.maybeWhen(
-                      orElse: () {
-                        return 0.5;
-                      },
-                      idle: (gasLevel) {
-                        return gasLevel;
-                      },
-                    ),
-                    activeColor: Theme.of(context).colorScheme.onBackground,
-                    inactiveColor: Theme.of(context).focusColor,
-                    onChanged: (value) {
-                      getIt
-                          .get<KmInBikeBloc>()
-                          .add(KmInBikeEvent.chageGasLevel(value));
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                const Text('Gas level:'),
+                Slider(
+                  value: getIt.get<KmInBikeBloc>().state.maybeWhen(
+                    orElse: () {
+                      return 0.5;
                     },
-                    thumbColor: Colors.white54,
-                    min: 0,
-                    max: 1,
-                    divisions: 10,
-                    label: getIt.get<KmInBikeBloc>().state.maybeWhen(
-                      orElse: () {
-                        return ' | ';
-                      },
-                      idle: (gasLevel) {
-                        return gasLevel == 0
-                            ? "Empty tank"
-                            : gasLevel == 1
-                                ? "Full tank"
-                                : "";
-                      },
-                    ),
+                    idle: (gasLevel) {
+                      return gasLevel;
+                    },
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 35),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).focusColor),
+                  activeColor: Theme.of(context).colorScheme.onBackground,
+                  inactiveColor: Theme.of(context).focusColor,
+                  onChanged: (value) {
+                    getIt
+                        .get<KmInBikeBloc>()
+                        .add(KmInBikeEvent.chageGasLevel(value));
+                  },
+                  thumbColor: Colors.white54,
+                  divisions: 10,
+                  label: getIt.get<KmInBikeBloc>().state.maybeWhen(
+                    orElse: () {
+                      return ' | ';
+                    },
+                    idle: (gasLevel) {
+                      return gasLevel == 0
+                          ? 'Empty tank'
+                          : gasLevel == 1
+                              ? 'Full tank'
+                              : '';
+                    },
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 35),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).focusColor,
                       ),
-                      onPressed: () {
-                        getIt.get<KmInBikeBloc>().state.maybeWhen(
-                              orElse: () {},
-                              idle: (gasLevel) {
-                                if (getIt.isRegistered<double>(
-                                    instanceName: 'gasLevel')) {
-                                  getIt.unregister<double>(
+                    ),
+                    onPressed: () {
+                      getIt.get<KmInBikeBloc>().state.maybeWhen(
+                            orElse: () {},
+                            idle: (gasLevel) {
+                              if (getIt.isRegistered<double>(
+                                instanceName: 'gasLevel',
+                              )) {
+                                getIt
+                                  ..unregister<double>(
+                                    instanceName: 'gasLevel',
+                                  )
+                                  ..registerSingleton<double>(
+                                    gasLevel,
                                     instanceName: 'gasLevel',
                                   );
-                                  getIt.registerSingleton<double>(gasLevel,
-                                      instanceName: 'gasLevel');
-                                } else {
-                                  getIt.registerSingleton<double>(gasLevel,
-                                      instanceName: 'gasLevel');
-                                }
-                                if (getIt.isRegistered<double>(
-                                    instanceName: 'odometer')) {
-                                  getIt.unregister<double>(
+                              } else {
+                                getIt.registerSingleton<double>(
+                                  gasLevel,
+                                  instanceName: 'gasLevel',
+                                );
+                              }
+                              if (getIt.isRegistered<double>(
+                                instanceName: 'odometer',
+                              )) {
+                                getIt
+                                  ..unregister<double>(
                                     instanceName: 'odometer',
-                                  );
-                                  getIt.registerSingleton<double>(
+                                  )
+                                  ..registerSingleton<double>(
                                     double.tryParse(odometer1.text) ?? 0.0,
                                     instanceName: 'odometer',
                                   );
-                                } else {
-                                  getIt.registerSingleton<double>(
-                                    double.tryParse(odometer1.text) ?? 0.0,
-                                    instanceName: 'odometer',
-                                  );
-                                }
-                                getIt.get<AppRouter>().pushNamed('/new_ride');
-                              },
-                            );
-                      },
-                      child: const Icon(
-                        Icons.arrow_forward_ios_rounded,
-                      ),
+                              } else {
+                                getIt.registerSingleton<double>(
+                                  double.tryParse(odometer1.text) ?? 0.0,
+                                  instanceName: 'odometer',
+                                );
+                              }
+                              getIt.get<AppRouter>().pushNamed('/new_ride');
+                            },
+                          );
+                    },
+                    child: const Icon(
+                      Icons.arrow_forward_ios_rounded,
                     ),
                   ),
-                ],
-              ),
-            ));
+                ),
+              ],
+            ),
+          ),
+        );
       },
     );
   }
 }
 
-class kmInBikeGasLevelAndOdometerModel {
+class KmInBikeGasLevelAndOdometerModel {
+  KmInBikeGasLevelAndOdometerModel(this.gasLevel, this.odometer);
   final double gasLevel;
   final double odometer;
-  kmInBikeGasLevelAndOdometerModel(this.gasLevel, this.odometer);
 }

@@ -9,7 +9,7 @@ import 'package:venom/src/presentation/ride/bloc/before_ride/before_ride_bloc.da
 
 @RoutePage(name: 'before_ride')
 class BeforeRidePage extends StatelessWidget {
-  BeforeRidePage({super.key});
+  const BeforeRidePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class BeforeRidePage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
             appBar: AppBar(
-              title: const Text("Ride time"),
+              title: const Text('Ride time'),
             ),
             body: Container(
               padding: const EdgeInsets.only(top: 100),
@@ -40,14 +40,14 @@ class BeforeRidePage extends StatelessWidget {
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).focusColor),
+                            Theme.of(context).focusColor,),
                       ),
                       onPressed: () {
                         getIt.get<BeforeRideBloc>().state.maybeWhen(
                               orElse: () {},
                               idle: (timeSelected) {
                                 getIt.get<BeforeRideBloc>().add(
-                                    BeforeRideEvent.acceptTime(timeSelected));
+                                    BeforeRideEvent.acceptTime(timeSelected),);
 
                                 getIt.get<AppRouter>().pushNamed('/km_in_bike');
                               },
@@ -58,7 +58,7 @@ class BeforeRidePage extends StatelessWidget {
                   ),
                 ],
               ),
-            ));
+            ),);
       },
     );
   }

@@ -7,12 +7,12 @@ part 'otp_verify_params.g.dart';
 @HiveType(typeId: 1)
 @JsonSerializable()
 class OtpVerifyParams {
+  OtpVerifyParams({required this.phoneNumber});
+
+  factory OtpVerifyParams.fromJson(Map<String, dynamic> json) =>
+      _$OtpVerifyParamsFromJson(json);
   @HiveField(0)
   final double phoneNumber;
 
-  OtpVerifyParams({required this.phoneNumber});
-  
-  factory OtpVerifyParams.fromJson(Map<String,dynamic>json) => _$OtpVerifyParamsFromJson(json);
-
-  Map<String, dynamic> toJson()=> _$OtpVerifyParamsToJson(this);
+  Map<String, dynamic> toJson() => _$OtpVerifyParamsToJson(this);
 }

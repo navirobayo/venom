@@ -7,12 +7,12 @@ part 'otp_verify_response.g.dart';
 @HiveType(typeId: 2)
 @JsonSerializable()
 class OtpVerifyResponse {
+  OtpVerifyResponse({required this.token});
+
+  factory OtpVerifyResponse.fromJson(Map<String, dynamic> json) =>
+      _$OtpVerifyResponseFromJson(json);
   @HiveField(0)
   final String token;
 
-  OtpVerifyResponse({required this.token});
-  
-  factory OtpVerifyResponse.fromJson(Map<String,dynamic>json) => _$OtpVerifyResponseFromJson(json);
-
-  Map<String, dynamic> toJson()=> _$OtpVerifyResponseToJson(this);
+  Map<String, dynamic> toJson() => _$OtpVerifyResponseToJson(this);
 }

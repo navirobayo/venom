@@ -13,13 +13,15 @@ class RequestInterceptor extends Interceptor {
   FunctionHelper appHelper = FunctionHelper();
 
   @override
-  Future onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  Future<void> onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     appHelper.logMessage(
       'REQUEST[${options.method}] => PATH: ${options.path}',
     );
     options.baseUrl = '';
-    String token = '';
+    const token = '';
     if (token.isNotEmpty) {
       options.headers = {
         'Authorization': 'Bearer $token',
@@ -30,16 +32,18 @@ class RequestInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
+  void onResponse(Response<void> response, ResponseInterceptorHandler handler) {
     appHelper.logMessage(
-      'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
+      'RESPONSE[${response.statusCode}]=>PATH: ${response.requestOptions.path}',
     );
     super.onResponse(response, handler);
   }
 
   @override
   Future<void> onError(
-      DioException err, ErrorInterceptorHandler handler) async {
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
     appHelper.logMessage(
       'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
     );
@@ -70,11 +74,11 @@ class RequestInterceptor extends Interceptor {
     ErrorInterceptorHandler handler,
     String refreshedToken,
   ) async {
-    Map<String, dynamic> newHeader = requestOptions.headers;
-    newHeader['Authorization'] = "Bearer $refreshedToken";
+    final newHeader = requestOptions.headers;
+    newHeader['Authorization'] = 'Bearer $refreshedToken';
     await getIt
         .get<Dio>()
-        .request(
+        .request<void>(
           '',
           data: requestOptions.data,
           onReceiveProgress: requestOptions.onReceiveProgress,
@@ -88,6 +92,7 @@ class RequestInterceptor extends Interceptor {
         )
         .then((res) => handler.resolve(res))
         .catchError(
+      // ignore: inference_failure_on_untyped_parameter
       (e) {
         if (e is DioException) handler.reject(e);
       },

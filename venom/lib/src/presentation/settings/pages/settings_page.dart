@@ -11,13 +11,13 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: const Text('Settings'),
       ),
       body: ListView(
         children: [
           ListTile(
             leading: const Icon(Icons.monetization_on_outlined),
-            title: const Text("Gas price"),
+            title: const Text('Gas price'),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               getIt.get<AppRouter>().pushNamed('/default_price_selector');
@@ -25,7 +25,7 @@ class SettingsPage extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.gas_meter_outlined),
-            title: const Text("Gas capacity"),
+            title: const Text('Gas capacity'),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               getIt.get<AppRouter>().pushNamed('/default_vehicle_selector');
@@ -38,9 +38,9 @@ class SettingsPage extends StatelessWidget {
             trailing: Icon(Icons.arrow_forward_ios),
           ),*/
           ListTile(
-            leading: Icon(Icons.info_outline_rounded),
-            title: Text("About"),
-            trailing: Icon(Icons.arrow_forward_ios),
+            leading: const Icon(Icons.info_outline_rounded),
+            title: const Text('About'),
+            trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               getIt.get<AppRouter>().pushNamed('/about');
             },

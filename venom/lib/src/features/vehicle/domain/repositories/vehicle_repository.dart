@@ -7,5 +7,5 @@ abstract class VehicleRepository {
   Future<Either<VehicleFailure, List<Vehicle>>> getCachedVehiclesData();
   //
   Future<Either<VehicleFailure, void>> cacheVehiclesData(
-      {required List<Vehicle> vehicles});
+      {required List<Vehicle> vehicles,});
 }
