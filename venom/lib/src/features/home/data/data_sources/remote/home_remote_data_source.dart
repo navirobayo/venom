@@ -2,6 +2,7 @@ import 'package:api_service/api_service.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+// ignore: one_member_abstracts
 abstract class HomeRemoteDataSource {
   Future<Either<DioException, Response<Map<String, dynamic>>>>
       getDataSurahsFromServer();

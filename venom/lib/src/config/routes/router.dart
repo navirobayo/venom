@@ -7,12 +7,13 @@ import 'package:venom/src/presentation/intro/page/intro_page.dart';
 import 'package:venom/src/presentation/ride/pages/before_ride_page.dart';
 import 'package:venom/src/presentation/ride/pages/final_data_page.dart';
 import 'package:venom/src/presentation/ride/pages/km_in_bike_page.dart';
-import 'package:venom/src/presentation/ride/pages/rides_page.dart';
 import 'package:venom/src/presentation/ride/pages/new_ride_page.dart';
 import 'package:venom/src/presentation/ride/pages/ride_results_page.dart';
+import 'package:venom/src/presentation/ride/pages/rides_page.dart';
 import 'package:venom/src/presentation/settings/pages/about_page.dart';
 import 'package:venom/src/presentation/settings/pages/default_price_selector_page.dart';
 import 'package:venom/src/presentation/settings/pages/default_vehicle_selector_page.dart';
+import 'package:venom/src/presentation/settings/pages/set_theme_page.dart';
 import 'package:venom/src/presentation/settings/pages/settings_page.dart';
 import 'package:venom/src/presentation/splash/pages/splash_page.dart';
 import 'package:venom/src/presentation/tool_kit/pages/toolkit_page.dart';
@@ -25,74 +26,78 @@ class AppRouter extends _$AppRouter {
   @override
   final List<AutoRoute> routes = <AutoRoute>[
     AutoRoute(
-      path: "/",
+      path: '/',
       page: Splash.page,
       initial: true,
     ),
     AutoRoute(
-      path: "/intro",
+      path: '/intro',
       page: Intro.page,
     ),
     AutoRoute(
-      path: "/rides",
+      path: '/rides',
       page: Rides.page,
     ),
     CustomRoute(
-      path: "/home",
+      path: '/home',
       page: Home.page,
       durationInMilliseconds: 500,
       transitionsBuilder: TransitionsBuilders.fadeIn,
     ),
     AutoRoute(
-      path: "/auth",
+      path: '/auth',
       page: Auth.page,
     ),
     AutoRoute(
-      path: "/new_ride",
+      path: '/new_ride',
       page: New_ride.page,
     ),
     AutoRoute(
-      path: "/final_data",
+      path: '/final_data',
       page: Final_data.page,
     ),
     AutoRoute(
-      path: "/ride_results_page",
+      path: '/ride_results_page',
       page: Ride_results_page.page,
     ),
     AutoRoute(
-      path: "/before_ride",
+      path: '/before_ride',
       page: Before_ride.page,
     ),
     AutoRoute(
-      path: "/km_in_bike",
+      path: '/km_in_bike',
       page: Km_in_bike.page,
     ),
     AutoRoute(
-      path: "/my_vehicle",
+      path: '/my_vehicle',
       page: My_vehicle.page,
     ),
     AutoRoute(
-      path: "/settings",
+      path: '/settings',
       page: Settings.page,
     ),
     AutoRoute(
-      path: "/default_price_selector",
+      path: '/default_price_selector',
       page: DefaultPriceSelector.page,
     ),
     AutoRoute(
-      path: "/default_vehicle_selector",
+      path: '/setTheme',
+      page: SetTheme.page,
+    ),
+    AutoRoute(
+      path: '/default_vehicle_selector',
       page: DefaultVehicleSelector.page,
     ),
     AutoRoute(
-      path: "/about",
+      path: '/about',
       page: About.page,
     ),
     AutoRoute(
-      path: "/gas_history",
+      path: '/gas_history',
       page: Gas_history.page,
     ),
     AutoRoute(
-      path: "/toolkit",
+      path: '/toolkit',
       page: Toolkit.page,
     ),
   ];

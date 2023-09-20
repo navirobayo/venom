@@ -16,9 +16,9 @@ class KmInBikeBloc extends Bloc<KmInBikeEvent, KmInBikeState> {
   }
 
   FutureOr<void> _onChangeGasLevel(
-      _ChangeGasLevel event, Emitter<KmInBikeState> emit) {
+      _ChangeGasLevel event, Emitter<KmInBikeState> emit,) {
     if (event.value == null) {
-      emit(KmInBikeState.failure('null param', RideFailure.nullParam()));
+      emit(const KmInBikeState.failure('null param', RideFailure.nullParam()));
     } else {
       emit(KmInBikeState.idle(event.value!));
     }

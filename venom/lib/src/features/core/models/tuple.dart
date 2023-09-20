@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes, lines_longer_than_80_chars
+
 import 'package:dartz/dartz.dart';
 
 abstract class Tuple {
@@ -15,13 +17,18 @@ abstract class ParamTuple extends Tuple {
 class Tuple0 extends NullTuple {}
 
 class Tuple1<T1> extends ParamTuple {
+  const Tuple1(this.value1);
+
+  factory Tuple1.fromMap(Map<String, dynamic> map) {
+    return Tuple1(
+      map['value1'] as T1,
+    );
+  }
   final T1 value1;
 
   R apply<R>(Function1<T1, R> f) => f(value1);
 
   Tuple1<NT1> map1<NT1>(Function1<T1, NT1> f) => Tuple1(f(value1));
-
-  const Tuple1(this.value1);
 
   @override
   bool operator ==(Object other) =>
@@ -43,18 +50,20 @@ class Tuple1<T1> extends ParamTuple {
 
   Map<String, dynamic> toMap() {
     return {
-      'value1':value1,
+      'value1': value1,
     };
-  }
-
-  factory Tuple1.fromMap(Map<String, dynamic> map) {
-    return Tuple1(
-      map['value1'] as T1,
-    );
   }
 }
 
 class Tuple2<T1, T2> extends ParamTuple {
+  const Tuple2(this.value1, this.value2);
+
+  factory Tuple2.fromMap(Map<String, dynamic> map) {
+    return Tuple2(
+      map['value1'] as T1,
+      map['value2'] as T2,
+    );
+  }
   final T1 value1;
   final T2 value2;
 
@@ -63,8 +72,6 @@ class Tuple2<T1, T2> extends ParamTuple {
   Tuple2<NT1, T2> map1<NT1>(Function1<T1, NT1> f) => Tuple2(f(value1), value2);
 
   Tuple2<T1, NT2> map2<NT2>(Function1<T2, NT2> f) => Tuple2(value1, f(value2));
-
-  const Tuple2(this.value1, this.value2);
 
   @override
   bool operator ==(Object other) =>
@@ -93,23 +100,23 @@ class Tuple2<T1, T2> extends ParamTuple {
       'value2': value2,
     };
   }
-
-  factory Tuple2.fromMap(Map<String, dynamic> map) {
-    return Tuple2(
-      map['value1'] as T1,
-      map['value2'] as T2,
-    );
-  }
 }
 
 class Tuple3<T1, T2, T3> extends ParamTuple {
+  const Tuple3(this.value1, this.value2, this.value3);
+
+  factory Tuple3.fromMap(Map<String, dynamic> map) {
+    return Tuple3(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+    );
+  }
   final T1 value1;
   final T2 value2;
   final T3 value3;
 
   R apply<R>(Function3<T1, T2, T3, R> f) => f(value1, value2, value3);
-
-  const Tuple3(this.value1, this.value2, this.value3);
 
   @override
   bool operator ==(Object other) =>
@@ -144,17 +151,24 @@ class Tuple3<T1, T2, T3> extends ParamTuple {
       'value3': value3,
     };
   }
-
-  factory Tuple3.fromMap(Map<String, dynamic> map) {
-    return Tuple3(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-    );
-  }
 }
 
 class Tuple4<T1, T2, T3, T4> extends ParamTuple {
+  const Tuple4(
+    this.value1,
+    this.value2,
+    this.value3,
+    this.value4,
+  );
+
+  factory Tuple4.fromMap(Map<String, dynamic> map) {
+    return Tuple4(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+    );
+  }
   final T1 value1;
   final T2 value2;
   final T3 value3;
@@ -162,13 +176,6 @@ class Tuple4<T1, T2, T3, T4> extends ParamTuple {
 
   R apply<R>(Function4<T1, T2, T3, T4, R> f) =>
       f(value1, value2, value3, value4);
-
-  const Tuple4(
-    this.value1,
-    this.value2,
-    this.value3,
-    this.value4,
-  );
 
   @override
   bool operator ==(Object other) =>
@@ -208,27 +215,9 @@ class Tuple4<T1, T2, T3, T4> extends ParamTuple {
       'value4': value4,
     };
   }
-
-  factory Tuple4.fromMap(Map<String, dynamic> map) {
-    return Tuple4(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-    );
-  }
 }
 
 class Tuple5<T1, T2, T3, T4, T5> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-
-  R apply<R>(Function5<T1, T2, T3, T4, T5, R> f) =>
-      f(value1, value2, value3, value4, value5);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple5(
@@ -238,6 +227,24 @@ class Tuple5<T1, T2, T3, T4, T5> extends ParamTuple {
     this.value4,
     this.value5,
   );
+
+  factory Tuple5.fromMap(Map<String, dynamic> map) {
+    return Tuple5(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+
+  R apply<R>(Function5<T1, T2, T3, T4, T5, R> f) =>
+      f(value1, value2, value3, value4, value5);
 
   @override
   bool operator ==(Object other) =>
@@ -286,30 +293,10 @@ class Tuple5<T1, T2, T3, T4, T5> extends ParamTuple {
     };
   }
 
-  factory Tuple5.fromMap(Map<String, dynamic> map) {
-    return Tuple5(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-    );
-  }
-
 //</editor-fold>
 }
 
 class Tuple6<T1, T2, T3, T4, T5, T6> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-
-  R apply<R>(Function6<T1, T2, T3, T4, T5, T6, R> f) =>
-      f(value1, value2, value3, value4, value5, value6);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple6(
@@ -320,6 +307,26 @@ class Tuple6<T1, T2, T3, T4, T5, T6> extends ParamTuple {
     this.value5,
     this.value6,
   );
+
+  factory Tuple6.fromMap(Map<String, dynamic> map) {
+    return Tuple6(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+
+  R apply<R>(Function6<T1, T2, T3, T4, T5, T6, R> f) =>
+      f(value1, value2, value3, value4, value5, value6);
 
   @override
   bool operator ==(Object other) =>
@@ -373,32 +380,10 @@ class Tuple6<T1, T2, T3, T4, T5, T6> extends ParamTuple {
     };
   }
 
-  factory Tuple6.fromMap(Map<String, dynamic> map) {
-    return Tuple6(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-    );
-  }
-
 //</editor-fold>
 }
 
 class Tuple7<T1, T2, T3, T4, T5, T6, T7> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-
-  R apply<R>(Function7<T1, T2, T3, T4, T5, T6, T7, R> f) =>
-      f(value1, value2, value3, value4, value5, value6, value7);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple7(
@@ -410,6 +395,28 @@ class Tuple7<T1, T2, T3, T4, T5, T6, T7> extends ParamTuple {
     this.value6,
     this.value7,
   );
+
+  factory Tuple7.fromMap(Map<String, dynamic> map) {
+    return Tuple7(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+
+  R apply<R>(Function7<T1, T2, T3, T4, T5, T6, T7, R> f) =>
+      f(value1, value2, value3, value4, value5, value6, value7);
 
   @override
   bool operator ==(Object other) =>
@@ -469,34 +476,10 @@ class Tuple7<T1, T2, T3, T4, T5, T6, T7> extends ParamTuple {
     };
   }
 
-  factory Tuple7.fromMap(Map<String, dynamic> map) {
-    return Tuple7(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-    );
-  }
-
 //</editor-fold>
 }
 
 class Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-
-  R apply<R>(Function8<T1, T2, T3, T4, T5, T6, T7, T8, R> f) =>
-      f(value1, value2, value3, value4, value5, value6, value7, value8);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple8(
@@ -509,6 +492,30 @@ class Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> extends ParamTuple {
     this.value7,
     this.value8,
   );
+
+  factory Tuple8.fromMap(Map<String, dynamic> map) {
+    return Tuple8(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+
+  R apply<R>(Function8<T1, T2, T3, T4, T5, T6, T7, T8, R> f) =>
+      f(value1, value2, value3, value4, value5, value6, value7, value8);
 
   @override
   bool operator ==(Object other) =>
@@ -573,36 +580,10 @@ class Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> extends ParamTuple {
     };
   }
 
-  factory Tuple8.fromMap(Map<String, dynamic> map) {
-    return Tuple8(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-    );
-  }
-
 //</editor-fold>
 }
 
 class Tuple9<T1, T2, T3, T4, T5, T6, T7, T8, T9> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-
-  R apply<R>(Function9<T1, T2, T3, T4, T5, T6, T7, T8, T9, R> f) =>
-      f(value1, value2, value3, value4, value5, value6, value7, value8, value9);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple9(
@@ -616,6 +597,32 @@ class Tuple9<T1, T2, T3, T4, T5, T6, T7, T8, T9> extends ParamTuple {
     this.value8,
     this.value9,
   );
+
+  factory Tuple9.fromMap(Map<String, dynamic> map) {
+    return Tuple9(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+
+  R apply<R>(Function9<T1, T2, T3, T4, T5, T6, T7, T8, T9, R> f) =>
+      f(value1, value2, value3, value4, value5, value6, value7, value8, value9);
 
   @override
   bool operator ==(Object other) =>
@@ -685,47 +692,10 @@ class Tuple9<T1, T2, T3, T4, T5, T6, T7, T8, T9> extends ParamTuple {
     };
   }
 
-  factory Tuple9.fromMap(Map<String, dynamic> map) {
-    return Tuple9(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-    );
-  }
-
 //</editor-fold>
 }
 
 class Tuple10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-
-  R apply<R>(Function10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R> f) => f(
-      value1,
-      value2,
-      value3,
-      value4,
-      value5,
-      value6,
-      value7,
-      value8,
-      value9,
-      value10);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple10(
@@ -740,6 +710,44 @@ class Tuple10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> extends ParamTuple {
     this.value9,
     this.value10,
   );
+
+  factory Tuple10.fromMap(Map<String, dynamic> map) {
+    return Tuple10(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+
+  R apply<R>(Function10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R> f) => f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -810,45 +818,14 @@ class Tuple10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> extends ParamTuple {
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
+      'value10': value10,
     };
-  }
-
-  factory Tuple10.fromMap(Map<String, dynamic> map) {
-    return Tuple10(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-    );
   }
 
 //</editor-fold>
 }
 
 class Tuple11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-  final T11 value11;
-
-  R apply<R>(Function11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R> f) =>
-      f(value1, value2, value3, value4, value5, value6, value7, value8, value9,
-          value10, value11);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple11(
@@ -864,6 +841,48 @@ class Tuple11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> extends ParamTuple {
     this.value10,
     this.value11,
   );
+
+  factory Tuple11.fromMap(Map<String, dynamic> map) {
+    return Tuple11(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+      map['value11'] as T11,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+  final T11 value11;
+
+  R apply<R>(Function11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R> f) =>
+      f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+        value11,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -938,25 +957,9 @@ class Tuple11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> extends ParamTuple {
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
-      'value11':value11,
+      'value10': value10,
+      'value11': value11,
     };
-  }
-
-  factory Tuple11.fromMap(Map<String, dynamic> map) {
-    return Tuple11(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-      map['value11'] as T11,
-    );
   }
 
 //</editor-fold>
@@ -964,24 +967,6 @@ class Tuple11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> extends ParamTuple {
 
 class Tuple12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
     extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-  final T11 value11;
-  final T12 value12;
-
-  R apply<R>(
-          Function12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R> f) =>
-      f(value1, value2, value3, value4, value5, value6, value7, value8, value9,
-          value10, value11, value12);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple12(
@@ -998,6 +983,53 @@ class Tuple12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
     this.value11,
     this.value12,
   );
+
+  factory Tuple12.fromMap(Map<String, dynamic> map) {
+    return Tuple12(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+      map['value11'] as T11,
+      map['value12'] as T12,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+  final T11 value11;
+  final T12 value12;
+
+  R apply<R>(
+    Function12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R> f,
+  ) =>
+      f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+        value11,
+        value12,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -1076,27 +1108,10 @@ class Tuple12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
-      'value11':value11,
-      'value12':value12,
+      'value10': value10,
+      'value11': value11,
+      'value12': value12,
     };
-  }
-
-  factory Tuple12.fromMap(Map<String, dynamic> map) {
-    return Tuple12(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-      map['value11'] as T11,
-      map['value12'] as T12,
-    );
   }
 
 //</editor-fold>
@@ -1104,26 +1119,6 @@ class Tuple12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
 
 class Tuple13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
     extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-  final T11 value11;
-  final T12 value12;
-  final T13 value13;
-
-  R apply<R>(
-          Function13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, R>
-              f) =>
-      f(value1, value2, value3, value4, value5, value6, value7, value8, value9,
-          value10, value11, value12, value13);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple13(
@@ -1141,6 +1136,56 @@ class Tuple13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
     this.value12,
     this.value13,
   );
+
+  factory Tuple13.fromMap(Map<String, dynamic> map) {
+    return Tuple13(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+      map['value11'] as T11,
+      map['value12'] as T12,
+      map['value13'] as T13,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+  final T11 value11;
+  final T12 value12;
+  final T13 value13;
+
+  R apply<R>(
+    Function13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, R> f,
+  ) =>
+      f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+        value11,
+        value12,
+        value13,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -1223,29 +1268,11 @@ class Tuple13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
-      'value11':value11,
-      'value12':value12,
-      'value13':value13,
+      'value10': value10,
+      'value11': value11,
+      'value12': value12,
+      'value13': value13,
     };
-  }
-
-  factory Tuple13.fromMap(Map<String, dynamic> map) {
-    return Tuple13(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-      map['value11'] as T11,
-      map['value12'] as T12,
-      map['value13'] as T13,
-    );
   }
 
 //</editor-fold>
@@ -1253,28 +1280,6 @@ class Tuple13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
 
 class Tuple14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
     extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-  final T11 value11;
-  final T12 value12;
-  final T13 value13;
-  final T14 value14;
-
-  R apply<R>(
-          Function14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
-                  T14, R>
-              f) =>
-      f(value1, value2, value3, value4, value5, value6, value7, value8, value9,
-          value10, value11, value12, value13, value14);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple14(
@@ -1293,6 +1298,60 @@ class Tuple14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
     this.value13,
     this.value14,
   );
+
+  factory Tuple14.fromMap(Map<String, dynamic> map) {
+    return Tuple14(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+      map['value11'] as T11,
+      map['value12'] as T12,
+      map['value13'] as T13,
+      map['value14'] as T14,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+  final T11 value11;
+  final T12 value12;
+  final T13 value13;
+  final T14 value14;
+
+  R apply<R>(
+    Function14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, R>
+        f,
+  ) =>
+      f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+        value11,
+        value12,
+        value13,
+        value14,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -1380,31 +1439,12 @@ class Tuple14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
-      'value11':value11,
-      'value12':value12,
-      'value13':value13,
-      'value14':value14,
+      'value10': value10,
+      'value11': value11,
+      'value12': value12,
+      'value13': value13,
+      'value14': value14,
     };
-  }
-
-  factory Tuple14.fromMap(Map<String, dynamic> map) {
-    return Tuple14(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-      map['value11'] as T11,
-      map['value12'] as T12,
-      map['value13'] as T13,
-      map['value14'] as T14,
-    );
   }
 
 //</editor-fold>
@@ -1412,29 +1452,6 @@ class Tuple14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
 
 class Tuple15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
     extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-  final T11 value11;
-  final T12 value12;
-  final T13 value13;
-  final T14 value14;
-  final T15 value15;
-
-  R apply<R>(
-          Function15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
-                  T14, T15, R>
-              f) =>
-      f(value1, value2, value3, value4, value5, value6, value7, value8, value9,
-          value10, value11, value12, value13, value14, value15);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple15(
@@ -1454,6 +1471,64 @@ class Tuple15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
     this.value14,
     this.value15,
   );
+
+  factory Tuple15.fromMap(Map<String, dynamic> map) {
+    return Tuple15(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+      map['value11'] as T11,
+      map['value12'] as T12,
+      map['value13'] as T13,
+      map['value14'] as T14,
+      map['value15'] as T15,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+  final T11 value11;
+  final T12 value12;
+  final T13 value13;
+  final T14 value14;
+  final T15 value15;
+
+  R apply<R>(
+    Function15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
+            R>
+        f,
+  ) =>
+      f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+        value11,
+        value12,
+        value13,
+        value14,
+        value15,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -1545,33 +1620,13 @@ class Tuple15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
-      'value11':value11,
-      'value12':value12,
-      'value13':value13,
-      'value14':value14,
-      'value15':value15,
+      'value10': value10,
+      'value11': value11,
+      'value12': value12,
+      'value13': value13,
+      'value14': value14,
+      'value15': value15,
     };
-  }
-
-  factory Tuple15.fromMap(Map<String, dynamic> map) {
-    return Tuple15(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-      map['value11'] as T11,
-      map['value12'] as T12,
-      map['value13'] as T13,
-      map['value14'] as T14,
-      map['value15'] as T15,
-    );
   }
 
 //</editor-fold>
@@ -1579,30 +1634,6 @@ class Tuple15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
 
 class Tuple16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
     T16> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-  final T11 value11;
-  final T12 value12;
-  final T13 value13;
-  final T14 value14;
-  final T15 value15;
-  final T16 value16;
-
-  R apply<R>(
-          Function16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
-                  T14, T15, T16, R>
-              f) =>
-      f(value1, value2, value3, value4, value5, value6, value7, value8, value9,
-          value10, value11, value12, value13, value14, value15, value16);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple16(
@@ -1623,6 +1654,67 @@ class Tuple16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
     this.value15,
     this.value16,
   );
+
+  factory Tuple16.fromMap(Map<String, dynamic> map) {
+    return Tuple16(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+      map['value11'] as T11,
+      map['value12'] as T12,
+      map['value13'] as T13,
+      map['value14'] as T14,
+      map['value15'] as T15,
+      map['value16'] as T16,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+  final T11 value11;
+  final T12 value12;
+  final T13 value13;
+  final T14 value14;
+  final T15 value15;
+  final T16 value16;
+
+  R apply<R>(
+    Function16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
+            T16, R>
+        f,
+  ) =>
+      f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+        value11,
+        value12,
+        value13,
+        value14,
+        value15,
+        value16,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -1718,35 +1810,14 @@ class Tuple16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
-      'value11':value11,
-      'value12':value12,
-      'value13':value13,
-      'value14':value14,
-      'value15':value15,
-      'value16':value16,
+      'value10': value10,
+      'value11': value11,
+      'value12': value12,
+      'value13': value13,
+      'value14': value14,
+      'value15': value15,
+      'value16': value16,
     };
-  }
-
-  factory Tuple16.fromMap(Map<String, dynamic> map) {
-    return Tuple16(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-      map['value11'] as T11,
-      map['value12'] as T12,
-      map['value13'] as T13,
-      map['value14'] as T14,
-      map['value15'] as T15,
-      map['value16'] as T16,
-    );
   }
 
 //</editor-fold>
@@ -1754,47 +1825,6 @@ class Tuple16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
 
 class Tuple17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
     T16, T17> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-  final T11 value11;
-  final T12 value12;
-  final T13 value13;
-  final T14 value14;
-  final T15 value15;
-  final T16 value16;
-  final T17 value17;
-
-  R apply<R>(
-          Function17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
-                  T14, T15, T16, T17, R>
-              f) =>
-      f(
-          value1,
-          value2,
-          value3,
-          value4,
-          value5,
-          value6,
-          value7,
-          value8,
-          value9,
-          value10,
-          value11,
-          value12,
-          value13,
-          value14,
-          value15,
-          value16,
-          value17);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple17(
@@ -1816,6 +1846,70 @@ class Tuple17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
     this.value16,
     this.value17,
   );
+
+  factory Tuple17.fromMap(Map<String, dynamic> map) {
+    return Tuple17(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+      map['value11'] as T11,
+      map['value12'] as T12,
+      map['value13'] as T13,
+      map['value14'] as T14,
+      map['value15'] as T15,
+      map['value16'] as T16,
+      map['value17'] as T17,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+  final T11 value11;
+  final T12 value12;
+  final T13 value13;
+  final T14 value14;
+  final T15 value15;
+  final T16 value16;
+  final T17 value17;
+
+  R apply<R>(
+    Function17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
+            T16, T17, R>
+        f,
+  ) =>
+      f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+        value11,
+        value12,
+        value13,
+        value14,
+        value15,
+        value16,
+        value17,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -1915,37 +2009,15 @@ class Tuple17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
-      'value11':value11,
-      'value12':value12,
-      'value13':value13,
-      'value14':value14,
-      'value15':value15,
-      'value16':value16,
-      'value17':value17,
+      'value10': value10,
+      'value11': value11,
+      'value12': value12,
+      'value13': value13,
+      'value14': value14,
+      'value15': value15,
+      'value16': value16,
+      'value17': value17,
     };
-  }
-
-  factory Tuple17.fromMap(Map<String, dynamic> map) {
-    return Tuple17(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-      map['value11'] as T11,
-      map['value12'] as T12,
-      map['value13'] as T13,
-      map['value14'] as T14,
-      map['value15'] as T15,
-      map['value16'] as T16,
-      map['value17'] as T17,
-    );
   }
 
 //</editor-fold>
@@ -1953,49 +2025,6 @@ class Tuple17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
 
 class Tuple18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
     T16, T17, T18> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-  final T11 value11;
-  final T12 value12;
-  final T13 value13;
-  final T14 value14;
-  final T15 value15;
-  final T16 value16;
-  final T17 value17;
-  final T18 value18;
-
-  R apply<R>(
-          Function18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
-                  T14, T15, T16, T17, T18, R>
-              f) =>
-      f(
-          value1,
-          value2,
-          value3,
-          value4,
-          value5,
-          value6,
-          value7,
-          value8,
-          value9,
-          value10,
-          value11,
-          value12,
-          value13,
-          value14,
-          value15,
-          value16,
-          value17,
-          value18);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple18(
@@ -2018,6 +2047,73 @@ class Tuple18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
     this.value17,
     this.value18,
   );
+
+  factory Tuple18.fromMap(Map<String, dynamic> map) {
+    return Tuple18(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+      map['value11'] as T11,
+      map['value12'] as T12,
+      map['value13'] as T13,
+      map['value14'] as T14,
+      map['value15'] as T15,
+      map['value16'] as T16,
+      map['value17'] as T17,
+      map['value18'] as T18,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+  final T11 value11;
+  final T12 value12;
+  final T13 value13;
+  final T14 value14;
+  final T15 value15;
+  final T16 value16;
+  final T17 value17;
+  final T18 value18;
+
+  R apply<R>(
+    Function18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
+            T16, T17, T18, R>
+        f,
+  ) =>
+      f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+        value11,
+        value12,
+        value13,
+        value14,
+        value15,
+        value16,
+        value17,
+        value18,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -2121,39 +2217,16 @@ class Tuple18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
-      'value11':value11,
-      'value12':value12,
-      'value13':value13,
-      'value14':value14,
-      'value15':value15,
-      'value16':value16,
-      'value17':value17,
-      'value18':value18,
+      'value10': value10,
+      'value11': value11,
+      'value12': value12,
+      'value13': value13,
+      'value14': value14,
+      'value15': value15,
+      'value16': value16,
+      'value17': value17,
+      'value18': value18,
     };
-  }
-
-  factory Tuple18.fromMap(Map<String, dynamic> map) {
-    return Tuple18(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-      map['value11'] as T11,
-      map['value12'] as T12,
-      map['value13'] as T13,
-      map['value14'] as T14,
-      map['value15'] as T15,
-      map['value16'] as T16,
-      map['value17'] as T17,
-      map['value18'] as T18,
-    );
   }
 
 //</editor-fold>
@@ -2161,51 +2234,6 @@ class Tuple18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
 
 class Tuple19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
     T16, T17, T18, T19> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-  final T11 value11;
-  final T12 value12;
-  final T13 value13;
-  final T14 value14;
-  final T15 value15;
-  final T16 value16;
-  final T17 value17;
-  final T18 value18;
-  final T19 value19;
-
-  R apply<R>(
-          Function19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
-                  T14, T15, T16, T17, T18, T19, R>
-              f) =>
-      f(
-          value1,
-          value2,
-          value3,
-          value4,
-          value5,
-          value6,
-          value7,
-          value8,
-          value9,
-          value10,
-          value11,
-          value12,
-          value13,
-          value14,
-          value15,
-          value16,
-          value17,
-          value18,
-          value19);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple19(
@@ -2229,6 +2257,76 @@ class Tuple19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
     this.value18,
     this.value19,
   );
+
+  factory Tuple19.fromMap(Map<String, dynamic> map) {
+    return Tuple19(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+      map['value11'] as T11,
+      map['value12'] as T12,
+      map['value13'] as T13,
+      map['value14'] as T14,
+      map['value15'] as T15,
+      map['value16'] as T16,
+      map['value17'] as T17,
+      map['value18'] as T18,
+      map['value19'] as T19,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+  final T11 value11;
+  final T12 value12;
+  final T13 value13;
+  final T14 value14;
+  final T15 value15;
+  final T16 value16;
+  final T17 value17;
+  final T18 value18;
+  final T19 value19;
+
+  R apply<R>(
+    Function19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
+            T16, T17, T18, T19, R>
+        f,
+  ) =>
+      f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+        value11,
+        value12,
+        value13,
+        value14,
+        value15,
+        value16,
+        value17,
+        value18,
+        value19,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -2336,41 +2434,17 @@ class Tuple19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
-      'value11':value11,
-      'value12':value12,
-      'value13':value13,
-      'value14':value14,
-      'value15':value15,
-      'value16':value16,
-      'value17':value17,
-      'value18':value18,
-      'value19':value19,
+      'value10': value10,
+      'value11': value11,
+      'value12': value12,
+      'value13': value13,
+      'value14': value14,
+      'value15': value15,
+      'value16': value16,
+      'value17': value17,
+      'value18': value18,
+      'value19': value19,
     };
-  }
-
-  factory Tuple19.fromMap(Map<String, dynamic> map) {
-    return Tuple19(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-      map['value11'] as T11,
-      map['value12'] as T12,
-      map['value13'] as T13,
-      map['value14'] as T14,
-      map['value15'] as T15,
-      map['value16'] as T16,
-      map['value17'] as T17,
-      map['value18'] as T18,
-      map['value19'] as T19,
-    );
   }
 
 //</editor-fold>
@@ -2378,53 +2452,6 @@ class Tuple19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
 
 class Tuple20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
     T16, T17, T18, T19, T20> extends ParamTuple {
-  final T1 value1;
-  final T2 value2;
-  final T3 value3;
-  final T4 value4;
-  final T5 value5;
-  final T6 value6;
-  final T7 value7;
-  final T8 value8;
-  final T9 value9;
-  final T10 value10;
-  final T11 value11;
-  final T12 value12;
-  final T13 value13;
-  final T14 value14;
-  final T15 value15;
-  final T16 value16;
-  final T17 value17;
-  final T18 value18;
-  final T19 value19;
-  final T20 value20;
-
-  R apply<R>(
-          Function20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
-                  T14, T15, T16, T17, T18, T19, T20, R>
-              f) =>
-      f(
-          value1,
-          value2,
-          value3,
-          value4,
-          value5,
-          value6,
-          value7,
-          value8,
-          value9,
-          value10,
-          value11,
-          value12,
-          value13,
-          value14,
-          value15,
-          value16,
-          value17,
-          value18,
-          value19,
-          value20);
-
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Tuple20(
@@ -2449,6 +2476,79 @@ class Tuple20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
     this.value19,
     this.value20,
   );
+
+  factory Tuple20.fromMap(Map<String, dynamic> map) {
+    return Tuple20(
+      map['value1'] as T1,
+      map['value2'] as T2,
+      map['value3'] as T3,
+      map['value4'] as T4,
+      map['value5'] as T5,
+      map['value6'] as T6,
+      map['value7'] as T7,
+      map['value8'] as T8,
+      map['value9'] as T9,
+      map['value10'] as T10,
+      map['value11'] as T11,
+      map['value12'] as T12,
+      map['value13'] as T13,
+      map['value14'] as T14,
+      map['value15'] as T15,
+      map['value16'] as T16,
+      map['value17'] as T17,
+      map['value18'] as T18,
+      map['value19'] as T19,
+      map['value20'] as T20,
+    );
+  }
+  final T1 value1;
+  final T2 value2;
+  final T3 value3;
+  final T4 value4;
+  final T5 value5;
+  final T6 value6;
+  final T7 value7;
+  final T8 value8;
+  final T9 value9;
+  final T10 value10;
+  final T11 value11;
+  final T12 value12;
+  final T13 value13;
+  final T14 value14;
+  final T15 value15;
+  final T16 value16;
+  final T17 value17;
+  final T18 value18;
+  final T19 value19;
+  final T20 value20;
+
+  R apply<R>(
+    Function20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
+            T16, T17, T18, T19, T20, R>
+        f,
+  ) =>
+      f(
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6,
+        value7,
+        value8,
+        value9,
+        value10,
+        value11,
+        value12,
+        value13,
+        value14,
+        value15,
+        value16,
+        value17,
+        value18,
+        value19,
+        value20,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -2560,43 +2660,18 @@ class Tuple20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,
       'value7': value7,
       'value8': value8,
       'value9': value9,
-      'value10':value10,
-      'value11':value11,
-      'value12':value12,
-      'value13':value13,
-      'value14':value14,
-      'value15':value15,
-      'value16':value16,
-      'value17':value17,
-      'value18':value18,
-      'value19':value19,
-      'value20':value20,
+      'value10': value10,
+      'value11': value11,
+      'value12': value12,
+      'value13': value13,
+      'value14': value14,
+      'value15': value15,
+      'value16': value16,
+      'value17': value17,
+      'value18': value18,
+      'value19': value19,
+      'value20': value20,
     };
-  }
-
-  factory Tuple20.fromMap(Map<String, dynamic> map) {
-    return Tuple20(
-      map['value1'] as T1,
-      map['value2'] as T2,
-      map['value3'] as T3,
-      map['value4'] as T4,
-      map['value5'] as T5,
-      map['value6'] as T6,
-      map['value7'] as T7,
-      map['value8'] as T8,
-      map['value9'] as T9,
-      map['value10'] as T10,
-      map['value11'] as T11,
-      map['value12'] as T12,
-      map['value13'] as T13,
-      map['value14'] as T14,
-      map['value15'] as T15,
-      map['value16'] as T16,
-      map['value17'] as T17,
-      map['value18'] as T18,
-      map['value19'] as T19,
-      map['value20'] as T20,
-    );
   }
 
 //</editor-fold>

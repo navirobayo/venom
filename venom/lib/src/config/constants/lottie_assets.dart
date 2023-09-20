@@ -1,4 +1,4 @@
-class LottieAssets{
+class LottieAssets {
   const LottieAssets._();
 
   static String get dotLoading => 'dot_loading'.lottie;

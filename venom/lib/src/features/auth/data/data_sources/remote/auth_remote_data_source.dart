@@ -4,13 +4,13 @@ import 'package:dio/dio.dart';
 
 abstract class AuthRemoteDataSource {
   Future<Either<DioException, Response<Map<String, dynamic>>>> otpHandshake(
-      {required double phoneNumber});
+      {required double phoneNumber,});
 
   Future<Either<DioException, Response<Map<String, dynamic>>>>
       getDataFromServer({required double phoneNumber});
 
   Future<Either<DioException, Response<Map<String, dynamic>>>> otpVerify(
-      {required Map<String, dynamic> params, required double phoneNumber});
+      {required Map<String, dynamic> params, required double phoneNumber,});
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -19,7 +19,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<Either<DioException, Response<Map<String, dynamic>>>> otpHandshake(
-          {required double phoneNumber}) =>
+          {required double phoneNumber,}) =>
       apiService.postMethod<Map<String, dynamic>>('https://www.asatic.ir/',
           option: ApiServiceOption(
             query: {
@@ -28,11 +28,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           ),
           body: {
             'phone_number': phoneNumber,
-          });
+          },);
 
   @override
   Future<Either<DioException, Response<Map<String, dynamic>>>> otpVerify(
-      {required Map<String, dynamic> params, required double phoneNumber}) {
+      {required Map<String, dynamic> params, required double phoneNumber,}) {
     return apiService.postMethod(
       'https://www.asatic.ir/',
       body: params,

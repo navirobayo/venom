@@ -5,11 +5,10 @@ import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/injectable/injectable.dart';
 
 class FunctionHelper {
-  static final FunctionHelper _singleton = FunctionHelper._();
-
   factory FunctionHelper() => _singleton;
 
   FunctionHelper._();
+  static final FunctionHelper _singleton = FunctionHelper._();
   // make one instance of Logger Class
   Logger logger = Logger();
 
@@ -18,8 +17,11 @@ class FunctionHelper {
   }
 
 // funtion for showing ErrorDetails
-  void logErrorDetailMessage(Object errorExep,
-      {String? libraryName, String bodyMessage = ''}) {
+  void logErrorDetailMessage(
+    Object errorExep, {
+    String? libraryName,
+    String bodyMessage = '',
+  }) {
     FlutterErrorDetails(
       exception: errorExep,
       library: libraryName,
@@ -31,13 +33,16 @@ class FunctionHelper {
     required String message,
     bool isFailureMessage = false,
   }) {
-    BuildContext context = getIt.get<AppRouter>().navigatorKey.currentContext!;
+    final context = getIt.get<AppRouter>().navigatorKey.currentContext!;
     final snackBar = SnackBar(
       content: Text(
         message.isNotEmpty ? message : 'Empty',
         textAlign: TextAlign.center,
         style: TextStyle(
-            color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 14.r),
+          color: Colors.white70,
+          fontWeight: FontWeight.bold,
+          fontSize: 14.r,
+        ),
       ),
       backgroundColor: isFailureMessage ? Colors.redAccent : Colors.greenAccent,
     );

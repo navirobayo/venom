@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:venom/src/config/routes/router.dart';
 import 'package:venom/src/features/vehicle/domain/models/vehicle_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
 import 'package:venom/src/presentation/vehicle/bloc/my_vehicle/my_vehicle_bloc.dart';
@@ -18,7 +19,7 @@ class MyVehiclePage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text("My Vehicles"),
+            title: const Text('My Vehicles'),
           ),
           body: ListView.builder(
             itemCount: getIt.get<MyVehicleBloc>().state.maybeWhen(
@@ -32,11 +33,11 @@ class MyVehiclePage extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return getIt.get<MyVehicleBloc>().state.maybeWhen(
                 orElse: () {
-                  return SizedBox();
+                  return const SizedBox();
                 },
                 idle: (vehicles) {
                   return vehicles.isEmpty
-                      ? SizedBox()
+                      ? const SizedBox()
                       : Dismissible(
                           key: Key(vehicles[index].id),
                           onDismissed: (direction) async {
@@ -46,21 +47,23 @@ class MyVehiclePage extends StatelessWidget {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content:
-                                    Text("${vehicles[index].name} deleted"),
+                                    Text('${vehicles[index].name} deleted'),
                                 action: SnackBarAction(
-                                  label: "Undo",
+                                  label: 'Undo',
                                   onPressed: () async {
                                     getIt.get<MyVehicleBloc>().add(
-                                        MyVehicleEvent.cacheVehicle(
-                                            vehicles[index]));
+                                          MyVehicleEvent.cacheVehicle(
+                                            vehicles[index],
+                                          ),
+                                        );
                                   },
                                 ),
                               ),
                             );
                           },
-                          background: Container(
+                          background: const ColoredBox(
                             color: Colors.red,
-                            child: const ListTile(
+                            child: ListTile(
                               leading: Icon(Icons.delete, color: Colors.white),
                             ),
                           ),
@@ -69,7 +72,7 @@ class MyVehiclePage extends StatelessWidget {
                             title: Text(vehicles[index].name),
                             subtitle: Text(
                               vehicles[index].tankCapacity,
-                              style: TextStyle(color: Colors.white54),
+                              style: const TextStyle(color: Colors.white54),
                             ),
                             onLongPress: () async {
                               final result = await showMenu(
@@ -78,31 +81,38 @@ class MyVehiclePage extends StatelessWidget {
                                     const RelativeRect.fromLTRB(2, 0, 0, 0),
                                 items: [
                                   const PopupMenuItem(
-                                    value: "delete",
+                                    value: 'delete',
                                     child: Row(
                                       children: [
                                         Icon(Icons.delete),
                                         SizedBox(width: 8),
-                                        Text("Delete")
+                                        Text('Delete'),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               );
-                              if (result == "delete") {
+                              if (result == 'delete') {
                                 getIt
                                     .get<MyVehicleBloc>()
                                     .add(MyVehicleEvent.deleteVehicle(index));
-                                ScaffoldMessenger.of(context).showSnackBar(
+                                ScaffoldMessenger.of(
+                                  getIt
+                                      .get<AppRouter>()
+                                      .navigatorKey
+                                      .currentContext!,
+                                ).showSnackBar(
                                   SnackBar(
                                     content:
-                                        Text("${vehicles[index].name} deleted"),
+                                        Text('${vehicles[index].name} deleted'),
                                     action: SnackBarAction(
-                                      label: "Undo",
+                                      label: 'Undo',
                                       onPressed: () async {
                                         getIt.get<MyVehicleBloc>().add(
-                                            MyVehicleEvent.cacheVehicle(
-                                                vehicles[index]));
+                                              MyVehicleEvent.cacheVehicle(
+                                                vehicles[index],
+                                              ),
+                                            );
                                       },
                                     ),
                                   ),
@@ -121,17 +131,18 @@ class MyVehiclePage extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text("Add Vehicle"),
+                    title: const Text('Add Vehicle'),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextField(
-                          decoration: const InputDecoration(labelText: "Name"),
+                          decoration: const InputDecoration(labelText: 'Name'),
                           controller: _nameController,
                         ),
                         TextField(
                           decoration: const InputDecoration(
-                              labelText: "Tank Capacity in GAL"),
+                            labelText: 'Tank Capacity in GAL',
+                          ),
                           keyboardType: TextInputType.number,
                           controller: _tankCapacity,
                         ),
@@ -140,17 +151,21 @@ class MyVehiclePage extends StatelessWidget {
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: const Text("Cancel"),
+                        child: const Text('Cancel'),
                       ),
                       TextButton(
                         onPressed: () async {
                           getIt.get<MyVehicleBloc>().add(
-                              MyVehicleEvent.cacheVehicle(Vehicle(
-                                  name: _nameController.text,
-                                  tankCapacity: _tankCapacity.text)));
+                                MyVehicleEvent.cacheVehicle(
+                                  Vehicle(
+                                    name: _nameController.text,
+                                    tankCapacity: _tankCapacity.text,
+                                  ),
+                                ),
+                              );
                           Navigator.pop(context);
                         },
-                        child: const Text("Add"),
+                        child: const Text('Add'),
                       ),
                     ],
                   );

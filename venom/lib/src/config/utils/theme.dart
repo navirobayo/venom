@@ -14,14 +14,14 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-          seedColor: AppTheme._primaryColorLight, brightness: Brightness.dark),
+          seedColor: AppTheme._primaryColorLight, brightness: Brightness.dark,),
       textTheme:
-          GoogleFonts.chakraPetchTextTheme().apply(bodyColor: Colors.white));
+          GoogleFonts.chakraPetchTextTheme().apply(bodyColor: Colors.white),);
 
   static final ThemeData darkTheme = ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-          seedColor: AppTheme._primaryColorDark, brightness: Brightness.dark),
+          seedColor: AppTheme._primaryColorDark, brightness: Brightness.dark,),
       textTheme:
-          GoogleFonts.chakraPetchTextTheme().apply(bodyColor: Colors.white));
+          GoogleFonts.chakraPetchTextTheme().apply(bodyColor: Colors.white),);
 }

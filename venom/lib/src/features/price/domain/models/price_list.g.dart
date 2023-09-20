@@ -48,7 +48,7 @@ _$_PriceList _$$_PriceListFromJson(Map<String, dynamic> json) => _$_PriceList(
       prices: (json['prices'] as List<dynamic>?)
               ?.map((e) => Price.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          const [],
+          const <Price>[],
     );
 
 Map<String, dynamic> _$$_PriceListToJson(_$_PriceList instance) =>

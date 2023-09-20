@@ -9,7 +9,7 @@ import 'package:venom/src/presentation/ride/widgets/timer_widget.dart';
 
 @RoutePage(name: 'new_ride')
 class NewRidePage extends StatefulWidget {
-  NewRidePage({super.key});
+  const NewRidePage({super.key});
 
   @override
   State<NewRidePage> createState() => _NewRidePageState();
@@ -17,6 +17,7 @@ class NewRidePage extends StatefulWidget {
 
 class _NewRidePageState extends State<NewRidePage> {
   late final CountDownController _controller = CountDownController();
+  final bloc = getIt.get<NewRideBloc>();
 
   @override
   void initState() {
@@ -33,7 +34,7 @@ class _NewRidePageState extends State<NewRidePage> {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           appBar: AppBar(
-            title: const Text("Ride Analyzer"),
+            title: const Text('Ride Analyzer'),
           ),
           body: Center(
             child: ListView(
@@ -49,12 +50,12 @@ class _NewRidePageState extends State<NewRidePage> {
                   onTap: () {
                     getIt.get<NewRideBloc>().state.maybeWhen(
                           orElse: () {},
-                          idle: (isStarted, defaultVehicle, defaultPrice) {
-                            if (!isStarted) {
+                          idle: (defaultVehicle, defaultPrice, isStarted) {
+                            if (!isStarted!) {
                               _controller.start();
                               getIt
                                   .get<NewRideBloc>()
-                                  .add(NewRideEvent.startTimer());
+                                  .add(const NewRideEvent.startTimer());
                             } else {
                               if (_controller.isPaused) {
                                 _controller.resume();
@@ -72,26 +73,24 @@ class _NewRidePageState extends State<NewRidePage> {
                   height: 100,
                   child: Column(
                     children: [
-                      const Text("Press Go and enjoy the ride,"),
-                      const Text("Venom will notify when the ride is done"),
+                      const Text('Press Go and enjoy the ride,'),
+                      const Text('Venom will notify when the ride is done'),
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                          'Current Vehicle: ${getIt.get<NewRideBloc>().state.maybeWhen(
+                      Text('Current Vehicle: ${bloc.state.maybeWhen(
                         orElse: () {
                           return '';
                         },
-                        idle: (isStarted, defaultVehicle, defaultPrice) {
+                        idle: (defaultVehicle, defaultPrice, isStarted) {
                           return defaultVehicle.name;
                         },
                       )}'),
-                      Text(
-                          'Current Price per Gallon: \$${getIt.get<NewRideBloc>().state.maybeWhen(
+                      Text('Current Price per Gallon: \$${bloc.state.maybeWhen(
                         orElse: () {
                           return '';
                         },
-                        idle: (isStarted, defaultVehicle, defaultPrice) {
+                        idle: (defaultVehicle, defaultPrice, isStarted) {
                           return defaultPrice.price;
                         },
                       )}'),
@@ -100,10 +99,10 @@ class _NewRidePageState extends State<NewRidePage> {
                 ),
                 getIt.get<NewRideBloc>().state.maybeWhen(
                   orElse: () {
-                    return SizedBox();
+                    return const SizedBox();
                   },
-                  idle: (isStarted, defaultVehicle, defaultPrice) {
-                    if (isStarted) {
+                  idle: (defaultVehicle, defaultPrice, isStarted) {
+                    if (isStarted!) {
                       return SizedBox(
                         height: 50,
                         child: ElevatedButton(
@@ -115,25 +114,29 @@ class _NewRidePageState extends State<NewRidePage> {
                           onPressed: () {
                             _controller.pause();
                             if (getIt.isRegistered<String>(
-                                instanceName: 'timeTraveled')) {
-                              getIt.unregister<String>(
-                                instanceName: 'timeTraveled',
-                              );
-                              getIt.registerSingleton<String>(
+                              instanceName: 'timeTraveled',
+                            )) {
+                              getIt
+                                ..unregister<String>(
+                                  instanceName: 'timeTraveled',
+                                )
+                                ..registerSingleton<String>(
                                   _controller.getTime() ?? '',
-                                  instanceName: 'timeTraveled');
+                                  instanceName: 'timeTraveled',
+                                );
                             } else {
                               getIt.registerSingleton<String>(
-                                  _controller.getTime() ?? '',
-                                  instanceName: 'timeTraveled');
+                                _controller.getTime() ?? '',
+                                instanceName: 'timeTraveled',
+                              );
                             }
                             getIt.get<AppRouter>().pushNamed('/final_data');
                           },
-                          child: const Text("Stop now and Analyze"),
+                          child: const Text('Stop now and Analyze'),
                         ),
                       );
                     } else {
-                      return SizedBox();
+                      return const SizedBox();
                     }
                   },
                 ),

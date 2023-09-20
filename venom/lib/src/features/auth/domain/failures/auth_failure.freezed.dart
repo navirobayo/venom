@@ -22,7 +22,7 @@ mixin _$AuthFailure {
     required TResult Function() missingToken,
     required TResult Function(DioException failure) api,
     required TResult Function() nullParam,
-    required TResult Function(DatabaseFailure<dynamic> failure) database,
+    required TResult Function(DatabaseFailure<void> failure) database,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +31,7 @@ mixin _$AuthFailure {
     TResult? Function()? missingToken,
     TResult? Function(DioException failure)? api,
     TResult? Function()? nullParam,
-    TResult? Function(DatabaseFailure<dynamic> failure)? database,
+    TResult? Function(DatabaseFailure<void> failure)? database,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +40,7 @@ mixin _$AuthFailure {
     TResult Function()? missingToken,
     TResult Function(DioException failure)? api,
     TResult Function()? nullParam,
-    TResult Function(DatabaseFailure<dynamic> failure)? database,
+    TResult Function(DatabaseFailure<void> failure)? database,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,7 +134,7 @@ class _$_CancelledByUser implements _CancelledByUser {
     required TResult Function() missingToken,
     required TResult Function(DioException failure) api,
     required TResult Function() nullParam,
-    required TResult Function(DatabaseFailure<dynamic> failure) database,
+    required TResult Function(DatabaseFailure<void> failure) database,
   }) {
     return cancelledByUser();
   }
@@ -146,7 +146,7 @@ class _$_CancelledByUser implements _CancelledByUser {
     TResult? Function()? missingToken,
     TResult? Function(DioException failure)? api,
     TResult? Function()? nullParam,
-    TResult? Function(DatabaseFailure<dynamic> failure)? database,
+    TResult? Function(DatabaseFailure<void> failure)? database,
   }) {
     return cancelledByUser?.call();
   }
@@ -158,7 +158,7 @@ class _$_CancelledByUser implements _CancelledByUser {
     TResult Function()? missingToken,
     TResult Function(DioException failure)? api,
     TResult Function()? nullParam,
-    TResult Function(DatabaseFailure<dynamic> failure)? database,
+    TResult Function(DatabaseFailure<void> failure)? database,
     required TResult orElse(),
   }) {
     if (cancelledByUser != null) {
@@ -254,7 +254,7 @@ class _$_MissingToken implements _MissingToken {
     required TResult Function() missingToken,
     required TResult Function(DioException failure) api,
     required TResult Function() nullParam,
-    required TResult Function(DatabaseFailure<dynamic> failure) database,
+    required TResult Function(DatabaseFailure<void> failure) database,
   }) {
     return missingToken();
   }
@@ -266,7 +266,7 @@ class _$_MissingToken implements _MissingToken {
     TResult? Function()? missingToken,
     TResult? Function(DioException failure)? api,
     TResult? Function()? nullParam,
-    TResult? Function(DatabaseFailure<dynamic> failure)? database,
+    TResult? Function(DatabaseFailure<void> failure)? database,
   }) {
     return missingToken?.call();
   }
@@ -278,7 +278,7 @@ class _$_MissingToken implements _MissingToken {
     TResult Function()? missingToken,
     TResult Function(DioException failure)? api,
     TResult Function()? nullParam,
-    TResult Function(DatabaseFailure<dynamic> failure)? database,
+    TResult Function(DatabaseFailure<void> failure)? database,
     required TResult orElse(),
   }) {
     if (missingToken != null) {
@@ -397,7 +397,7 @@ class _$_Api implements _Api {
     required TResult Function() missingToken,
     required TResult Function(DioException failure) api,
     required TResult Function() nullParam,
-    required TResult Function(DatabaseFailure<dynamic> failure) database,
+    required TResult Function(DatabaseFailure<void> failure) database,
   }) {
     return api(failure);
   }
@@ -409,7 +409,7 @@ class _$_Api implements _Api {
     TResult? Function()? missingToken,
     TResult? Function(DioException failure)? api,
     TResult? Function()? nullParam,
-    TResult? Function(DatabaseFailure<dynamic> failure)? database,
+    TResult? Function(DatabaseFailure<void> failure)? database,
   }) {
     return api?.call(failure);
   }
@@ -421,7 +421,7 @@ class _$_Api implements _Api {
     TResult Function()? missingToken,
     TResult Function(DioException failure)? api,
     TResult Function()? nullParam,
-    TResult Function(DatabaseFailure<dynamic> failure)? database,
+    TResult Function(DatabaseFailure<void> failure)? database,
     required TResult orElse(),
   }) {
     if (api != null) {
@@ -521,7 +521,7 @@ class _$_NullParam implements _NullParam {
     required TResult Function() missingToken,
     required TResult Function(DioException failure) api,
     required TResult Function() nullParam,
-    required TResult Function(DatabaseFailure<dynamic> failure) database,
+    required TResult Function(DatabaseFailure<void> failure) database,
   }) {
     return nullParam();
   }
@@ -533,7 +533,7 @@ class _$_NullParam implements _NullParam {
     TResult? Function()? missingToken,
     TResult? Function(DioException failure)? api,
     TResult? Function()? nullParam,
-    TResult? Function(DatabaseFailure<dynamic> failure)? database,
+    TResult? Function(DatabaseFailure<void> failure)? database,
   }) {
     return nullParam?.call();
   }
@@ -545,7 +545,7 @@ class _$_NullParam implements _NullParam {
     TResult Function()? missingToken,
     TResult Function(DioException failure)? api,
     TResult Function()? nullParam,
-    TResult Function(DatabaseFailure<dynamic> failure)? database,
+    TResult Function(DatabaseFailure<void> failure)? database,
     required TResult orElse(),
   }) {
     if (nullParam != null) {
@@ -605,9 +605,9 @@ abstract class _$$_DatabaseCopyWith<$Res> {
           _$_Database value, $Res Function(_$_Database) then) =
       __$$_DatabaseCopyWithImpl<$Res>;
   @useResult
-  $Res call({DatabaseFailure<dynamic> failure});
+  $Res call({DatabaseFailure<void> failure});
 
-  $DatabaseFailureCopyWith<dynamic, $Res> get failure;
+  $DatabaseFailureCopyWith<void, $Res> get failure;
 }
 
 /// @nodoc
@@ -627,14 +627,14 @@ class __$$_DatabaseCopyWithImpl<$Res>
       null == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as DatabaseFailure<dynamic>,
+              as DatabaseFailure<void>,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $DatabaseFailureCopyWith<dynamic, $Res> get failure {
-    return $DatabaseFailureCopyWith<dynamic, $Res>(_value.failure, (value) {
+  $DatabaseFailureCopyWith<void, $Res> get failure {
+    return $DatabaseFailureCopyWith<void, $Res>(_value.failure, (value) {
       return _then(_value.copyWith(failure: value));
     });
   }
@@ -646,7 +646,7 @@ class _$_Database implements _Database {
   const _$_Database(this.failure);
 
   @override
-  final DatabaseFailure<dynamic> failure;
+  final DatabaseFailure<void> failure;
 
   @override
   String toString() {
@@ -677,7 +677,7 @@ class _$_Database implements _Database {
     required TResult Function() missingToken,
     required TResult Function(DioException failure) api,
     required TResult Function() nullParam,
-    required TResult Function(DatabaseFailure<dynamic> failure) database,
+    required TResult Function(DatabaseFailure<void> failure) database,
   }) {
     return database(failure);
   }
@@ -689,7 +689,7 @@ class _$_Database implements _Database {
     TResult? Function()? missingToken,
     TResult? Function(DioException failure)? api,
     TResult? Function()? nullParam,
-    TResult? Function(DatabaseFailure<dynamic> failure)? database,
+    TResult? Function(DatabaseFailure<void> failure)? database,
   }) {
     return database?.call(failure);
   }
@@ -701,7 +701,7 @@ class _$_Database implements _Database {
     TResult Function()? missingToken,
     TResult Function(DioException failure)? api,
     TResult Function()? nullParam,
-    TResult Function(DatabaseFailure<dynamic> failure)? database,
+    TResult Function(DatabaseFailure<void> failure)? database,
     required TResult orElse(),
   }) {
     if (database != null) {
@@ -752,9 +752,9 @@ class _$_Database implements _Database {
 }
 
 abstract class _Database implements AuthFailure {
-  const factory _Database(final DatabaseFailure<dynamic> failure) = _$_Database;
+  const factory _Database(final DatabaseFailure<void> failure) = _$_Database;
 
-  DatabaseFailure<dynamic> get failure;
+  DatabaseFailure<void> get failure;
   @JsonKey(ignore: true)
   _$$_DatabaseCopyWith<_$_Database> get copyWith =>
       throw _privateConstructorUsedError;

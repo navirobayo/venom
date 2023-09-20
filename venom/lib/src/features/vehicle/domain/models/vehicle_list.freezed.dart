@@ -20,7 +20,7 @@ VehicleList _$VehicleListFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$VehicleList {
-  @HiveField(0, defaultValue: [])
+  @HiveField(0, defaultValue: <Vehicle>[])
   List<Vehicle> get vehicles => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $VehicleListCopyWith<$Res> {
           VehicleList value, $Res Function(VehicleList) then) =
       _$VehicleListCopyWithImpl<$Res, VehicleList>;
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Vehicle> vehicles});
+  $Res call({@HiveField(0, defaultValue: <Vehicle>[]) List<Vehicle> vehicles});
 }
 
 /// @nodoc
@@ -70,7 +70,7 @@ abstract class _$$_VehicleListCopyWith<$Res>
       __$$_VehicleListCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@HiveField(0, defaultValue: []) List<Vehicle> vehicles});
+  $Res call({@HiveField(0, defaultValue: <Vehicle>[]) List<Vehicle> vehicles});
 }
 
 /// @nodoc
@@ -99,7 +99,8 @@ class __$$_VehicleListCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_VehicleList implements _VehicleList {
   _$_VehicleList(
-      {@HiveField(0, defaultValue: []) final List<Vehicle> vehicles = const []})
+      {@HiveField(0, defaultValue: <Vehicle>[])
+      final List<Vehicle> vehicles = const <Vehicle>[]})
       : _vehicles = vehicles;
 
   factory _$_VehicleList.fromJson(Map<String, dynamic> json) =>
@@ -108,7 +109,7 @@ class _$_VehicleList implements _VehicleList {
   final List<Vehicle> _vehicles;
   @override
   @JsonKey()
-  @HiveField(0, defaultValue: [])
+  @HiveField(0, defaultValue: <Vehicle>[])
   List<Vehicle> get vehicles {
     if (_vehicles is EqualUnmodifiableListView) return _vehicles;
     // ignore: implicit_dynamic_type
@@ -149,14 +150,14 @@ class _$_VehicleList implements _VehicleList {
 
 abstract class _VehicleList implements VehicleList {
   factory _VehicleList(
-          {@HiveField(0, defaultValue: []) final List<Vehicle> vehicles}) =
-      _$_VehicleList;
+      {@HiveField(0, defaultValue: <Vehicle>[])
+      final List<Vehicle> vehicles}) = _$_VehicleList;
 
   factory _VehicleList.fromJson(Map<String, dynamic> json) =
       _$_VehicleList.fromJson;
 
   @override
-  @HiveField(0, defaultValue: [])
+  @HiveField(0, defaultValue: <Vehicle>[])
   List<Vehicle> get vehicles;
   @override
   @JsonKey(ignore: true)

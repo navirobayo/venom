@@ -7,7 +7,7 @@ import 'package:venom/src/presentation/ride/bloc/final_data/final_data_bloc.dart
 
 @RoutePage(name: 'final_data')
 class FinalData extends StatelessWidget {
-  FinalData({Key? key}) : super(key: key);
+  FinalData({super.key});
 
   final odometer2 = TextEditingController();
 
@@ -18,15 +18,15 @@ class FinalData extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Final Data"),
+            title: const Text('Final Data'),
           ),
           body: Container(
             padding: const EdgeInsets.only(top: 50),
             child: Column(
               children: <Widget>[
-                Center(child: Text("Nice ride, ${getIt.get<String>()}")),
+                Center(child: Text('Nice ride, ${getIt.get<String>()}')),
                 Padding(
-                  padding: const EdgeInsets.all(50.0),
+                  padding: const EdgeInsets.all(50),
                   child: TextField(
                     controller: odometer2,
                     decoration: const InputDecoration(
@@ -41,7 +41,7 @@ class FinalData extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
-                const Text("Gas level:"),
+                const Text('Gas level:'),
                 Slider(
                   value: getIt.get<FinalDataBloc>().state.maybeWhen(
                     orElse: () {
@@ -58,8 +58,6 @@ class FinalData extends StatelessWidget {
                         .get<FinalDataBloc>()
                         .add(FinalDataEvent.chageGasLevel(value));
                   },
-                  min: 0,
-                  max: 1,
                   divisions: 10,
                   label: getIt.get<FinalDataBloc>().state.maybeWhen(
                     orElse: () {
@@ -67,10 +65,10 @@ class FinalData extends StatelessWidget {
                     },
                     idle: (gasLevel) {
                       return gasLevel == 0
-                          ? "Empty tank"
+                          ? 'Empty tank'
                           : gasLevel == 1
-                              ? "Full tank"
-                              : "";
+                              ? 'Full tank'
+                              : '';
                     },
                   ),
                 ),
@@ -79,32 +77,41 @@ class FinalData extends StatelessWidget {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).focusColor),
+                        Theme.of(context).focusColor,
+                      ),
                     ),
                     onPressed: () {
                       getIt.get<FinalDataBloc>().state.maybeWhen(
                             orElse: () {},
                             idle: (gasLevel) {
                               if (getIt.isRegistered<double>(
-                                  instanceName: 'gasLevel2')) {
-                                getIt.unregister<double>(
+                                instanceName: 'gasLevel2',
+                              )) {
+                                getIt
+                                  ..unregister<double>(
+                                    instanceName: 'gasLevel2',
+                                  )
+                                  ..registerSingleton<double>(
+                                    gasLevel,
+                                    instanceName: 'gasLevel2',
+                                  );
+                              } else {
+                                getIt.registerSingleton<double>(
+                                  gasLevel,
                                   instanceName: 'gasLevel2',
                                 );
-                                getIt.registerSingleton<double>(gasLevel,
-                                    instanceName: 'gasLevel2');
-                              } else {
-                                getIt.registerSingleton<double>(gasLevel,
-                                    instanceName: 'gasLevel2');
                               }
                               if (getIt.isRegistered<double>(
-                                  instanceName: 'odometer2')) {
-                                getIt.unregister<double>(
-                                  instanceName: 'odometer2',
-                                );
-                                getIt.registerSingleton<double>(
-                                  double.tryParse(odometer2.text) ?? 0.0,
-                                  instanceName: 'odometer2',
-                                );
+                                instanceName: 'odometer2',
+                              )) {
+                                getIt
+                                  ..unregister<double>(
+                                    instanceName: 'odometer2',
+                                  )
+                                  ..registerSingleton<double>(
+                                    double.tryParse(odometer2.text) ?? 0.0,
+                                    instanceName: 'odometer2',
+                                  );
                               } else {
                                 getIt.registerSingleton<double>(
                                   double.tryParse(odometer2.text) ?? 0.0,

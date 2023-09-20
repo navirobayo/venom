@@ -9,32 +9,34 @@ import 'package:venom/src/features/price/domain/models/price_list.dart';
 import 'package:venom/src/features/price/domain/models/price_model.dart';
 import 'package:venom/src/features/ride/domain/models/ride_list.dart';
 import 'package:venom/src/features/ride/domain/models/ride_model.dart';
+import 'package:venom/src/features/theme/domain/models/venom_theme_data.dart';
 import 'package:venom/src/features/vehicle/domain/models/vehicle_list.dart';
 import 'package:venom/src/features/vehicle/domain/models/vehicle_model.dart';
 import 'package:venom/src/injectable/injectable.dart';
 
 class MainModulesInjection {
   MainModulesInjection() {
-    getIt.registerSingleton<Dio>(Dio());
-    getIt.registerLazySingleton<ApiService>(
-      () => ApiServiceImpl(
-        interceptors: [getIt.get<RequestInterceptor>()],
-        dio: getIt.get<Dio>(),
-      ),
-    );
-    getIt.registerLazySingleton<DatabaseService>(
-      () => DatabaseServiceImpl(),
-    );
-    getIt.registerLazySingleton<AppRouter>(() => AppRouter());
-    getIt.registerLazySingleton<AuthHeaderSupplier>(() => AuthHeaderSupplier());
-    getIt.registerLazySingleton<Uuid>(() => Uuid());
+    getIt
+      ..registerSingleton<Dio>(Dio())
+      ..registerLazySingleton<ApiService>(
+        () => ApiServiceImpl(
+          interceptors: [getIt.get<RequestInterceptor>()],
+          dio: getIt.get<Dio>(),
+        ),
+      )
+      ..registerLazySingleton<DatabaseService>(
+        DatabaseServiceImpl.new,
+      )
+      ..registerLazySingleton<AppRouter>(AppRouter.new)
+      ..registerLazySingleton<AuthHeaderSupplier>(AuthHeaderSupplier.new)
+      ..registerLazySingleton<Uuid>(Uuid.new);
   }
 
   //
-  Future initDatabase() async =>
-      await getIt.get<DatabaseService>().initialize();
+  Future<void> initDatabase() async =>
+      getIt.get<DatabaseService>().initialize();
 
-  Future registerHiveAdapters() async {
+  Future<void> registerHiveAdapters() async {
     final databaseService = getIt.get<DatabaseService>();
 
     await databaseService.registerAdapter<RideList>(RideListAdapter());
@@ -43,5 +45,7 @@ class MainModulesInjection {
     await databaseService.registerAdapter<Price>(PriceAdapter());
     await databaseService.registerAdapter<VehicleList>(VehicleListAdapter());
     await databaseService.registerAdapter<Vehicle>(VehicleAdapter());
+    await databaseService
+        .registerAdapter<VenomThemeData>(VenomThemeDataAdapter());
   }
 }

@@ -7,5 +7,5 @@ abstract class PriceRepository {
   Future<Either<PriceFailure, List<Price>>> getCachedPricesData();
   //
   Future<Either<PriceFailure, void>> cachePricesData(
-      {required List<Price> prices});
+      {required List<Price> prices,});
 }

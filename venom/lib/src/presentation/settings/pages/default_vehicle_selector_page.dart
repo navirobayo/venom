@@ -15,7 +15,7 @@ class DefaultVehicleSelectorPage extends StatelessWidget {
     return BlocBuilder<DefaultVehicleBloc, DefaultVehicleState>(
       bloc: getIt.get<DefaultVehicleBloc>(),
       builder: (context, state) {
-        final Vehicle defaultVehicle = state.vehicle ??
+        final defaultVehicle = state.vehicle ??
             (getIt.get<MyVehicleBloc>().state.maybeWhen(
               orElse: () {
                 return Vehicle();
@@ -23,7 +23,8 @@ class DefaultVehicleSelectorPage extends StatelessWidget {
               idle: (vehicles) {
                 if (vehicles.isEmpty) {
                   return Vehicle(
-                      id: '0', isDefault: false, tankCapacity: '', name: '');
+                    id: '0',
+                  );
                 } else {
                   return vehicles.last;
                 }
@@ -31,7 +32,7 @@ class DefaultVehicleSelectorPage extends StatelessWidget {
             ));
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Default Vehicle"),
+            title: const Text('Default Vehicle'),
           ),
           body: ListView(
             children: [
@@ -42,13 +43,13 @@ class DefaultVehicleSelectorPage extends StatelessWidget {
                 children: [
                   const Spacer(),
                   Text(
-                    (defaultVehicle.tankCapacity),
-                    style: const TextStyle(fontSize: 48.0),
+                    defaultVehicle!.tankCapacity,
+                    style: const TextStyle(fontSize: 48),
                   ),
-                  const Text("-GAL", style: TextStyle(fontSize: 48.0)),
+                  const Text('-GAL', style: TextStyle(fontSize: 48)),
                   const Spacer(),
                   Text(
-                    (defaultVehicle.name),
+                    defaultVehicle.name,
                   ),
                   const Spacer(),
                 ],
@@ -62,33 +63,16 @@ class DefaultVehicleSelectorPage extends StatelessWidget {
                       MaterialStateProperty.all(Theme.of(context).focusColor),
                 ),
                 onPressed: () async {
-                  getIt.get<MyVehicleBloc>().state.maybeWhen(orElse: () {
-                    showDialog(
+                  await getIt.get<MyVehicleBloc>().state.maybeWhen(
+                    orElse: () {
+                      showDialog<void>(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
                             title: const Text('No current vehicles'),
                             content: const Text(
-                                'Please add them in "My vehicles" screen'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          );
-                        });
-                  }, idle: (vehicles) async {
-                    if (vehicles.isEmpty) {
-                      return showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text('No current vehicles'),
-                            content: const Text(
-                                'Please add them in "My vehicles" screen'),
+                              'Please add them in "My vehicles" screen',
+                            ),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -100,39 +84,64 @@ class DefaultVehicleSelectorPage extends StatelessWidget {
                           );
                         },
                       );
-                    }
-                    final selectedVehicle = await showDialog<Vehicle>(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text('Select a vehicle'),
-                          content: SizedBox(
-                            width: double.maxFinite,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: vehicles.length,
-                              itemBuilder: (context, index) {
-                                final vehicle = vehicles[index];
-                                return ListTile(
-                                  title: Text(vehicle.name),
-                                  onTap: () {
-                                    Navigator.pop(context, vehicle);
+                    },
+                    idle: (vehicles) async {
+                      if (vehicles.isEmpty) {
+                        return showDialog<void>(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text('No current vehicles'),
+                              content: const Text(
+                                'Please add them in "My vehicles" screen',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
                                   },
-                                );
-                              },
-                            ),
-                          ),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
                         );
-                      },
-                    );
+                      }
+                      final selectedVehicle = await showDialog<Vehicle>(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Select a vehicle'),
+                            content: SizedBox(
+                              width: double.maxFinite,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: vehicles.length,
+                                itemBuilder: (context, index) {
+                                  final vehicle = vehicles[index];
+                                  return ListTile(
+                                    title: Text(vehicle.name),
+                                    onTap: () {
+                                      Navigator.pop(context, vehicle);
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      );
 
-                    if (selectedVehicle != null) {
-                      // Insert the selected vehicle as the new default vehicle
-                      getIt.get<DefaultVehicleBloc>().add(
-                          DefaultVehicleEvent.setDefaultVehicle(
-                              selectedVehicle));
-                    }
-                  });
+                      if (selectedVehicle != null) {
+                        //Insert the selected vehicle as the new default vehicle
+                        getIt.get<DefaultVehicleBloc>().add(
+                              DefaultVehicleEvent.setDefaultVehicle(
+                                selectedVehicle,
+                              ),
+                            );
+                      }
+                    },
+                  );
                 },
                 child: const Text('Select vehicle'),
               ),

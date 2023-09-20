@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 TextField customTextField({
-  TextInputType textType = TextInputType.text,
-  int maxLength = 9,
-  bool isEnable = false,
-  InputDecoration? inputDecoration,
-  String hintText = "",
   required BuildContext context,
   required TextAlign textAlign,
   required TextEditingController controller,
   required TextStyle? style,
   required TextStyle? hintStyle,
-  required obscureText,
+  required bool obscureText,
+  TextInputType textType = TextInputType.text,
+  int maxLength = 9,
+  bool isEnable = false,
+  InputDecoration? inputDecoration,
+  String hintText = '',
 }) {
   return TextField(
     controller: controller,

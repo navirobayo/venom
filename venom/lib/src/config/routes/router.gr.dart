@@ -44,11 +44,9 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     Before_ride.name: (routeData) {
-      final args = routeData.argsAs<Before_rideArgs>(
-          orElse: () => const Before_rideArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: BeforeRidePage(key: args.key),
+        child: const BeforeRidePage(),
       );
     },
     Final_data.name: (routeData) {
@@ -68,11 +66,9 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     New_ride.name: (routeData) {
-      final args =
-          routeData.argsAs<New_rideArgs>(orElse: () => const New_rideArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: NewRidePage(key: args.key),
+        child: const NewRidePage(),
       );
     },
     Rides.name: (routeData) {
@@ -129,6 +125,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: MyVehiclePage(key: args.key),
+      );
+    },
+    SetTheme.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SetThemePage(),
       );
     },
   };
@@ -234,30 +236,16 @@ class IntroArgs {
 
 /// generated route for
 /// [BeforeRidePage]
-class Before_ride extends PageRouteInfo<Before_rideArgs> {
-  Before_ride({
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
+class Before_ride extends PageRouteInfo<void> {
+  const Before_ride({List<PageRouteInfo>? children})
+      : super(
           Before_ride.name,
-          args: Before_rideArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'Before_ride';
 
-  static const PageInfo<Before_rideArgs> page = PageInfo<Before_rideArgs>(name);
-}
-
-class Before_rideArgs {
-  const Before_rideArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'Before_rideArgs{key: $key}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -318,30 +306,16 @@ class Km_in_bikeArgs {
 
 /// generated route for
 /// [NewRidePage]
-class New_ride extends PageRouteInfo<New_rideArgs> {
-  New_ride({
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
+class New_ride extends PageRouteInfo<void> {
+  const New_ride({List<PageRouteInfo>? children})
+      : super(
           New_ride.name,
-          args: New_rideArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'New_ride';
 
-  static const PageInfo<New_rideArgs> page = PageInfo<New_rideArgs>(name);
-}
-
-class New_rideArgs {
-  const New_rideArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'New_rideArgs{key: $key}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -482,4 +456,18 @@ class My_vehicleArgs {
   String toString() {
     return 'My_vehicleArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [SetThemePage]
+class SetTheme extends PageRouteInfo<void> {
+  const SetTheme({List<PageRouteInfo>? children})
+      : super(
+          SetTheme.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SetTheme';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

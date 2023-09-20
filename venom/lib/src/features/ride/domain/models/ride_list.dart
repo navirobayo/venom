@@ -1,5 +1,5 @@
-import 'package:hive/hive.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 import 'package:venom/src/features/ride/domain/models/ride_model.dart';
 
 part 'ride_list.freezed.dart';
@@ -18,7 +18,7 @@ part 'ride_list.g.dart';
 class RideList with _$RideList {
   ///adsasd
   factory RideList({
-    @HiveField(0, defaultValue: []) @Default([]) List<Ride> rides,
+    @HiveField(0, defaultValue: <Ride>[]) @Default(<Ride>[]) List<Ride> rides,
   }) = _RideList;
 
   ///das

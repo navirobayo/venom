@@ -8,14 +8,14 @@ import 'package:venom/src/injectable/injectable.dart';
 import 'package:venom/src/injectable/module_injection/main_modules_injection.dart';
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await _startupSetup();
   runApp(Application());
 }
 
 //
-Future _startupSetup() async {
+Future<void> _startupSetup() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initializeInjection();
   if (!kIsWeb) {

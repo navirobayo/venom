@@ -7,5 +7,5 @@ class GeneralConstants {
   static bool didStartSetup = false;
 
   static Color backgroundColor = const Color.fromARGB(255, 250, 239, 222);
-  static Color mainColor = Color.fromARGB(255, 63, 63, 63);
+  static Color mainColor = const Color.fromARGB(255, 63, 63, 63);
 }

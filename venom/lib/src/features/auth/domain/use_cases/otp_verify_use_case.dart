@@ -16,9 +16,9 @@ class OtpVerifyUseCase
 
   @override
   Future<Either<AuthFailure, OtpVerifyResponse>> call(
-          {tuple.Tuple2<double, OtpVerifyParams>? param}) =>
+          {tuple.Tuple2<double, OtpVerifyParams>? param,}) =>
       (param == null)
           ? Future.value(left(const AuthFailure.nullParam()))
           : repo.otpVerify(
-              phoneNumber: param.value1, verifyParams: param.value2);
+              phoneNumber: param.value1, verifyParams: param.value2,);
 }

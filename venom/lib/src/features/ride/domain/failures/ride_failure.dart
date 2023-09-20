@@ -3,7 +3,7 @@
 import 'package:database_service/database_service.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../core/failures/failure.dart';
+import 'package:venom/src/features/core/failures/failure.dart';
 
 part 'ride_failure.freezed.dart';
 
