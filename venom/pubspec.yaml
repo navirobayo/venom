@@ -1,7 +1,7 @@
 name: venom
 description: A mobile app for motorbikers.
 publish_to: 'none'
-version: 0.1.0
+version: 2.0.0
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -52,6 +52,8 @@ dev_dependencies:
   injectable_generator: ^2.1.6
   json_serializable: ^6.6.1
   very_good_analysis: ^5.1.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.2
 
 flutter_native_splash:
   color: "#000000"
