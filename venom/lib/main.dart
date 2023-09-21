@@ -1,31 +1,47 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:venom/presentation/welcome_screen/welcome_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:venom/src/application.dart';
+import 'package:venom/src/config/constants/general_constants.dart';
+import 'package:venom/src/injectable/injectable.dart';
+import 'package:venom/src/injectable/module_injection/main_modules_injection.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await _startupSetup();
+  runApp(Application());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Venom Beta',
-      theme: ThemeData(
-        textTheme:
-            GoogleFonts.chakraPetchTextTheme(Theme.of(context).textTheme),
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        textTheme: GoogleFonts.chakraPetchTextTheme(Theme.of(context).textTheme)
-            .apply(bodyColor: Colors.white),
-        brightness: Brightness.dark,
-      ),
-      themeMode: ThemeMode.dark,
-      home: WelcomeScreen(),
+//
+Future<void> _startupSetup() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await _initializeInjection();
+  if (!kIsWeb) {
+    await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp],
     );
   }
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+    ),
+  );
+}
+
+//
+
+Future<void> _initializeInjection() async {
+  if (GeneralConstants.didStartSetup) {
+    return;
+  }
+  GeneralConstants.didStartSetup = true;
+  configureInjection();
+  final mainModule = MainModulesInjection();
+  await mainModule.initDatabase();
+  await mainModule.registerHiveAdapters();
 }
