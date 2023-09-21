@@ -32,7 +32,7 @@ class _MyRidesState extends State<MyRides> {
           return getIt.get<RidesBloc>().state.maybeWhen(
             orElse: () {
               return const Center(
-                child: Text('No Data'),
+                child: Text('No rides yet.'),
               );
             },
             failure: (message, failure) {
@@ -40,10 +40,10 @@ class _MyRidesState extends State<MyRides> {
                 child: Text(
                   failure.maybeWhen(
                     orElse: () {
-                      return 'No Data';
+                      return 'No rides yet.';
                     },
                     nullParam: () {
-                      return 'No Data';
+                      return 'No rides yet.';
                     },
                   ),
                 ),

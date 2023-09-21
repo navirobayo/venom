@@ -21,7 +21,7 @@ class GasHistory extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Gas Prices Historical Tracker'),
+            title: const Text('Gas Prices'),
           ),
           body: ListView.builder(
             itemCount: state.maybeWhen(
