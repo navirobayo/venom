@@ -15,15 +15,15 @@ class IntroPage extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
-        title: const Text('Venom Beta 1.0'),
+        title: const Text('Venom 2.0.1'),
       ),
       body: Center(
         child: Column(
           children: [
             const SizedBox(
-              height: 150,
+              height: 50,
             ),
-            const Text('Venom Beta 1.0', style: TextStyle(fontSize: 45)),
+            const Text('Welcome', style: TextStyle(fontSize: 45)),
             const SizedBox(
               height: 50,
             ),
@@ -38,8 +38,7 @@ class IntroPage extends StatelessWidget {
                       content: SizedBox(
                         width: 0.5.sw,
                         height: 80.h,
-                        child:
-                            const Center(child: Text('Username is required')),
+                        child: const Center(child: Text('Add a username')),
                       ),
                     ).show<void>(context);
                     return;
@@ -55,7 +54,7 @@ class IntroPage extends StatelessWidget {
                 },
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Enter your username',
+                  labelText: 'Enter a username',
                 ),
               ),
             ),

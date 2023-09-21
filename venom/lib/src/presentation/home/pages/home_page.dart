@@ -37,107 +37,104 @@ class HomePage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Ver. 2.0.0'),
+          title: const Text('Ver. 2.0.1'),
           automaticallyImplyLeading: false,
         ),
-        body: Center(
-          child: ListView(
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              Center(
-                child: Text(
-                  'Welcome, $userName',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineMedium!
-                      .copyWith(fontSize: 22.sp),
+        body: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Center(
+            child: ListView(
+              children: [
+                const SizedBox(
+                  height: 50,
                 ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Card(
-                    clipBehavior: Clip.hardEdge,
-                    elevation: 3,
-                    child: InkWell(
-                      splashColor: Colors.blue.withAlpha(30),
-                      onTap: () {
-                        getIt.get<AppRouter>().pushNamed('/rides');
-                      },
-                      child: const SizedBox(
-                        width: 150,
-                        height: 150,
-                        child: Center(child: Text('Rides')),
+                Center(
+                  child: Text('Welcome, $userName'),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      clipBehavior: Clip.hardEdge,
+                      elevation: 3,
+                      child: InkWell(
+                        splashColor: Theme.of(context).primaryColor,
+                        onTap: () {
+                          getIt.get<AppRouter>().pushNamed('/rides');
+                        },
+                        child: const SizedBox(
+                          width: 150,
+                          height: 150,
+                          child: Center(child: Text('Rides')),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 50,
-                  ),
-                  Card(
-                    clipBehavior: Clip.hardEdge,
-                    elevation: 3,
-                    child: InkWell(
-                      splashColor: Colors.blue.withAlpha(30),
-                      onTap: () {
-                        getIt.get<AppRouter>().pushNamed('/toolkit');
-                      },
-                      child: const SizedBox(
-                        width: 150,
-                        height: 150,
-                        child: Center(child: Text('Toolkit')),
+                    const SizedBox(
+                      width: 50,
+                    ),
+                    Card(
+                      clipBehavior: Clip.hardEdge,
+                      elevation: 3,
+                      child: InkWell(
+                        splashColor: Theme.of(context).primaryColor,
+                        onTap: () {
+                          getIt.get<AppRouter>().pushNamed('/toolkit');
+                        },
+                        child: const SizedBox(
+                          width: 150,
+                          height: 150,
+                          child: Center(child: Text('Toolkit')),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Card(
-                    clipBehavior: Clip.hardEdge,
-                    elevation: 3,
-                    child: InkWell(
-                      splashColor: Colors.blue.withAlpha(30),
-                      onTap: () {
-                        getIt.get<AppRouter>().pushNamed('/gas_history');
-                      },
-                      child: const SizedBox(
-                        width: 150,
-                        height: 150,
-                        child: Center(child: Text('Gas Prices')),
+                  ],
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      clipBehavior: Clip.hardEdge,
+                      elevation: 3,
+                      child: InkWell(
+                        splashColor: Theme.of(context).primaryColor,
+                        onTap: () {
+                          getIt.get<AppRouter>().pushNamed('/gas_history');
+                        },
+                        child: const SizedBox(
+                          width: 150,
+                          height: 150,
+                          child: Center(child: Text('Gas Prices')),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 50,
-                  ),
-                  Card(
-                    clipBehavior: Clip.hardEdge,
-                    elevation: 3,
-                    child: InkWell(
-                      splashColor: Colors.blue.withAlpha(30),
-                      onTap: () {
-                        getIt.get<AppRouter>().pushNamed('/my_vehicle');
-                      },
-                      child: const SizedBox(
-                        width: 150,
-                        height: 150,
-                        child: Center(child: Text('My Vehicles')),
+                    const SizedBox(
+                      width: 50,
+                    ),
+                    Card(
+                      clipBehavior: Clip.hardEdge,
+                      elevation: 3,
+                      child: InkWell(
+                        splashColor: Theme.of(context).primaryColor,
+                        onTap: () {
+                          getIt.get<AppRouter>().pushNamed('/my_vehicle');
+                        },
+                        child: const SizedBox(
+                          width: 150,
+                          height: 150,
+                          child: Center(child: Text('My Vehicles')),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
@@ -150,14 +147,16 @@ class HomePage extends StatelessWidget {
             getIt.get<MyVehicleBloc>().state.maybeWhen(
               orElse: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Please add a vehicle')),
+                  const SnackBar(content: Text('Create a vehicle first')),
                 );
               },
               idle: (vehicles) {
                 getIt.get<GasPriceBloc>().state.maybeWhen(
                   orElse: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please add a gas price')),
+                      const SnackBar(
+                        content: Text('Add a gas price first'),
+                      ),
                     );
                   },
                   idle: (prices) {
