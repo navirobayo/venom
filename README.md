@@ -1,4 +1,5 @@
 # Release Notes - Venom Beta 1.0.1
+
 We are thrilled to announce the release of the first stable open source prototype of the Venom App!
 
 This is an Android application that helps you keeping track of the fuel expenses of your vehicles and to understand them better.
