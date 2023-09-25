@@ -17,48 +17,53 @@ class BeforeRidePage extends StatelessWidget {
       bloc: getIt.get<BeforeRideBloc>(),
       builder: (context, state) {
         return Scaffold(
-            appBar: AppBar(
-              title: const Text('Ride time'),
-            ),
-            body: Container(
-              padding: const EdgeInsets.only(top: 100),
-              width: 1.sw,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TimeSelectorSpinner(
-                    fontSize: 26.sp,
-                    selectedFontColor: Colors.white,
-                    unselectedFontColor: Colors.white54,
-                    itemSpace: 25.w,
-                    height: 250.h,
-                    width: 0.9.sw,
-                    onTimeChange: onTimeChange,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 50),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).focusColor,),
+          appBar: AppBar(
+            title: const Text('Ride time'),
+          ),
+          body: Container(
+            padding: const EdgeInsets.only(top: 100),
+            width: 1.sw,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TimeSelectorSpinner(
+                  fontSize: 26.sp,
+                  selectedFontColor: Theme.of(context).colorScheme.onBackground,
+                  unselectedFontColor: Theme.of(context)
+                      .colorScheme
+                      .onBackground
+                      .withOpacity(0.6),
+                  itemSpace: 25.w,
+                  height: 250.h,
+                  width: 0.9.sw,
+                  onTimeChange: onTimeChange,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 50),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).focusColor,
                       ),
-                      onPressed: () {
-                        getIt.get<BeforeRideBloc>().state.maybeWhen(
-                              orElse: () {},
-                              idle: (timeSelected) {
-                                getIt.get<BeforeRideBloc>().add(
-                                    BeforeRideEvent.acceptTime(timeSelected),);
-
-                                getIt.get<AppRouter>().pushNamed('/km_in_bike');
-                              },
-                            );
-                      },
-                      child: const Icon(Icons.arrow_forward_ios_rounded),
                     ),
+                    onPressed: () {
+                      getIt.get<BeforeRideBloc>().state.maybeWhen(
+                            orElse: () {},
+                            idle: (timeSelected) {
+                              getIt.get<BeforeRideBloc>().add(
+                                    BeforeRideEvent.acceptTime(timeSelected),
+                                  );
+                              getIt.get<AppRouter>().pushNamed('/km_in_bike');
+                            },
+                          );
+                    },
+                    child: const Icon(Icons.arrow_forward_ios_rounded),
                   ),
-                ],
-              ),
-            ),);
+                ),
+              ],
+            ),
+          ),
+        );
       },
     );
   }
