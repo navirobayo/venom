@@ -13,8 +13,6 @@ Key Features:
 - Liters to gallons converter.
 - Customizable theme app color. 
 
-Download the app and start tracking the fuel consumption of your vehicles. Available on the [Google Play Store](https://play.google.com/store/apps/details?id=com.host2077.venom)
-
 # Contributions: 
 
 If you would like to collaborate in the project feel free to fork the repo and work on it. 
