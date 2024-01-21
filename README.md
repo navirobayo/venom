@@ -1,5 +1,9 @@
 # Release Notes - Venom Beta 2.0.1
 
+<p align="center">
+  <img src="https://github.com/navirobayo/mi_terra_app/blob/main/github_assets/images/mi%20Terra%20App%20-%20ver%201_0_0.gif" width="350" title="hover text">
+</p>
+
 We are thrilled to announce the version 2.0.1 of the Venom App!
 
 This is an Android application that helps you keeping track of the fuel expenses of your vehicles and to understand them better.
